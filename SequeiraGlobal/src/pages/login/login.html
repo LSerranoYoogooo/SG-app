@@ -1,25 +1,29 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Login</ion-title>
+    <ion-title>{{"TITLE" | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-<form [formGroup]="loginForm">
+<ion-content padding class="page-login">
+  <form [formGroup]="loginForm">
+    <div padding class="div-title">
+      <ion-img class="logo_login" src="assets/icon/favicon.ico"></ion-img>
+      <h2 class="center_title"> {{"Login" | translate}} </h2>
+    </div>
+    
     <ion-list>
-       
-        <ion-item>
-            <ion-label floating>Email</ion-label>
-            <ion-input type="text" formControlName="email"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label floating>Password</ion-label>
-            <ion-input type="password" formControlName="password"></ion-input>
-        </ion-item>
+      <ion-item class="label">
+        <ion-label floating>Email</ion-label>
+        <ion-input type="text"formControlName="email"></ion-input>
+      </ion-item>
+      <br/>
+      <ion-item class="label">
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
     </ion-list>
     
     <div padding>
@@ -28,8 +32,12 @@
     
     <div padding>
       <button ion-button full clear favorite (click)="createAccount()" [disabled]="!loginForm.valid">
-          <ion-icon name="person"></ion-icon>
-          Registrar</button>
+        <ion-icon name="person"></ion-icon>
+        Registrar</button>
     </div>
-   </form>
+  </form>
 </ion-content>
+
+<ion-footer class="bottom_bar">
+  <p>Sequeira Global Ink.</p>
+</ion-footer>

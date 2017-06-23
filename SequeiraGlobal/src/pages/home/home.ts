@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-
 import { NavController } from 'ionic-angular';
-
 import { AuthProvider } from '../../providers/auth-provider';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-home',
@@ -12,12 +11,8 @@ export class HomePage {
 
   uid: any;
 
-  constructor(public navCtrl: NavController,
-              public auth:AuthProvider
-              ) 
-  {
+  constructor(public navCtrl: NavController, public auth:AuthProvider, public translateService: TranslateService){}
 
-  }
 
   ngOnInit(){
     this.uid = this.auth.getCurrentUid();
@@ -25,6 +20,14 @@ export class HomePage {
 
   logout() {
       this.auth.logout();
+  }
+
+  translateToSpanish(){
+    this.translateService.use('es');
+   }
+
+  translateToEnglish(){
+    this.translateService.use('en');
   }
 
 }

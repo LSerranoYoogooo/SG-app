@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Home
+      {{"TITLE" | translate}}
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -15,4 +15,11 @@
         <button ion-button full (click)="logout()">Logout</button>
       </ion-item>
     </ion-list>
+
+    <button ion-button block (click)="translateToEnglish()">{{ "BTN_ENGLISH" | translate }}</button>
+    <button ion-button block (click)="translateToSpanish()">{{ "BTN_SPANISH" | translate }}</button>
 </ion-content>
+
+<ion-footer>
+  <p class="bottom_bar">Sequeira Global Ink.</p>
+</ion-footer>
