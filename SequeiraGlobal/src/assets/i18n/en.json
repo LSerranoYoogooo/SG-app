@@ -1,7 +1,13 @@
 {
   "TITLE": "Sequeira Global Ink",
-  "btn_Login": "Login",
+  "Login": "Login",
   "btn_Register": "Singup",
+  "lbl_menu": "Menu",
+  "tlb_Signal": "Signals",
+  "tlb_History": "Signal history",
+  "mn_Signal": "Signals",
+  "mn_Red": "Market network",
+
   "BTN_ENGLISH": "English",
   "BTN_SPANISH": "Spanish"
 }

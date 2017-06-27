@@ -7,12 +7,15 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+import { ConfigPage } from '../pages/config/config';
+import { HistoryPage } from '../pages/history/history';
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+  
   rootPage:any;
 
   constructor(platform: Platform, public af: AngularFire,  public authProvider:AuthProvider, translate: TranslateService) {

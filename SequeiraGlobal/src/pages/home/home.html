@@ -1,25 +1,70 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      {{"TITLE" | translate}}
-    </ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{"TITLE" | translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
+
+    <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="state">
+      <ion-segment-button value="signal">
+        {{"tlb_Signal" | translate}}
+      </ion-segment-button>
+      <ion-segment-button value="history">
+        {{"tlb_History" | translate}}
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
 </ion-header>
 
-<ion-content padding>
-    <ion-list>
-      <ion-item>
-        <div *ngIf="uid">uid: {{uid}}</div>
-      </ion-item>
-      <ion-item>
-        <button ion-button full (click)="logout()">Logout</button>
-      </ion-item>
+<ion-content padding class="conten_1">
+<!--
+  <ion-list>
+    <ion-item>
+      <div *ngIf="uid">uid: {{uid}}</div>
+    </ion-item>
+    <ion-item>
+      <button ion-button full (click)="logout()">Logout</button>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button block (click)="translateToEnglish()">{{ "BTN_ENGLISH" | translate }}</button>
+  <button ion-button block (click)="translateToSpanish()">{{ "BTN_SPANISH" | translate }}</button>
+  -->
+
+  <div [ngSwitch]="state" class="conten_2">
+    <ion-list *ngSwitchCase="'signal'">
+      <p>señal</p>
+
+      <ion-list>
+        <ion-item>
+          <div *ngIf="uid">uid: {{uid}}</div>
+        </ion-item>
+        <ion-item>
+          <button ion-button full (click)="logout()">Logout</button>
+        </ion-item>
+      </ion-list>
+
     </ion-list>
 
-    <button ion-button block (click)="translateToEnglish()">{{ "BTN_ENGLISH" | translate }}</button>
-    <button ion-button block (click)="translateToSpanish()">{{ "BTN_SPANISH" | translate }}</button>
+    <ion-list *ngSwitchCase="'history'">
+      <p>historial</p>
+
+      <button ion-button block (click)="translateToEnglish()">{{ "BTN_ENGLISH" | translate }}</button>
+      <button ion-button block (click)="translateToSpanish()">{{ "BTN_SPANISH" | translate }}</button>
+    </ion-list>
+  </div>
 </ion-content>
 
-<ion-footer>
-  <p class="bottom_bar">Sequeira Global Ink.</p>
+
+
+<ion-footer class="bottom_bar">
+  <p>Sequeira Global Ink.</p>
 </ion-footer>

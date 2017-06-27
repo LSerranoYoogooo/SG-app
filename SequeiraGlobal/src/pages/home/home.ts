@@ -7,10 +7,12 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
 
-  uid: any;
+  state: string = "signal"
 
+  uid: any;
   constructor(public navCtrl: NavController, public auth:AuthProvider, public translateService: TranslateService){}
 
 

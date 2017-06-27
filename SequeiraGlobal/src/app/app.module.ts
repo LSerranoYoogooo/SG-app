@@ -4,6 +4,8 @@ import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
+import { ConfigPage } from '../pages/config/config';
+import { HistoryPage } from '../pages/history/history';
 
 import { AuthProvider} from '../providers/auth-provider';
 import { AngularFireModule, AuthProviders, AuthMethods  } from 'angularfire2';
@@ -11,7 +13,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpModule, Http } from '@angular/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDCnZEuPU72V0UpVrveJU7eB3kjze8pxOw",
@@ -34,28 +35,34 @@ const myFirebaseAuthConfig = {
 
 @NgModule({
   declarations: [
-  MyApp,
-  HomePage,
-  LoginPage
+    MyApp,
+    HomePage,
+    LoginPage,
+    ConfigPage,
+    HistoryPage
   ],
   imports: [
-  IonicModule.forRoot(MyApp),
-  AngularFireModule.initializeApp(firebaseConfig,myFirebaseAuthConfig),
-  TranslateModule.forRoot({
-    loader:{
-      provide: TranslateLoader,
-      useFactory: (createTranslateLoader),
-      deps: [Http]
-    }
-  })
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig,myFirebaseAuthConfig),
+    TranslateModule.forRoot({
+      loader:{
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [Http]
+      }
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-  MyApp,
-  HomePage,
-  LoginPage
+    MyApp,
+    HomePage,
+    LoginPage,
+    ConfigPage,
+    HistoryPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
-  AuthProvider]
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthProvider
+  ]
 })
 export class AppModule {}

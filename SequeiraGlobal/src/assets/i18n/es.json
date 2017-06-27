@@ -2,6 +2,12 @@
   "TITLE": "Sequeira Global Ink",
   "btn_Login": "iniciar sesion",
   "btn_Register": "Registrarse",
+  "lbl_menu": "Menu",
+  "tlb_Signal": "Señales",
+  "tlb_History": "Historial de señales",
+  "mn_Signal": "Señales",
+  "mn_Red": "Red de Mercado",
+
   "BTN_ENGLISH": "Ingles",
   "BTN_SPANISH": "Español"
 }
