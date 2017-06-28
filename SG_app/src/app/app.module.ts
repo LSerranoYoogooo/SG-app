@@ -13,16 +13,9 @@ import { MyApp } from './app.component';
 
 import { InicioPage } from '../pages/inicio/inicio';
 import { NetworkPage } from '../pages/network/network';
-import { PerfilDetallePage } from '../pages/perfil-detalle/perfil-detalle';
-
 import { ConfigPage } from '../pages/config/config';
 import { SignalsPage } from '../pages/signals/signals';
 
-import { PlaylistsPage } from '../pages/playlists/playlists';
-import { CancionesPage } from '../pages/canciones/canciones';
-import { CancionPopoverPage } from '../pages/cancion-popover/cancion-popover'
-
-import { TecnoPlayerComponent } from '../components/tecno-player/tecno-player';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -34,15 +27,8 @@ export function createTranslateLoader(http: Http) {
 
     InicioPage,
     NetworkPage,
-    PerfilDetallePage,
     ConfigPage,
-    SignalsPage,
-
-    PlaylistsPage,
-    CancionesPage,
-    CancionPopoverPage,
-
-    TecnoPlayerComponent
+    SignalsPage
   ],
   imports: [
   BrowserModule,
@@ -62,15 +48,8 @@ export function createTranslateLoader(http: Http) {
     
     InicioPage,
     NetworkPage,
-    PerfilDetallePage,
     ConfigPage,
-    SignalsPage,
-
-    PlaylistsPage,
-    CancionesPage,
-    CancionPopoverPage,
-
-    TecnoPlayerComponent
+    SignalsPage
   ],
   providers: [
     StatusBar,
