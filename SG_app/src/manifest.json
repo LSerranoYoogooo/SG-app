@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "Sequeira Global app",
+  "short_name": "SQ app",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

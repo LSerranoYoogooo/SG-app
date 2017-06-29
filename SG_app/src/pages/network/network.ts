@@ -9,10 +9,7 @@ export class NetworkPage {
   public users: any;
   public loader: any;
 
-  constructor(
-    public navCtrl:     NavController,
-    public navParams:   NavParams
-  ) {
+  constructor(public navCtrl:     NavController, public navParams:   NavParams) {
 
   }
 

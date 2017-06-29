@@ -16,15 +16,12 @@ import { NetworkPage } from '../pages/network/network';
 import { ConfigPage } from '../pages/config/config';
 import { SignalsPage } from '../pages/signals/signals';
 
-
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-
 @NgModule({
   declarations: [
     MyApp,
-
     InicioPage,
     NetworkPage,
     ConfigPage,

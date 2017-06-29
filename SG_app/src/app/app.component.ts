@@ -28,10 +28,10 @@ export class MyApp {
 
     this.rootPage = InicioPage;
     this.pages = [
-      { titulo: 'mn_Signal', component: InicioPage,   icon: 'home'},
-      { titulo: 'mn_Red', component: NetworkPage, icon: 'person'},
-      { titulo: 'mn_Config', component: ConfigPage, icon: 'mail'},
-      { titulo: 'mn_About', component: SignalsPage,   icon: 'information-circle'}
+      { titulo: 'mn_Signal', component: SignalsPage,   icon: 'analytics'},
+      { titulo: 'mn_Red', component: NetworkPage, icon: 'card'},
+      { titulo: 'mn_Config', component: ConfigPage, icon: 'settings'},
+      { titulo: 'mn_About', component: InicioPage,   icon: 'information-circle'}
     ];
 
     platform.ready().then(() => {
