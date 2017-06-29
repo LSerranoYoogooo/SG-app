@@ -6,10 +6,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { InicioPage } from "../pages/inicio/inicio";
+import { HomePage } from "../pages/home/home";
 import { NetworkPage } from '../pages/network/network';
 import { ConfigPage } from '../pages/config/config';
 import { SignalsPage } from '../pages/signals/signals';
+import { LoginPage } from '../pages/login/login';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -26,12 +28,12 @@ export class MyApp {
     translate: TranslateService
   ) {
 
-    this.rootPage = InicioPage;
+    this.rootPage = LoginPage;
     this.pages = [
       { titulo: 'mn_Signal', component: SignalsPage,   icon: 'analytics'},
       { titulo: 'mn_Red', component: NetworkPage, icon: 'card'},
       { titulo: 'mn_Config', component: ConfigPage, icon: 'settings'},
-      { titulo: 'mn_About', component: InicioPage,   icon: 'information-circle'}
+      { titulo: 'mn_About', component: HomePage,   icon: 'information-circle'}
     ];
 
     platform.ready().then(() => {

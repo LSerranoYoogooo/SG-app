@@ -1,7 +1,7 @@
 {
   "TITLE": "Sequeira Global Ink",
-  "Login": "Login",
-  "btn_Register": "Singup",
+  "btn_Login": "Login",
+  "btn_Register": " Singup",
   "btn_Pass": "Forget my password",
 
   "lbl_menu": "Menu",
@@ -12,6 +12,12 @@
   "mn_Config": "Configuration",
   "mn_About": "About us",
   "LOGOUT": "Logout",
+  "log_email": "Email",
+  "log_pass": "Password",
+  "msg_userCreate": "Successful register",
+  "msg_notuserCreateEmail": "Invalid Email",
+  "msg_notuserCreatePassword": "password 6 characters long or more.",
+  "msg_errorRegister": "indicate email and password",
 
   "BTN_ENGLISH": "English",
   "BTN_SPANISH": "Spanish"

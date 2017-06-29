@@ -12,6 +12,13 @@
   "mn_Config": "Configuracion",
   "mn_About": "Acerca de",
   "LOGOUT": "Cerrar Sesion",
+  "log_email": "Email",
+  "log_pass": "Contraseña",
+  "msg_userCreate": "Registro satisfactorio",
+  "msg_notuserCreateEmail": "Email invalido",
+  "msg_notuserCreatePassword": "Contraseña minimo 6 caracteres",
+  "msg_errorRegister": "Favor indicar datos",
+
   
   "BTN_ENGLISH": "Ingles",
   "BTN_SPANISH": "Español"

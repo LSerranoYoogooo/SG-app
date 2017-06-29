@@ -8,9 +8,10 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ConfigPage {
 
-  constructor(public navCtrl:   NavController, public navParams: NavParams, public translateService: TranslateService) {
-
-  }
+  constructor(
+    public navCtrl:   NavController, 
+    public navParams: NavParams, 
+    public translateService: TranslateService) {}
   
   translateToSpanish(){
     this.translateService.use('es');

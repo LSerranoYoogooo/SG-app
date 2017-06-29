@@ -1,0 +1,40 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <div class="logo">
+
+
+  </div>
+  <div>
+    <ion-item class="bla">
+      <ion-label floating>{{"log_email" | translate}}</ion-label>
+      <ion-input type="text" [(ngModel)]="user.email"></ion-input>
+    </ion-item>
+
+    <ion-item class="bla">
+      <ion-label floating>{{"log_pass" | translate}}</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+    </ion-item>
+  </div>
+  <div padding class="bla2">
+    <button ion-button color="primary" block (click)="login(user)">
+      {{"btn_Login" | translate}}
+    </button>
+      <div class="bloque">
+        <button ion-button full clear (click)="register()">
+          <ion-icon name="person"></ion-icon>
+          {{"btn_Register" | translate}}
+      </button>
+      <button ion-button full clear>
+          <ion-icon name="person"></ion-icon>
+          {{"btn_Pass" | translate}}
+      </button>
+    </div>
+  </div>
+</ion-content>
