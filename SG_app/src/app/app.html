@@ -1,7 +1,7 @@
 
 <ion-menu [content]="NAV">
   <ion-content>
-    <img src="/assets/images/cover.jpg" alt="">
+    <img src="../assets/images/cover.jpg" >
     <ion-list>
       <button ion-item *ngFor="let page of pages" (click)="goToPage(page.component)" menuClose>
         <ion-icon item-left name="{{ page.icon }}"></ion-icon>
@@ -16,3 +16,6 @@
 </ion-menu>
 
 <ion-nav #NAV [root]="rootPage"></ion-nav>
+<ion-footer class="bottom_bar">
+  <p>Sequeira Global Ink.</p>
+</ion-footer>
