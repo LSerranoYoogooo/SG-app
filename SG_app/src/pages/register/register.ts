@@ -26,7 +26,6 @@ export class RegisterPage {
         duration: 2000
       }).present();
       this.navCtrl.pop();
-
     }
     catch (e) {
       if(e.code == "auth/argument-error"){
