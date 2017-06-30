@@ -17,6 +17,7 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
 import { NetworkPage } from '../pages/network/network';
 import { ConfigPage } from '../pages/config/config';
 import { SignalsPage } from '../pages/signals/signals';
+import { HomePage } from "../pages/home/home";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -27,6 +28,7 @@ export function createTranslateLoader(http: Http) {
     NetworkPage,
     ConfigPage,
     SignalsPage,
+    HomePage
   ],
   imports: [
   BrowserModule,
@@ -48,6 +50,7 @@ export function createTranslateLoader(http: Http) {
     NetworkPage,
     ConfigPage,
     SignalsPage,
+    HomePage
   ],
   providers: [
     StatusBar,
