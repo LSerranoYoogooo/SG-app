@@ -17,8 +17,6 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
 import { NetworkPage } from '../pages/network/network';
 import { ConfigPage } from '../pages/config/config';
 import { SignalsPage } from '../pages/signals/signals';
-import { LoginPage } from '../pages/login/login';
-import { InicioPage } from "../pages/inicio/inicio";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -26,11 +24,9 @@ export function createTranslateLoader(http: Http) {
 @NgModule({
   declarations: [
     MyApp,
-    InicioPage,
     NetworkPage,
     ConfigPage,
     SignalsPage,
-    LoginPage
   ],
   imports: [
   BrowserModule,
@@ -49,11 +45,9 @@ export function createTranslateLoader(http: Http) {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    InicioPage,
     NetworkPage,
     ConfigPage,
     SignalsPage,
-    LoginPage
   ],
   providers: [
     StatusBar,

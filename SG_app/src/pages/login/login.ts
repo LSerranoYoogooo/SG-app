@@ -19,34 +19,50 @@ export class LoginPage {
 
   async login(user: User){
     try {
-      this.auth.auth.signInWithEmailAndPassword(user.email, user.password);
-      console.log(this.auth.idToken);
-      /*this.auth.authState.subscribe(data => {
-        if (data && data.email && data.uid){
-          this.navCtrl.setRoot('HomePage');
+      await this.auth.auth.signInWithEmailAndPassword(user.email, user.password);
+      this.auth.authState.subscribe(data => {
+        if (data.uid){
+          this.navCtrl.setRoot("HomePage");
         } 
-        else {
-          this.toast.create({
-          message: 'Email / Password incorrects',
-          duration: 3000
-          }).present();
-        }
-      })*/
-      /*if (result){
-        this.navCtrl.setRoot('HomePage');
-      }*/
+      })
     }
     catch (e){
-      console.log(e);
-      this.toast.create({
-        message: 'Email / Password incorrects',
-        duration: 2000
-      }).present();
+      console.log(e.code);
+      if(e.code == "auth/argument-error"){
+        this.toast.create({
+          message: "Indicate email and password",
+          duration: 2000
+        }).present();
+      } else if (e.code == "auth/user-not-found"){
+        this.toast.create({
+          message: "Invalid User",
+          duration: 2000
+        }).present();
+      } else if (e.code == "auth/wrong-password"){
+        this.toast.create({
+          message: "Invalid Password",
+          duration: 2000
+        }).present();
+      } else if (e.code == "auth/invalid-email"){
+        this.toast.create({
+          message: "Invalid Email",
+          duration: 2000
+        }).present();
+      } else {
+        this.toast.create({
+          message: "Error",
+          duration: 2000
+        }).present();
+      }
     }
-    
   }
 
   register() {
     this.navCtrl.push("RegisterPage");
   }
+
+  resetPass(email: string) {
+    return this.auth.auth.sendPasswordResetEmail(email);
+  }
+
 }

@@ -15,21 +15,16 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    //console.log('ionViewDidLoad HomePage');
     this.auth.authState.subscribe(data => {
-        if (data && data.email && data.uid){
-          this.navCtrl.setRoot('HomePage');
-        } 
-        else {
-          this.toast.create({
-          message: 'Email / Password incorrects',
-          duration: 3000
-        }).present();
-        this.navCtrl.setRoot('LoginPage');
-        }
-      })
+      try{
+        if (data.uid){} 
+      }  
+      catch(e){
+        console.log(e);
+        this.navCtrl.setRoot("LoginPage");
+      }
+    });
   }
-
   
 
 }

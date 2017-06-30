@@ -1,13 +1,13 @@
 
 <ion-menu [content]="NAV">
   <ion-content>
-    <img src="../assets/images/cover.jpg" >
+    <img src="assets/images/cover.jpg" >
     <ion-list>
       <button ion-item *ngFor="let page of pages" (click)="goToPage(page.component)" menuClose>
         <ion-icon item-left name="{{ page.icon }}"></ion-icon>
           {{page.titulo | translate}}
       </button>
-      <button ion-item menuClose>
+      <button ion-item menuClose (click)=" logOut()">
         <ion-icon item-left name="key"></ion-icon>
           {{"LOGOUT" | translate}}
       </button>

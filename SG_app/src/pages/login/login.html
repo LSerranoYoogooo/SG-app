@@ -4,33 +4,33 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <div class="logo">
     <img src="assets/images/cover.jpg"/>
   </div>
-  <div>
-    <ion-item class="bla">
+  <div padding>
+    <ion-item>
       <ion-label floating>{{"log_email" | translate}}</ion-label>
       <ion-input type="text" [(ngModel)]="user.email"></ion-input>
     </ion-item>
 
-    <ion-item class="bla">
+    <ion-item>
       <ion-label floating>{{"log_pass" | translate}}</ion-label>
       <ion-input type="password" [(ngModel)]="user.password"></ion-input>
     </ion-item>
   </div>
-  <div padding class="bla2">
+  <div padding>
     <button ion-button color="primary" block (click)="login(user)">
       {{"btn_Login" | translate}}
     </button>
-      <div class="bloque">
-        <button ion-button full clear (click)="register()">
-          <ion-icon name="person"></ion-icon>
-          {{"btn_Register" | translate}}
+    <br>
+    <div>
+      <button  class="bloque1" ion-button full clear (click)="register()">
+        <ion-icon name="person"></ion-icon>
+        {{"btn_Register" | translate}}
       </button>
-      <button ion-button full clear>
-          <ion-icon name="person"></ion-icon>
-          {{"btn_Pass" | translate}}
+      <button  class="bloque2" ion-button full clear (click)="resetPass(user.email)">
+        {{"btn_Pass" | translate}}
       </button>
     </div>
   </div>
