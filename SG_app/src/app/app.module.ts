@@ -8,6 +8,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 
+import { Push } from '@ionic-native/push';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -17,6 +18,7 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
 import { NetworkPage } from '../pages/network/network';
 import { ConfigPage } from '../pages/config/config';
 import { SignalsPage } from '../pages/signals/signals';
+import { HomePage } from "../pages/home/home";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -26,7 +28,7 @@ export function createTranslateLoader(http: Http) {
     MyApp,
     NetworkPage,
     ConfigPage,
-    SignalsPage
+    SignalsPage,
   ],
   imports: [
   BrowserModule,
@@ -47,11 +49,12 @@ export function createTranslateLoader(http: Http) {
     MyApp,
     NetworkPage,
     ConfigPage,
-    SignalsPage
+    SignalsPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Push,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
