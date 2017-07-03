@@ -14,21 +14,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { MyApp } from './app.component';
 import { FIREBASE_CONFIG } from './app.firebase.config';
-
-import { NetworkPage } from '../pages/network/network';
-import { ConfigPage } from '../pages/config/config';
-import { SignalsPage } from '../pages/signals/signals';
-import { HomePage } from "../pages/home/home";
+import { SignalsPageModule } from "../pages/signals/signals.module";
+import { NetworkPageModule } from "../pages/network/network.module";
+import { ConfigurationPageModule } from "../pages/configuration/configuration.module";
+import { LoginPageModule } from "../pages/login/login.module";
+import { RegisterPageModule } from "../pages/register/register.module";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 @NgModule({
   declarations: [
-    MyApp,
-    NetworkPage,
-    ConfigPage,
-    SignalsPage,
+    MyApp
   ],
   imports: [
   BrowserModule,
@@ -42,14 +39,14 @@ export function createTranslateLoader(http: Http) {
     }
   }),
   AngularFireModule.initializeApp(FIREBASE_CONFIG),
-  AngularFireAuthModule
+  AngularFireAuthModule,
+  SignalsPageModule,
+  NetworkPageModule,
+  ConfigurationPageModule
 ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    NetworkPage,
-    ConfigPage,
-    SignalsPage,
+    MyApp
   ],
   providers: [
     StatusBar,

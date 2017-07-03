@@ -6,11 +6,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { TranslateService } from '@ngx-translate/core';
 import { Push, PushObject, PushOptions } from '@ionic-native/push';
-
-import { HomePage } from "../pages/home/home";
-import { NetworkPage } from '../pages/network/network';
-import { ConfigPage } from '../pages/config/config';
-import { SignalsPage } from '../pages/signals/signals';
+import { SignalsPage } from "../pages/signals/signals";
+import { NetworkPage } from "../pages/network/network";
+import { ConfigurationPage } from "../pages/configuration/configuration";
 
 
 @Component({
@@ -27,12 +25,11 @@ export class MyApp {
     private auth: AngularFireAuth, public push: Push, public alertCtrl: AlertController
   ) {
 
-    this.rootPage = HomePage;
+    this.rootPage = SignalsPage;
     this.pages = [
       { titulo: 'mn_Signal', component: SignalsPage,   icon: 'analytics'},
       { titulo: 'mn_Red', component: NetworkPage, icon: 'card'},
-      { titulo: 'mn_Config', component: ConfigPage, icon: 'settings'},
-      { titulo: 'mn_About', component: HomePage,   icon: 'information-circle'}
+      { titulo: 'mn_Config', component: ConfigurationPage, icon: 'settings'}
     ];
 
     platform.ready().then(() => {

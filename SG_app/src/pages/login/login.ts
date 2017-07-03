@@ -22,7 +22,7 @@ export class LoginPage {
       await this.auth.auth.signInWithEmailAndPassword(user.email, user.password);
       this.auth.authState.subscribe(data => {
         if (data.uid){
-          this.navCtrl.setRoot("HomePage");
+          this.navCtrl.setRoot("SignalsPage");
         } 
       })
     }

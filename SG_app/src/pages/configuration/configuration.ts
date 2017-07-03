@@ -2,23 +2,23 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the NetworkPage page.
+ * Generated class for the ConfigurationPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-network',
-  templateUrl: 'network.html',
+  selector: 'page-configuration',
+  templateUrl: 'configuration.html',
 })
-export class NetworkPage {
+export class ConfigurationPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NetworkPage');
+    console.log('ionViewDidLoad ConfigurationPage');
   }
 
 }
