@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ionicframework.tecnodeezer175991" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.yoogooodevelop.sequeiraglobal" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Sequeira Global app</name>
     <description>SQ app, mercado financiero</description>
     <author email="develop@yoogooo.com" href="http://yoogooo.com/">Yoogooo Team</author>
@@ -36,7 +36,4 @@
     <plugin name="cordova-plugin-statusbar" spec="2.2.1" />
     <plugin name="cordova-plugin-device" spec="1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
-    <plugin name="phonegap-plugin-push" spec="^1.10.5">
-        <variable name="SENDER_ID" value="503332807539" />
-    </plugin>
 </widget>

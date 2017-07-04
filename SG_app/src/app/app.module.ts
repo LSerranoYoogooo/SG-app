@@ -17,8 +17,6 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
 import { SignalsPageModule } from "../pages/signals/signals.module";
 import { NetworkPageModule } from "../pages/network/network.module";
 import { ConfigurationPageModule } from "../pages/configuration/configuration.module";
-import { LoginPageModule } from "../pages/login/login.module";
-import { RegisterPageModule } from "../pages/register/register.module";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
