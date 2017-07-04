@@ -11,6 +11,7 @@ import { AngularFireAuthModule} from 'angularfire2/auth';
 import { Push } from '@ionic-native/push';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
 import { MyApp } from './app.component';
 import { FIREBASE_CONFIG } from './app.firebase.config';
@@ -21,6 +22,13 @@ import { ConfigurationPageModule } from "../pages/configuration/configuration.mo
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': '98107872'
+  }
+};
+
 @NgModule({
   declarations: [
     MyApp
@@ -29,6 +37,7 @@ export function createTranslateLoader(http: Http) {
   BrowserModule,
   HttpModule,
   IonicModule.forRoot(MyApp),
+  CloudModule.forRoot(cloudSettings),
   TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,
