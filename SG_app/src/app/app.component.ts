@@ -1,11 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav, AlertController } from 'ionic-angular';
+import {
+  Push,
+  PushToken
+} from '@ionic/cloud-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { TranslateService } from '@ngx-translate/core';
-import { Push, PushObject, PushOptions } from '@ionic-native/push';
 import { SignalsPage } from "../pages/signals/signals";
 import { NetworkPage } from "../pages/network/network";
 import { ConfigurationPage } from "../pages/configuration/configuration";
@@ -20,16 +23,16 @@ export class MyApp {
   public pages: Array<{ titulo: string, component: any, icon: string }>;
 
   constructor(
-    public platform:     Platform, public statusBar:    StatusBar,
+    public platform: Platform, public statusBar: StatusBar,
     public splashScreen: SplashScreen, public translate: TranslateService,
     private auth: AngularFireAuth, public push: Push, public alertCtrl: AlertController
   ) {
 
     this.rootPage = SignalsPage;
     this.pages = [
-      { titulo: 'mn_Signal', component: SignalsPage,   icon: 'analytics'},
-      { titulo: 'mn_Red', component: NetworkPage, icon: 'card'},
-      { titulo: 'mn_Config', component: ConfigurationPage, icon: 'settings'}
+      { titulo: 'mn_Signal', component: SignalsPage, icon: 'analytics' },
+      { titulo: 'mn_Red', component: NetworkPage, icon: 'card' },
+      { titulo: 'mn_Config', component: ConfigurationPage, icon: 'settings' }
     ];
 
     platform.ready().then(() => {
@@ -37,47 +40,37 @@ export class MyApp {
       translate.use('en');
       statusBar.styleDefault();
       splashScreen.hide();
+      this.RegisterNotificaction();
+      this.Notification();
     });
   }
 
-  goToPage(page){
+  goToPage(page) {
     this.nav.setRoot(page);
   }
 
-  logOut(){
+  logOut() {
     this.auth.auth.signOut();
+    this.UnRegisterNotification();
     this.nav.setRoot('LoginPage');
   }
 
-  pushsetup() {
-    const options: PushOptions = {
-     android: {
-         senderID: '503332807539'
-     },
-     ios: {
-         alert: 'true',
-         badge: true,
-         sound: 'false'
-     },
-     windows: {}
-  };
- 
-  const pushObject: PushObject = this.push.init(options);
- 
-  pushObject.on('notification').subscribe((notification: any) => {
-    if (notification.additionalData.foreground) {
-      let youralert = this.alertCtrl.create({
-        title: 'New Push notification',
-        message: notification.message
+  private RegisterNotificaction() {
+    this.push.register().then((t: PushToken) => {
+      return this.push.saveToken(t);
+    }).then((t: PushToken) => {
+      console.log('Token saved:', t.token);
+    });
+  }
+
+  private Notification() {
+    this.push.rx.notification()
+      .subscribe((msg) => {
+        alert(msg.title + ': ' + msg.text);
       });
-      youralert.present();
-    }
-  });
- 
-  pushObject.on('registration').subscribe((registration: any) => {
-     //do whatever you want with the registration ID
-  });
- 
-  pushObject.on('error').subscribe(error => alert('Error with Push plugin' + error));
+  }
+
+  private UnRegisterNotification(){
+    this.push.unregister();
   }
 }

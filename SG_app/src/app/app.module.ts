@@ -26,6 +26,18 @@ export function createTranslateLoader(http: Http) {
 const cloudSettings: CloudSettings = {
   'core': {
     'app_id': '98107872'
+  },
+  'push': {
+    'sender_id': '503332807539',
+    'pluginConfig': {
+      'ios': {
+        'badge': true,
+        'sound': true
+      },
+      'android': {
+        'iconColor': '#343434'
+      }
+    }
   }
 };
 
