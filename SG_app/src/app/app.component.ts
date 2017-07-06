@@ -12,6 +12,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { SignalsPage } from "../pages/signals/signals";
 import { NetworkPage } from "../pages/network/network";
 import { ConfigurationPage } from "../pages/configuration/configuration";
+import { VideosPage } from "../pages/videos/videos";
+import { InitialPage } from "../pages/initial/initial";
 
 
 @Component({
@@ -32,7 +34,9 @@ export class MyApp {
     this.pages = [
       { titulo: 'mn_Signal', component: SignalsPage, icon: 'analytics' },
       { titulo: 'mn_Red', component: NetworkPage, icon: 'card' },
-      { titulo: 'mn_Config', component: ConfigurationPage, icon: 'settings' }
+      { titulo: 'mn_Config', component: ConfigurationPage, icon: 'settings' },
+      { titulo: 'mn_Config', component: VideosPage, icon: 'settings' },
+      { titulo: 'mn_Config', component: InitialPage, icon: 'settings' }
     ];
 
     platform.ready().then(() => {

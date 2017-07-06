@@ -18,6 +18,8 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
 import { SignalsPageModule } from "../pages/signals/signals.module";
 import { NetworkPageModule } from "../pages/network/network.module";
 import { ConfigurationPageModule } from "../pages/configuration/configuration.module";
+import { InitialPageModule } from "../pages/initial/initial.module";
+import { VideosPageModule } from "../pages/videos/videos.module";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -43,7 +45,7 @@ const cloudSettings: CloudSettings = {
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
   ],
   imports: [
   BrowserModule,
@@ -61,7 +63,9 @@ const cloudSettings: CloudSettings = {
   AngularFireAuthModule,
   SignalsPageModule,
   NetworkPageModule,
-  ConfigurationPageModule
+  ConfigurationPageModule,
+  InitialPageModule,
+  VideosPageModule
 ],
   bootstrap: [IonicApp],
   entryComponents: [
