@@ -8,6 +8,7 @@ import {
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { TranslateService } from '@ngx-translate/core';
 import { SignalsPage } from "../pages/signals/signals";
 import { NetworkPage } from "../pages/network/network";
@@ -27,7 +28,8 @@ export class MyApp {
   constructor(
     public platform: Platform, public statusBar: StatusBar,
     public splashScreen: SplashScreen, public translate: TranslateService,
-    private auth: AngularFireAuth, public push: Push, public alertCtrl: AlertController
+    private auth: AngularFireAuth, public push: Push, public alertCtrl: AlertController,
+    private db: AngularFireDatabase
   ) {
 
     this.rootPage = SignalsPage;

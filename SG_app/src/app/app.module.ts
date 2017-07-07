@@ -7,6 +7,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule} from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { Push } from '@ionic-native/push';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -61,6 +62,7 @@ const cloudSettings: CloudSettings = {
   }),
   AngularFireModule.initializeApp(FIREBASE_CONFIG),
   AngularFireAuthModule,
+  AngularFireDatabaseModule,
   SignalsPageModule,
   NetworkPageModule,
   ConfigurationPageModule,

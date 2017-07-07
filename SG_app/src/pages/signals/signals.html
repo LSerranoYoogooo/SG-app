@@ -8,5 +8,19 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-buttons end>
+    <button ion-button icon-only (click)="addSong()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-buttons>
+
+  <ion-card *ngFor="let song of songs | async">
+    <ion-card-header>
+      {{song.title}}
+    </ion-card-header>
+    <ion-card-content>
+      <img >
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
