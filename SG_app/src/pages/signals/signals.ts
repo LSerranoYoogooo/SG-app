@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireStorage} from 'angularfire2/storage';
+import { FileChooser, FilePath, File } from 'ionic-native';
 import firebase from 'firebase';
 
 
@@ -41,6 +42,42 @@ export class SignalsPage {
     });
   }
 
+  store() {
+    FileChooser.open().then((url) => {
+      (<any>window).FilePath.resolveNativePath(url, (result) => {
+        this.nativepath = result;
+        this.uploadimage();
+      }
+      )
+    })
+  }
+
+  display() {
+    this.firestore.ref().child('logo_ionic.png').getDownloadURL().then((url) => {
+      this.zone.run(() => {
+        this.imgsource = url;
+       })
+    })
+  }
+
+  uploadimage() {
+    (<any>window).resolveLocalFileSystemURL(this.nativepath, (res) => {
+      res.file((resFile) => {
+        var reader = new FileReader();
+        reader.readAsArrayBuffer(resFile);
+        reader.onloadend = (evt: any) => {
+          var imgBlob = new Blob([evt.target.result], { type: 'image/jpeg' });
+          var imageStore = this.firestore.ref().child('image');
+          imageStore.put(imgBlob).then((res) => {
+            alert('Upload Success');
+          }).catch((err) => {
+            alert('Upload Failed' + err);
+          })
+        }
+      })
+    })
+  }
+
   addSong(){
     let prompt = this.alertCtrl.create({
       title: 'Song Name',
@@ -69,11 +106,6 @@ export class SignalsPage {
       ]
     });
     prompt.present();
-  }
-
-  display(img: string) {
-    this.firestore.ref().child('images/logo_ionic.png/').getDownloadURL().then(
-      function(url){}).catch(function(error){});
   }
 
 }

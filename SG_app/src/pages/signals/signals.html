@@ -19,7 +19,9 @@
       {{song.title}}
     </ion-card-header>
     <ion-card-content>
-      <img >
+      <button ion-button (click)="store()">Upload</button>
+      <button ion-button (click)="display()">Display</button>
+      <img src="{{imgsource}}">
     </ion-card-content>
   </ion-card>
 
