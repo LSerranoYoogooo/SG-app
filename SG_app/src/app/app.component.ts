@@ -1,9 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav, AlertController } from 'ionic-angular';
-import {
-  Push,
-  PushToken
-} from '@ionic/cloud-angular';
+import { Push, PushToken } from '@ionic/cloud-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -28,17 +25,15 @@ export class MyApp {
   constructor(
     public platform: Platform, public statusBar: StatusBar,
     public splashScreen: SplashScreen, public translate: TranslateService,
-    private auth: AngularFireAuth, public push: Push, public alertCtrl: AlertController,
-    private db: AngularFireDatabase
+    private auth: AngularFireAuth, public push: Push, public alertCtrl: AlertController
   ) {
 
     this.rootPage = SignalsPage;
     this.pages = [
       { titulo: 'mn_Signal', component: SignalsPage, icon: 'analytics' },
       { titulo: 'mn_Red', component: NetworkPage, icon: 'card' },
-      { titulo: 'mn_Config', component: ConfigurationPage, icon: 'settings' },
-      { titulo: 'mn_Config', component: VideosPage, icon: 'settings' },
-      { titulo: 'mn_Config', component: InitialPage, icon: 'settings' }
+      { titulo: 'mn_Videos', component: VideosPage, icon: 'videocam' },
+      { titulo: 'mn_Config', component: ConfigurationPage, icon: 'settings' }
     ];
 
     platform.ready().then(() => {

@@ -14,7 +14,8 @@ import firebase from 'firebase';
 })
 export class SignalsPage {
   user: any;
-  songs: FirebaseListObservable<any>;
+  users: any;
+  //songs: FirebaseListObservable<any>;
   nativepath: any;
   firestore = firebase.storage();
   imgsource: any;
@@ -26,30 +27,24 @@ export class SignalsPage {
     private auth: AngularFireAuth,
     private db: AngularFireDatabase,
     public zone: NgZone) {
-      this.songs = db.list('/songs');
+      //this.songs = db.list('/songs');
+      /*this.db.list('/users').subscribe(users => this.users = users, 
+        error => console.log(error)
+      );*/
     }
 
   ionViewDidLoad() {
     this.auth.authState.subscribe(data => {
       if(data){
-        this.user = data.uid;
-        console.log("loget")
+        //this.SearchSession();
+        //this.user = data.uid;
+        //console.log("loget")
       } else {
-        console.log("not loget")
+        //console.log("not loget")
         this.navCtrl.setRoot("LoginPage");
       }
-      console.log(data.uid);
+      //console.log(data.uid);
     });
-  }
-
-  store() {
-    FileChooser.open().then((url) => {
-      (<any>window).FilePath.resolveNativePath(url, (result) => {
-        this.nativepath = result;
-        this.uploadimage();
-      }
-      )
-    })
   }
 
   display() {
@@ -60,25 +55,15 @@ export class SignalsPage {
     })
   }
 
-  uploadimage() {
-    (<any>window).resolveLocalFileSystemURL(this.nativepath, (res) => {
-      res.file((resFile) => {
-        var reader = new FileReader();
-        reader.readAsArrayBuffer(resFile);
-        reader.onloadend = (evt: any) => {
-          var imgBlob = new Blob([evt.target.result], { type: 'image/jpeg' });
-          var imageStore = this.firestore.ref().child('image');
-          imageStore.put(imgBlob).then((res) => {
-            alert('Upload Success');
-          }).catch((err) => {
-            alert('Upload Failed' + err);
-          })
-        }
-      })
-    })
-  }
+  /*SearchSession(){
+    console.log("USERS REGISTRADOS");
 
-  addSong(){
+    for (let entry of this.users) {
+      console.log(entry);
+    }
+  }*/
+
+  /*addSong(){
     let prompt = this.alertCtrl.create({
       title: 'Song Name',
       message: "Enter a name for this new song you're so keen on adding",
@@ -106,6 +91,6 @@ export class SignalsPage {
       ]
     });
     prompt.present();
-  }
+  }*/
 
 }

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Component, NgZone } from '@angular/core';
+import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { FirebaseListObservable, AngularFireDatabase } from "angularfire2/database";
 
 @IonicPage()
 @Component({
@@ -10,22 +11,25 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class RegisterPage {
   user = {} as User;
+  users: FirebaseListObservable<any>;
   
-  constructor(
-    public navCtrl: NavController, public navParams: NavParams, 
-    public toast: ToastController, 
-    private auth: AngularFireAuth ) {
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams, 
+    public toast: ToastController, public alertCtrl: AlertController,
+    private auth: AngularFireAuth, private db: AngularFireDatabase,
+    public zone: NgZone) {
+      this.users = db.list('/users');
+    }
 
   async register(user: User) {
     try{
       const result = await this.auth.auth.createUserWithEmailAndPassword(user.email, user.password);
       if (result)
-      this.toast.create({
-        message: 'Successful register',
-        duration: 2000
-      }).present();
-      this.navCtrl.pop();
+        this.addUser(user.email);
+        this.toast.create({
+          message: 'Successful register',
+          duration: 2000
+        }).present();
+        this.navCtrl.pop();
     }
     catch (e) {
       if(e.code == "auth/argument-error"){
@@ -43,9 +47,27 @@ export class RegisterPage {
           message: "Invalid Email",
           duration: 2000
         }).present();
+      } else if (e.code == "auth/email-already-in-use"){
+        this.toast.create({
+          message: "Email is already in use",
+          duration: 2000
+        }).present();
+      } else {
+        console.log(e);
+        this.toast.create({
+          message: "Error",
+          duration: 1000
+        }).present();
       }
 
     }
     
+  }
+
+  addUser(email: string){
+    this.users.push({
+      Email: email,
+      Intro: '1'
+    });
   }
 }
