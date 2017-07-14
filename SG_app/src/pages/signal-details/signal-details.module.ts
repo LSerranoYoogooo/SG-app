@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { SignalDetailsPage } from './signal-details';
+import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { SignalDetailsPage } from './signal-details';
   ],
   imports: [
     IonicPageModule.forChild(SignalDetailsPage),
+    TranslateModule,
   ],
   exports: [
     SignalDetailsPage

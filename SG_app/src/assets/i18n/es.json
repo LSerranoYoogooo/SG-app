@@ -23,6 +23,11 @@
   "msg_DontShow": "No mostrar mas",
   "trend_A": "Alcista",
   "trend_B": "Bajista",
+  "priceA": "Precio Inicial:",
+  "trend": "Tendencia:",
+  "tp1": "Toma Ganancia 1:",
+  "tp2": "Toma Ganancia 2:",
+  "sl": "Limite Perdida:",
 
   
   "BTN_ENGLISH": "Ingles",

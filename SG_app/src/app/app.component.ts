@@ -37,8 +37,8 @@ export class MyApp {
     ];
 
     platform.ready().then(() => {
-      translate.setDefaultLang('en');
-      translate.use('en');
+      translate.setDefaultLang('es');
+      translate.use('es');
       statusBar.styleDefault();
       splashScreen.hide();
       this.RegisterNotificaction();

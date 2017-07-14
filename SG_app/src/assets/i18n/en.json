@@ -23,6 +23,11 @@
   "msg_DontShow": "Don't show more",
   "trend_A": "Bullish",
   "trend_B": "Bassist",
+  "priceA": "Initial price:",
+  "trend": "Tendency",
+  "tp1": "Take profit 1:",
+  "tp2": "Take profit 2:",
+  "sl": "Stop loss:",
 
   "BTN_ENGLISH": "English",
   "BTN_SPANISH": "Spanish"

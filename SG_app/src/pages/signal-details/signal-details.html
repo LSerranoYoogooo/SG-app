@@ -16,17 +16,17 @@
       <ion-grid class="grid">
         <ion-row>
           <ion-col>
-            <p>Precio de apertura:</p>
+            <p>{{"priceA" | translate}}</p>
             <p class="rigth-txt"> {{Signal.Price_a}} </p>
-            <p>Limite de ganancia 1:</p>
+            <p>{{"tp1" | translate}}</p>
             <p class="rigth-txt"> {{Signal.TP1}} </p>
-            <p>Limite de perdida:</p>
+            <p>{{"sl" | translate}}</p>
             <p class="rigth-txt"> {{Signal.SL}} </p>
           </ion-col>
           <ion-col>
-            <p>Tendencia:</p>
-            <p class="rigth-txt"> {{Trend}} </p>
-            <p>Limite de ganancia 2:</p>
+            <p>{{"trend" | translate}}</p>
+            <p class="rigth-txt"> {{Trend | translate}}</p>
+            <p>{{"tp2" | translate}}</p>
             <p class="rigth-txt">  {{Signal.TP2}} </p>
           </ion-col>
         </ion-row>
