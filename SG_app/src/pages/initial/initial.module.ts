@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
+import { TranslateModule } from '@ngx-translate/core';
 import { InitialPage } from './initial';
+import { MainPipe } from "../../app/main-pipe.module";
 
 @NgModule({
   declarations: [
@@ -8,6 +10,8 @@ import { InitialPage } from './initial';
   ],
   imports: [
     IonicPageModule.forChild(InitialPage),
+    TranslateModule,
+    MainPipe,
   ],
   exports: [
     InitialPage

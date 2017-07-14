@@ -21,6 +21,9 @@ import { NetworkPageModule } from "../pages/network/network.module";
 import { ConfigurationPageModule } from "../pages/configuration/configuration.module";
 import { InitialPageModule } from "../pages/initial/initial.module";
 import { VideosPageModule } from "../pages/videos/videos.module";
+import { SafePipe } from "../pipes/safe/safe";
+import { MainPipe } from "./main-pipe.module";
+//import { SafeStylePipe } from '../pipes/safe-style/safe-style';
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -47,6 +50,7 @@ const cloudSettings: CloudSettings = {
 @NgModule({
   declarations: [
     MyApp,
+    //SafeStylePipe,
   ],
   imports: [
   BrowserModule,
@@ -67,7 +71,7 @@ const cloudSettings: CloudSettings = {
   NetworkPageModule,
   ConfigurationPageModule,
   InitialPageModule,
-  VideosPageModule
+  VideosPageModule,
 ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -81,3 +85,5 @@ const cloudSettings: CloudSettings = {
   ]
 })
 export class AppModule {}
+
+

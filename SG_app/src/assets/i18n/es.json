@@ -20,6 +20,9 @@
   "msg_notuserCreateEmail": "Email invalido",
   "msg_notuserCreatePassword": "Contraseña minimo 6 caracteres",
   "msg_errorRegister": "Favor indicar datos",
+  "msg_DontShow": "No mostrar mas",
+  "trend_A": "Alcista",
+  "trend_B": "Bajista",
 
   
   "BTN_ENGLISH": "Ingles",

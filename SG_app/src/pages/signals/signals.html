@@ -5,23 +5,90 @@
       </button>
     <ion-title>{{"mn_Signal" | translate}}</ion-title>
   </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="state">
+      <ion-segment-button value="signals">
+        {{"tlb_Signal" | translate}}
+      </ion-segment-button>
+      <ion-segment-button value="history">
+        {{"tlb_History" | translate}}
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <div [ngSwitch]="state">
+    
+
+
+    <ion-list *ngSwitchCase="'signals'">
+      <ion-card *ngFor="let signal of signals | async">
+        <button ion-item (click)="openNavDetailsPage(signal)">
+            <ion-icon item-left  name={{signal.E_Trend}} [ngStyle]="{'color': signal.E_Color}"></ion-icon>
+            {{signal.Instrument}}
+            <ion-icon name="ios-arrow-forward" class="rigthArrow"></ion-icon>
+          </button>
+      </ion-card>
+    </ion-list>
+
+    
+      
+  </div>
+  
+  <!--
+    <ion-list *ngSwitchCase="'history'">
+      <ion-card *ngFor="let history of history_signals | async">
+        <ion-card-header>
+          {{history.Intrument}}
+        </ion-card-header>
+        <ion-card-content>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+
+
   <ion-buttons end>
     <button ion-button icon-only (click)="addSong()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-buttons>
 
-  <ion-card *ngFor="let song of songs | async">
+
+        <ion-card *ngFor="let signal of signals | async">
+        <ion-card-header>
+          {{signal.Intrument}}
+        </ion-card-header>
+        <ion-card-content>
+        </ion-card-content>
+      </ion-card>
+
+  <ion-card *ngFor="let signal of signals | async">
     <ion-card-header>
-      {{song.title}}
+      {{signal.Intrument}}
     </ion-card-header>
     <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div>{{signal.Price_a}}</div>
+            <div>{{signal.E_Trend}}</div>
+            <div>{{signal.TP1}}</div>
+            <div>{{signal.TP2}}</div>
+            <div>{{signal.SL}}</div>
+          </ion-col>
+          <ion-col>
+            <div><img src="{{imgsource}}" ></div>
+            <div>{{signal.Date_A}}</div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
       <button ion-button (click)="display()">Display</button>
       <img src="{{imgsource}}">
     </ion-card-content>
   </ion-card>
+  -->
 
 </ion-content>

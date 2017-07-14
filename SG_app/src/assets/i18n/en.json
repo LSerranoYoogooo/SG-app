@@ -20,6 +20,9 @@
   "msg_notuserCreateEmail": "Invalid Email",
   "msg_notuserCreatePassword": "password 6 characters long or more.",
   "msg_errorRegister": "indicate email and password",
+  "msg_DontShow": "Don't show more",
+  "trend_A": "Bullish",
+  "trend_B": "Bassist",
 
   "BTN_ENGLISH": "English",
   "BTN_SPANISH": "Spanish"

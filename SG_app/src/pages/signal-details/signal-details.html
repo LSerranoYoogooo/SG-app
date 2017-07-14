@@ -1,0 +1,37 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>signal-details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+   <ion-card>
+    <ion-title class="instrument">
+      <b>{{Signal.Instrument}}</b>
+    </ion-title>
+    <ion-card-content class="card">
+      <img src="{{imgsource}}" class="viewImg"/>
+      <ion-grid class="grid">
+        <ion-row>
+          <ion-col>
+            <p>Precio de apertura:</p>
+            <p class="rigth-txt"> {{Signal.Price_a}} </p>
+            <p>Limite de ganancia 1:</p>
+            <p class="rigth-txt"> {{Signal.TP1}} </p>
+            <p>Limite de perdida:</p>
+            <p class="rigth-txt"> {{Signal.SL}} </p>
+          </ion-col>
+          <ion-col>
+            <p>Tendencia:</p>
+            <p class="rigth-txt"> {{Trend}} </p>
+            <p>Limite de ganancia 2:</p>
+            <p class="rigth-txt">  {{Signal.TP2}} </p>
+          </ion-col>
+        </ion-row>
+        <p class="rigth-txt">{{Signal.Date_A}} </p>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

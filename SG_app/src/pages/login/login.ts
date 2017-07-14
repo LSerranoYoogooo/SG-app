@@ -52,7 +52,6 @@ export class LoginPage {
           duration: 2000
         }).present();
       } else {
-        console.log(e);
         this.toast.create({
           message: "Error",
           duration: 1000

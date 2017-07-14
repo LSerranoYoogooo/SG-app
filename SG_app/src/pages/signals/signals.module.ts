@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { SignalsPage } from './signals';
 import { TranslateModule } from '@ngx-translate/core';
+import { SignalDetailsPageModule } from "../signal-details/signal-details.module";
+
 
 @NgModule({
   declarations: [
@@ -9,10 +11,12 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   imports: [
     IonicPageModule.forChild(SignalsPage),
-    TranslateModule
+    TranslateModule,
+    SignalDetailsPageModule
+    
   ],
   exports: [
-    SignalsPage
+    SignalsPage,
   ]
 })
 export class SignalsPageModule {}

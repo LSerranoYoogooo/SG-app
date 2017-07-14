@@ -1,18 +1,38 @@
-<!--
-  Generated template for the InitialPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>initial</ion-title>
+    <ion-title>{{"title" | translate}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-slides pager>
+    <ion-slide *ngFor="let slide of slides">
+      <ion-toolbar>
+        <ion-buttons end>
+          <button ion-button color="primary" (click)="Continue()">Skip</button>
+        </ion-buttons>
+      </ion-toolbar>
+      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+      <ion-card-content>
+        <iframe width="100%" height="100%" [src]="slide.video | safe" frameborder="0" allowfullscreen ></iframe>
+      </ion-card-content>
+      <p [innerHTML]="slide.description"></p>
+    </ion-slide>
+    <ion-slide>
+      <ion-toolbar>
+      </ion-toolbar>
+      <img src="assets/images/cover.jpg" class="slide-image"/>
+      <h2 class="slide-title">Ready to Play?</h2>
+      <button ion-button large clear icon-end color="primary" (click)="Continue()">
+        Continue
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+      <ion-item class="dont-show">
+        <ion-label>{{"msg_DontShow" | translate}}</ion-label>
+        <ion-checkbox checked="false" (click)="DontShow()"></ion-checkbox>
+      </ion-item>
+    </ion-slide>
+  </ion-slides>
 
 </ion-content>
