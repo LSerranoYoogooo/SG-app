@@ -7,6 +7,8 @@ import { FileChooser, FilePath, File } from 'ionic-native';
 import firebase from 'firebase';
 import { SignalDetailsPage } from "../signal-details/signal-details";
 import { Signal } from "../../models/signal";
+import { History } from "../../models/history";
+import { HistoryDetailsPage } from "../history-details/history-details";
 
 @IonicPage()
 @Component({
@@ -30,11 +32,30 @@ export class SignalsPage {
     private auth: AngularFireAuth,
     private db: AngularFireDatabase,
     public zone: NgZone) {
-      this.signals = db.list('/signals');
-      this.history_signals = db.list('/history');
+      this.auth.authState.subscribe(data => {
+        if(data){
+          this.signals = db.list('/signals');
+          this.history_signals = db.list('/history');
+        } else {
+          this.navCtrl.setRoot("LoginPage");
+        }
+      }).unsubscribe;
     }
 
-    openNavDetailsPage(signal) {
+    display(img: string) {
+      this.firestore.ref().child(img).getDownloadURL().then((url) => {
+        this.zone.run(() => {
+          this.imgsource = url;
+        })
+      })
+    }
+
+    openNavSignalsDetailsPage(signal) {
       this.navCtrl.push(SignalDetailsPage, {Signal: signal});
     }
+
+    openNavHistoryDetailsPage(history) {
+      this.navCtrl.push(HistoryDetailsPage, {History: history});
+    }
+
 }

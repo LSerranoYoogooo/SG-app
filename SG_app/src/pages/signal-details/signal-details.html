@@ -1,37 +1,22 @@
 
 <ion-header>
-  <ion-navbar>
-    <ion-title>signal-details</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>{{"title_page_signal_details" | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content>
-   <ion-card>
-    <ion-title class="instrument">
-      <b>{{Signal.Instrument}}</b>
-    </ion-title>
-    <ion-card-content class="card">
-      <img src="{{imgsource}}" class="viewImg"/>
-      <ion-grid class="grid">
-        <ion-row>
-          <ion-col>
-            <p>{{"priceA" | translate}}</p>
-            <p class="rigth-txt"> {{Signal.Price_a}} </p>
-            <p>{{"tp1" | translate}}</p>
-            <p class="rigth-txt"> {{Signal.TP1}} </p>
-            <p>{{"sl" | translate}}</p>
-            <p class="rigth-txt"> {{Signal.SL}} </p>
-          </ion-col>
-          <ion-col>
-            <p>{{"trend" | translate}}</p>
-            <p class="rigth-txt"> {{Trend | translate}}</p>
-            <p>{{"tp2" | translate}}</p>
-            <p class="rigth-txt">  {{Signal.TP2}} </p>
-          </ion-col>
-        </ion-row>
-        <p class="rigth-txt">{{Signal.Date_A}} </p>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
+<ion-content class="S_total">
+  <h2 class="S_instrument">{{Signal.Instrument}}</h2>
+  <div class="S_centerImg">
+    <img src="{{imgsource}}" class="S_viewImg"/>
+  </div>
+  <div class="S_signalInfo">
+      <h5>{{"label_priceA" | translate}} {{Signal.Price_a}}</h5>
+      <h5>{{"label_trend" | translate}} {{Trend | translate}}</h5>
+      <h5>{{"label_tp1" | translate}} {{Signal.TP1}}</h5>
+      <h5>{{"label_tp2" | translate}} {{Signal.TP2}} </h5>
+      <h5>{{"label_sl" | translate}} {{Signal.SL}}</h5>
+  </div>
+  
 </ion-content>

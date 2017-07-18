@@ -3,92 +3,76 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
       </button>
-    <ion-title>{{"mn_Signal" | translate}}</ion-title>
+    <ion-title>{{"title_page_signals" | translate}}</ion-title>
   </ion-navbar>
 
   <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="state">
       <ion-segment-button value="signals">
-        {{"tlb_Signal" | translate}}
+        {{"btn_slide_Signal" | translate}}
       </ion-segment-button>
       <ion-segment-button value="history">
-        {{"tlb_History" | translate}}
+        {{"btn_slide_History" | translate}}
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
-
 </ion-header>
 
 <ion-content>
   <div [ngSwitch]="state">
-    
-
-
     <ion-list *ngSwitchCase="'signals'">
       <ion-card *ngFor="let signal of signals | async">
-        <button ion-item (click)="openNavDetailsPage(signal)">
-            <ion-icon item-left  name={{signal.E_Trend}} [ngStyle]="{'color': signal.E_Color}"></ion-icon>
-            {{signal.Instrument}}
-            <ion-icon name="ios-arrow-forward" class="rigthArrow"></ion-icon>
-          </button>
+         <ion-grid>
+          <ion-row (click)="openNavSignalsDetailsPage(signal)">
+            <ion-col>
+              <ion-icon col-2 class="tamIco" item-left  name={{signal.E_Trend}} [ngStyle]="{'color': signal.E_Color}"></ion-icon>
+            </ion-col>
+            <ion-col col-5 >
+              <h4 class="hs">{{signal.Instrument}}</h4>
+            </ion-col>
+            <ion-col col-3>
+              <a class="a">{{signal.Date_A}}</a>
+            </ion-col>
+            <ion-col col-2>
+              <ion-icon class="rigthArrowH tamIco" name="ios-arrow-forward"></ion-icon>
+            </ion-col>
+          </ion-row>
+         </ion-grid>
       </ion-card>
     </ion-list>
-
-    
-      
-  </div>
-  
-  <!--
     <ion-list *ngSwitchCase="'history'">
-      <ion-card *ngFor="let history of history_signals | async">
-        <ion-card-header>
-          {{history.Intrument}}
-        </ion-card-header>
-        <ion-card-content>
-        </ion-card-content>
+      <ion-card *ngFor="let history of history_signals | async" class="cardHist">
+        <ion-grid>
+          <ion-row (click)="openNavHistoryDetailsPage(history)">
+            <ion-col>
+              <ion-icon col-2 class="tamIco" item-left  name={{history.R_Trend}} [ngStyle]="{'color': history.E_Color}"></ion-icon>
+            </ion-col>
+            <ion-col col-4 >
+              <h4 class="h">{{history.Instrument}}</h4>
+            </ion-col>
+            <ion-col col-2>
+              <p class="p">Pips</p>
+            </ion-col>
+            <ion-col col-2>
+              <h5 class="h">{{history.Pips}}</h5>
+            </ion-col>
+            <ion-col col-2>
+              <ion-icon class="rigthArrowH tamIco" name="ios-arrow-forward" [ngStyle]="{'color': history.R_Color}"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-card>
-    </ion-list>
-
-
-  <ion-buttons end>
-    <button ion-button icon-only (click)="addSong()">
-      <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-buttons>
-
-
-        <ion-card *ngFor="let signal of signals | async">
-        <ion-card-header>
-          {{signal.Intrument}}
-        </ion-card-header>
-        <ion-card-content>
-        </ion-card-content>
-      </ion-card>
-
-  <ion-card *ngFor="let signal of signals | async">
-    <ion-card-header>
-      {{signal.Intrument}}
-    </ion-card-header>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <div>{{signal.Price_a}}</div>
-            <div>{{signal.E_Trend}}</div>
-            <div>{{signal.TP1}}</div>
-            <div>{{signal.TP2}}</div>
-            <div>{{signal.SL}}</div>
-          </ion-col>
-          <ion-col>
-            <div><img src="{{imgsource}}" ></div>
-            <div>{{signal.Date_A}}</div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <button ion-button (click)="display()">Display</button>
-      <img src="{{imgsource}}">
-    </ion-card-content>
-  </ion-card>
-  -->
+    </ion-list>     
+  </div>
 
 </ion-content>
+
+
+<!-- <ion-card *ngFor="let history of history_signals | async">
+        <button ion-item (click)="openNavHistoryDetailsPage(history)">
+          <ion-icon item-left  name={{history.R_Trend}} [ngStyle]="{'color': history.E_Color}"></ion-icon>
+            {{history.Instrument}} {{history.Pips}}
+          <ion-icon name="ios-arrow-forward" class="rigthArrow" [ngStyle]="{'color': history.R_Color}"></ion-icon>
+        </button>
+      </ion-card>
+      -->

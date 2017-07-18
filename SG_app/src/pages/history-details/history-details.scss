@@ -1,21 +1,24 @@
-page-signal-details {
+page-history-details {
 
 }
-.S_instrument{
+.H_instrument{
     margin: 0;
     padding: 10px;
     text-align: center;
 }
-.S_centerImg{
+.H_centerImg{
     display: table;
     margin: 0 auto;
 }
-.S_viewImg{
+.H_viewImg{
     margin: 0 auto;
     padding: 5px;
     height: 15em;
     width: 25em;
 }
-.S_signalInfo{
+.H_signalInfo{
     padding: 1em;
+}
+.H_row{
+    margin: 5px;
 }

@@ -17,20 +17,16 @@ export class SignalDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public zone: NgZone) {
     this.Signal = navParams.data.Signal;
-    console.log(this.Signal);
-  }
-
-  ionViewDidLoad() {
     if (this.Signal.E_Trend == "arrow-dropup-circle"){
-      this.Trend = "trend_A";
+      this.Trend = "label_trend_A";
     } else {
-      this.Trend = "trend_B";
+      this.Trend = "label_trend_B";
     }
     this.display(this.Signal.Img_E);
   }
 
   display(img: string) {
-    this.firestore.ref().child(img).getDownloadURL().then((url) => {
+    this.firestore.ref().child("ImgEstimated/" + img).getDownloadURL().then((url) => {
       this.zone.run(() => {
         this.imgsource = url;
        })

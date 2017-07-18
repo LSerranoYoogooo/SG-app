@@ -30,10 +30,10 @@ export class MyApp {
 
     this.rootPage = SignalsPage;
     this.pages = [
-      { titulo: 'mn_Signal', component: SignalsPage, icon: 'analytics' },
-      { titulo: 'mn_Red', component: NetworkPage, icon: 'card' },
-      { titulo: 'mn_Videos', component: VideosPage, icon: 'videocam' },
-      { titulo: 'mn_Config', component: ConfigurationPage, icon: 'settings' }
+      { titulo: 'btn_menu_Signal', component: SignalsPage, icon: 'analytics' },
+      { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
+      { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' },
+      { titulo: 'btn_menu_Config', component: ConfigurationPage, icon: 'settings' }
     ];
 
     platform.ready().then(() => {

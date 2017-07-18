@@ -1,35 +1,48 @@
 {
   "title": "Sequeira Global Inc",
-  "btn_Login": "iniciar sesion",
+
+  "title_page_register": "Registro",
+  "title_page_initial": "Bienvenido",
+  "title_page_signals": "Señales",
+  "title_page_network": "Red de mercado",
+  "title_page_videos": "Videos",
+  "title_page_config": "Configuracion",
+  "title_page_signal_details": "Detalle de señal",
+  "title_page_history_details": "Detalle de historial",
+
+
   "btn_Register": "Registrarse",
   "btn_Pass": "Olvidé mi cntraseña",
-
-  "lbl_menu": "Menu",
-  "tlb_Signal": "Señales",
-  "tlb_History": "Historial de señales",
-  "mn_Signal": "Señales de Mercado",
-  "mn_Red": "Red de Mercado",
-  "mn_Config": "Configuracion",
-  "mn_About": "Acerca de",
-  "mn_Videos": "Videos",
-  "mn_Initial": "Empecemos",
+  "btn_Login": "iniciar sesion",
+  "btn_menu_Signal": "Señales de Mercado",
+  "btn_menu_Red": "Red de Mercado",
+  "btn_menu_Config": "Configuracion",
+  "btn_menu_About": "Acerca de",
+  "btn_menu_Videos": "Videos",
+  "btn_slide_Signal": "Señales",
+  "btn_slide_History": "Historial de señales",
   "LOGOUT": "Cerrar Sesion",
-  "log_email": "Email",
-  "log_pass": "Contraseña",
+
+
   "msg_userCreate": "Registro satisfactorio",
   "msg_notuserCreateEmail": "Email invalido",
   "msg_notuserCreatePassword": "Contraseña minimo 6 caracteres",
   "msg_errorRegister": "Favor indicar datos",
   "msg_DontShow": "No mostrar mas",
-  "trend_A": "Alcista",
-  "trend_B": "Bajista",
-  "priceA": "Precio Inicial:",
-  "trend": "Tendencia:",
-  "tp1": "Toma Ganancia 1:",
-  "tp2": "Toma Ganancia 2:",
-  "sl": "Limite Perdida:",
 
-  
-  "BTN_ENGLISH": "Ingles",
-  "BTN_SPANISH": "Español"
+
+  "label_trend_A": "Alcista",
+  "label_trend_B": "Bajista",
+  "label_priceA": "Precio apertura:",
+  "label_price_cierre": "Precio cierre:",
+  "label_trend": "Tendencia esperada:",
+  "label_trend_real": "Tendencia real:",
+  "label_tp1": "Toma Ganancia 1:",
+  "label_tp2": "Toma Ganancia 2:",
+  "label_sl": "Limite Perdida:",
+  "label_date": "Fecha de inicio:",
+  "label_date_cierre": "Fecha de cierre:",
+  "label_pips": "Pips de ganancia o perdida:",
+  "log_email": "Email",
+  "log_pass": "Contraseña"
 }
