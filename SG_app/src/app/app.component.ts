@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav, AlertController } from 'ionic-angular';
-import { Push, PushToken } from '@ionic/cloud-angular';
+//import { Push, PushToken } from '@ionic/cloud-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -25,7 +25,7 @@ export class MyApp {
   constructor(
     public platform: Platform, public statusBar: StatusBar,
     public splashScreen: SplashScreen, public translate: TranslateService,
-    private auth: AngularFireAuth, public push: Push, public alertCtrl: AlertController
+    private auth: AngularFireAuth, /*public push: Push,*/ public alertCtrl: AlertController
   ) {
 
     this.rootPage = SignalsPage;
@@ -41,8 +41,8 @@ export class MyApp {
       translate.use('es');
       statusBar.styleDefault();
       splashScreen.hide();
-      this.RegisterNotificaction();
-      this.Notification();
+      //this.RegisterNotificaction();
+      //this.Notification();
     });
   }
 
@@ -52,10 +52,11 @@ export class MyApp {
 
   logOut() {
     this.auth.auth.signOut();
-    this.UnRegisterNotification();
+    //this.UnRegisterNotification();
     this.nav.setRoot('LoginPage');
   }
 
+  /*
   private RegisterNotificaction() {
     this.push.register().then((t: PushToken) => {
       return this.push.saveToken(t);
@@ -74,4 +75,5 @@ export class MyApp {
   private UnRegisterNotification(){
     this.push.unregister();
   }
+  */
 }

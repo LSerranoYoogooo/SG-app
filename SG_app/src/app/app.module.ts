@@ -9,7 +9,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
-import { Push } from '@ionic-native/push';
+//import { Push } from '@ionic-native/push';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
@@ -28,6 +28,7 @@ export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+/*
 const cloudSettings: CloudSettings = {
   'core': {
     'app_id': '98107872'
@@ -44,7 +45,7 @@ const cloudSettings: CloudSettings = {
       }
     }
   }
-};
+};*/
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ const cloudSettings: CloudSettings = {
   BrowserModule,
   HttpModule,
   IonicModule.forRoot(MyApp),
-  CloudModule.forRoot(cloudSettings),
+  //CloudModule.forRoot(cloudSettings),
   TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,
@@ -79,7 +80,7 @@ const cloudSettings: CloudSettings = {
   providers: [
     StatusBar,
     SplashScreen,
-    Push,
+    //Push,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

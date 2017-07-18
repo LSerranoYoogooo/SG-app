@@ -20,8 +20,8 @@ export class VideosPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
+  /*ionViewDidLoad() {
     console.log('ionViewDidLoad VideosPage');
-  }
+  }*/
 
 }

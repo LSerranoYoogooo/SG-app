@@ -61,7 +61,7 @@ export class InitialPage {
           uid = user.$key;
           item = this.db.object('/users/' + user.$key);
           item.update({Intro: false});
-          item._finally;
+          //item._finally;
         }
       }
     }).unsubscribe;
