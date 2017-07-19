@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from "../../models/user";
-import { FirebaseListObservable, AngularFireDatabase, FirebaseObjectObservable } from "angularfire2/database";
-import { UserInfo } from "../../models/userInfo";
-import firebase from 'firebase';
+import { /*FirebaseListObservable,*/ AngularFireDatabase,/* FirebaseObjectObservable*/ } from "angularfire2/database";
+//import { UserInfo } from "../../models/userInfo";
+//mport firebase from 'firebase';
 
 @IonicPage()
 @Component({

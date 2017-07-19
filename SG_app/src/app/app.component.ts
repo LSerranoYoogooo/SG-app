@@ -5,13 +5,13 @@ import { Platform, Nav, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+//import { AngularFireDatabase } from 'angularfire2/database';
 import { TranslateService } from '@ngx-translate/core';
 import { SignalsPage } from "../pages/signals/signals";
 import { NetworkPage } from "../pages/network/network";
 import { ConfigurationPage } from "../pages/configuration/configuration";
 import { VideosPage } from "../pages/videos/videos";
-import { InitialPage } from "../pages/initial/initial";
+//import { InitialPage } from "../pages/initial/initial";
 
 
 @Component({
@@ -37,8 +37,8 @@ export class MyApp {
     ];
 
     platform.ready().then(() => {
-      translate.setDefaultLang('es');
-      translate.use('es');
+      translate.setDefaultLang('en');
+      translate.use('en');
       statusBar.styleDefault();
       splashScreen.hide();
       //this.RegisterNotificaction();

@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component,/* NgZone*/ } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -16,7 +16,7 @@ export class RegisterPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public toast: ToastController, public alertCtrl: AlertController,
     private auth: AngularFireAuth, private db: AngularFireDatabase,
-    public zone: NgZone) {
+    /*public zone: NgZone*/) {
       this.users = db.list('/users');
     }
 

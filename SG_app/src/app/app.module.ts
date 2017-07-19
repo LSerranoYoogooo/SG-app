@@ -12,7 +12,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 //import { Push } from '@ionic-native/push';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+//import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
 import { MyApp } from './app.component';
 import { FIREBASE_CONFIG } from './app.firebase.config';
@@ -21,8 +21,8 @@ import { NetworkPageModule } from "../pages/network/network.module";
 import { ConfigurationPageModule } from "../pages/configuration/configuration.module";
 import { InitialPageModule } from "../pages/initial/initial.module";
 import { VideosPageModule } from "../pages/videos/videos.module";
-import { SafePipe } from "../pipes/safe/safe";
-import { MainPipe } from "./main-pipe.module";
+//import { SafePipe } from "../pipes/safe/safe";
+//import { MainPipe } from "./main-pipe.module";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

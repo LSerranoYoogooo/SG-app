@@ -1,13 +1,13 @@
-import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ViewController} from 'ionic-angular';
+import { Component/*, NgZone*/ } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController /*, ViewController*/} from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { AngularFireStorage} from 'angularfire2/storage';
-import { FileChooser, FilePath, File } from 'ionic-native';
+//import { AngularFireStorage} from 'angularfire2/storage';
+//import { FileChooser, FilePath, File } from 'ionic-native';
 import firebase from 'firebase';
 import { SignalDetailsPage } from "../signal-details/signal-details";
-import { Signal } from "../../models/signal";
-import { History } from "../../models/history";
+//import { Signal } from "../../models/signal";
+//import { History } from "../../models/history";
 import { HistoryDetailsPage } from "../history-details/history-details";
 
 @IonicPage()
@@ -31,7 +31,7 @@ export class SignalsPage {
     public alertCtrl: AlertController,
     private auth: AngularFireAuth,
     private db: AngularFireDatabase,
-    public zone: NgZone) {
+    /*public zone: NgZone*/ ) {
       this.auth.authState.subscribe(data => {
         if(data){
           this.signals = db.list('/signals');
@@ -42,13 +42,13 @@ export class SignalsPage {
       }).unsubscribe;
     }
 
-    display(img: string) {
+    /*display(img: string) {
       this.firestore.ref().child(img).getDownloadURL().then((url) => {
         this.zone.run(() => {
           this.imgsource = url;
         })
       })
-    }
+    }*/
 
     openNavSignalsDetailsPage(signal) {
       this.navCtrl.push(SignalDetailsPage, {Signal: signal});

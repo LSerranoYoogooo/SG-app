@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FirebaseListObservable, AngularFireDatabase, FirebaseObjectObservable } from "angularfire2/database";
+import { /*FirebaseListObservable,*/ AngularFireDatabase, FirebaseObjectObservable } from "angularfire2/database";
 import { AngularFireAuth } from 'angularfire2/auth';
-import firebase from 'firebase';
+//import firebase from 'firebase';
 
 @IonicPage()
 @Component({
