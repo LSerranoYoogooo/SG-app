@@ -2,6 +2,7 @@ import { Component/*, NgZone*/ } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController /*, ViewController*/} from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { Push, PushToken } from '@ionic/cloud-angular';
 //import { AngularFireStorage} from 'angularfire2/storage';
 //import { FileChooser, FilePath, File } from 'ionic-native';
 import firebase from 'firebase';
@@ -31,7 +32,9 @@ export class SignalsPage {
     public alertCtrl: AlertController,
     private auth: AngularFireAuth,
     private db: AngularFireDatabase,
+    public push: Push
     /*public zone: NgZone*/ ) {
+      console.log("push suscribe");
       this.auth.authState.subscribe(data => {
         if(data){
           this.signals = db.list('/signals');
