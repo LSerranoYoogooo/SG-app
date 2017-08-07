@@ -99,13 +99,22 @@ export class LoginPage {
         equalTo: email
       }
     }).subscribe(snapshot => { 
-      for (let user of snapshot){
+      var c = snapshot.length;
+      if(c >= 1){
+        for (let user of snapshot){
+        console.log(user);
         if(user.Intro){
           this.navCtrl.setRoot("InitialPage");
         } else {
           this.navCtrl.setRoot("SignalsPage");
         }
       }
-    }); 
+    } else{
+      this.toast.create({
+        message: "unauthorized user",
+        duration: 2000
+      }).present();
+    }   
+    }).closed; 
   }
 }

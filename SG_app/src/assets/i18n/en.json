@@ -44,5 +44,13 @@
   "label_date_cierre": "Close date:",
   "label_pips": "Profit or loss pips:",
   "log_email": "Email",
-  "log_pass": "Password"
+  "log_pass": "Password",
+  "label_name": "Full Name",
+  "label_tel": "Telephone",
+  "label_country": "Country",
+  "label_refer_cod": "Your code: ",
+  "label_loget_as": "Login as",
+  "label_refer_code": "Referral code"
+
+
 }

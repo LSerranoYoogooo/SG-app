@@ -33,8 +33,7 @@ export class SignalsPage {
     private auth: AngularFireAuth,
     private db: AngularFireDatabase,
     public push: Push
-    /*public zone: NgZone*/ ) {
-      console.log("push suscribe");
+    ) {
       this.auth.authState.subscribe(data => {
         if(data){
           this.signals = db.list('/signals');
@@ -44,14 +43,6 @@ export class SignalsPage {
         }
       }).unsubscribe;
     }
-
-    /*display(img: string) {
-      this.firestore.ref().child(img).getDownloadURL().then((url) => {
-        this.zone.run(() => {
-          this.imgsource = url;
-        })
-      })
-    }*/
 
     openNavSignalsDetailsPage(signal) {
       this.navCtrl.push(SignalDetailsPage, {Signal: signal});

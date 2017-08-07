@@ -5,21 +5,44 @@
 </ion-header>
 
 <ion-content padding>
-  <div>
-    <ion-item class="bla">
-      <ion-label floating>{{"log_email" | translate}}</ion-label>
-      <ion-input type="text" [(ngModel)]="user.email"></ion-input>
-    </ion-item>
+  <form [formGroup]="myForm">
 
-    <ion-item class="bla">
-      <ion-label floating>{{"log_pass" | translate}}</ion-label>
-      <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+    <ion-item>
+      <ion-label floating>{{"log_email" | translate}}</ion-label>
+      <ion-input formControlName="email" type="email" [(ngModel)]="user.email"></ion-input>
     </ion-item>
-  </div>
-  <div padding class="bla2">
-    <button ion-button full clear (click)="register(user)">
-      <ion-icon name="person"></ion-icon>
-      {{"btn_Register" | translate}}
-    </button>
-  </div>
+    <ion-item>
+      <ion-label floating>{{"log_pass" | translate}}</ion-label>
+      <ion-input formControlName="password" type="password" [(ngModel)]="user.password"></ion-input>
+    </ion-item>
+    <div>
+      <ion-item>
+        <ion-label floating class="littleLetter">{{"label_name" | translate}}</ion-label>
+        <ion-input formControlName="name" type="text" [(ngModel)]="user.name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating class="littleLetter">{{"label_tel" | translate}}</ion-label>
+        <ion-input formControlName="telephone" type="number" [(ngModel)]="user.telephone"></ion-input>
+      </ion-item>
+      <ion-item>
+      <ion-label class="littleLetter">{{"label_country" | translate}}</ion-label>
+      <ion-select [(ngModel)]="user.country" formControlName="country">
+        <ion-option value="CR">Costa Rica</ion-option>
+        <ion-option value="USA">United States</ion-option>
+        <ion-option value="MX">Mexico</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating class="littleLetter">{{"label_refer_code" | translate}}</ion-label>
+      <ion-input formControlName="code" type="text" [(ngModel)]="reference"></ion-input>
+    </ion-item>
+    </div>
+
+    <div padding>
+      <button ion-button full clear [disabled]="!myForm.valid" (click)="register(user)">
+        <ion-icon name="person"></ion-icon>
+        {{"btn_Register" | translate}}
+      </button>
+    </div>
+  </form>
 </ion-content>

@@ -44,5 +44,13 @@
   "label_date_cierre": "Fecha de cierre:",
   "label_pips": "Pips de ganancia o perdida:",
   "log_email": "Email",
-  "log_pass": "Contraseña"
+  "log_pass": "Contraseña",
+  "label_name": "Nombre Completo",
+  "label_tel": "Telefono",
+  "label_country": "Pais",
+  "label_refer_cod": "Su codigo: ",
+  "label_loget_as": "Conectado como",
+  "label_refer_code": "Codigo de referido"
+  
+
 }
