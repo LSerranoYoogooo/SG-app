@@ -15,13 +15,9 @@ import { Linea } from "../../models/line";
 export class RegisterPage {
   myForm: FormGroup;
   user = {} as User;
-  //network= {} as Network;
   users: FirebaseListObservable<any>;
-  //networkList: FirebaseListObservable<any>;
-  //ObjNet: FirebaseObjectObservable<any>
   myDate: string = new Date().toLocaleString();
   reference: string;
-  //reference2: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public toast: ToastController, public alertCtrl: AlertController,
@@ -52,13 +48,11 @@ export class RegisterPage {
         this.auth.auth.createUserWithEmailAndPassword(user.email, user.password).then(res=>{
           this.addUser(user);
           if(cant <= 5){
-            console.log("nueva hoja --> " + user.email);
             this.addToNetwork(user, this.reference).then(res =>{
               this.auxLine1(this.reference, user.email, user.referCode);
             });
           } else{
             this.addToNetwork(user, "Null").then(res =>{
-              //this.auxLine1(this.reference, user.email, user.referCode);
             });
           }
         });
@@ -67,7 +61,7 @@ export class RegisterPage {
           message: 'Incorrect code',
           duration: 2000
           }).present();
-          //this.navCtrl.pop();
+        this.navCtrl.pop();
       }
     }, error => {
       console.log(error);
@@ -163,24 +157,22 @@ export class RegisterPage {
   }
 
   auxLine1(codeReference: string, email: string, codeGenerate: string){
-    var network: any;
+    var network1: any;
     var line = {} as Linea;
-    var key: any;
+    var key1: any;
     line.Email = email;
     line.Reference = codeGenerate;
     line.State = "0";
     this.auxGetKey(codeReference).then(res =>{
-      key = res;
+      key1 = res;
       this.auxGetNetwork(codeReference).then( res => {
-        network = res;
-        var cant = network.Line1.length;
+        network1 = res;
+        var cant = network1.Line1.length;
         if(cant <= 5){
-          console.log("line1");
-          network.Line1.push(line);
-          this.db.list('/network').remove(key);
-          this.db.list('/network').push(network);
-          if(network.FatherReference != 'Null'){
-            this.auxLine2(network.FatherReference, line);
+          network1.Line1.push(line);
+          this.db.list('/network').update(key1, network1);
+          if(network1.FatherReference != 'Null'){
+            this.auxLine2(network1.FatherReference, line);
           }
         }
       })
@@ -188,20 +180,17 @@ export class RegisterPage {
   }
 
   auxLine2(fatherReference: string, line: Linea){
-    var key: any;
-    var network: any;
+    var key2: any;
+    var network2: any;
     this.auxGetNetwork(fatherReference).then(res => {
-      network = res;
-      if(network.Line2.length <= 25){
-        console.log("line2");
-        network.Line2.push(line);
-        this.auxGetKey(network.reference).then(res =>{
-          key = res;
-          this.db.list('/network').remove(key);
-          this.db.list('/network').push(network);
-          if(network.FatherReference != 'Null'){
-            console.log(network.FatherReference);
-            this.auxLine3(network.FatherReference, line);
+      network2 = res;
+      if(network2.Line2.length <= 25){
+        network2.Line2.push(line);
+        this.auxGetKey(fatherReference).then(res =>{
+          key2 = res;
+          this.db.list('/network').update(key2, network2);
+          if(network2.FatherReference != 'Null'){
+            this.auxLine3(network2.FatherReference, line);
           }
         });
       }
@@ -209,21 +198,17 @@ export class RegisterPage {
   }
 
   auxLine3(fatherReference: string, line: Linea){
-    var key: any;
-    var network: any;
+    var key3: any;
+    var network3: any;
     this.auxGetNetwork(fatherReference).then(res => {
-      network = res;
-      console.log(network);
-      if(network.Line3.length <= 125){
-        console.log("line3");
-        network.Line2.push(line);
-        this.auxGetKey(network.reference).then(res =>{
-          key = res;
-          console.log(key);
-          this.db.list('/network').remove(key);
-          this.db.list('/network').push(network);
-          if(network.FatherReference != 'Null'){
-            this.auxLine4(network.FatherReference, line);
+      network3 = res;
+      if(network3.Line3.length <= 125){
+        network3.Line3.push(line);
+        this.auxGetKey(fatherReference).then(res =>{
+          key3 = res;
+          this.db.list('/network').update(key3, network3);
+          if(network3.FatherReference != 'Null'){
+            this.auxLine4(network3.FatherReference, line);
           }
         });
       }
@@ -231,19 +216,17 @@ export class RegisterPage {
   }
 
   auxLine4(fatherReference: string, line: Linea){
-    var key: any;
-    var network: any;
+    var key4: any;
+    var network4: any;
     this.auxGetNetwork(fatherReference).then(res => {
-      network = res;
-      if(network.Line2.length <= 625){
-        console.log("line4");
-        network.Line2.push(line);
-        this.auxGetKey(network.reference).then(res =>{
-          key = res;
-          this.db.list('/network').remove(key);
-          this.db.list('/network').push(network);
-          if(network.FatherReference != 'Null'){
-            this.auxLine5(network.FatherReference, line);
+      network4 = res;
+      if(network4.Line4.length <= 625){
+        network4.Line4.push(line);
+        this.auxGetKey(fatherReference).then(res =>{
+          key4 = res;
+          this.db.list('/network').update(key4, network4);
+          if(network4.FatherReference != 'Null'){
+            this.auxLine5(network4.FatherReference, line);
           }
         });
       }
@@ -251,29 +234,18 @@ export class RegisterPage {
   }
 
   auxLine5(fatherReference: string, line: Linea){
-    var key: any;
-    var network: any;
+    var key5: any;
+    var network5: any;
     this.auxGetNetwork(fatherReference).then(res => {
-      network = res;
-      if(network.Line2.length <= 3125){
-        console.log("line5");
-        network.Line2.push(line);
-        this.auxGetKey(network.reference).then(res =>{
-          key = res;
-          this.db.list('/network').remove(key);
-          this.db.list('/network').push(network);
+      network5 = res;
+      if(network5.Line5.length <= 3125){
+        network5.Line5.push(line);
+        this.auxGetKey(fatherReference).then(res =>{
+          key5 = res;
+          this.db.list('/network').update(key5, network5);
         });
       }
     });
   }
 
-  register_old(user: User){
-    this.genReferCode();
-    this.auth.auth.createUserWithEmailAndPassword(user.email, user.password).then(res=>{
-      this.addUser(user);
-      this.addToNetwork(user, this.reference).then(res =>{
-        this.auxLine1(this.reference, user.email, user.referCode);
-      });
-    });
-  }
 }
