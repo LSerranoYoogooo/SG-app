@@ -1,19 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav, AlertController } from 'ionic-angular';
 import { Push, PushToken } from '@ionic/cloud-angular';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
-//import { AngularFireDatabase } from 'angularfire2/database';
 import { TranslateService } from '@ngx-translate/core';
 import { SignalsPage } from "../pages/signals/signals";
 import { NetworkPage } from "../pages/network/network";
-import { ConfigurationPage } from "../pages/configuration/configuration";
 import { VideosPage } from "../pages/videos/videos";
-import { User } from "../models/user";
 import { AngularFireDatabase } from "angularfire2/database";
-//import { InitialPage } from "../pages/initial/initial";
 
 
 @Component({
@@ -27,7 +22,6 @@ export class MyApp {
   public user: any;
   public UsrEmail: any;
   public UsrReferCode: any;
-  
 
   constructor(
     public platform: Platform, public statusBar: StatusBar,
@@ -48,7 +42,6 @@ export class MyApp {
       splashScreen.hide();
       this.RegisterNotificaction();
       this.Notification();
-      console.log(this.UsrEmail);
     });
   }
 

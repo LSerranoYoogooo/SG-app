@@ -18,11 +18,8 @@ import { MyApp } from './app.component';
 import { FIREBASE_CONFIG } from './app.firebase.config';
 import { SignalsPageModule } from "../pages/signals/signals.module";
 import { NetworkPageModule } from "../pages/network/network.module";
-import { ConfigurationPageModule } from "../pages/configuration/configuration.module";
 import { InitialPageModule } from "../pages/initial/initial.module";
 import { VideosPageModule } from "../pages/videos/videos.module";
-//import { SafePipe } from "../pipes/safe/safe";
-//import { MainPipe } from "./main-pipe.module";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -68,7 +65,6 @@ const cloudSettings: CloudSettings = {
   AngularFireDatabaseModule,
   SignalsPageModule,
   NetworkPageModule,
-  ConfigurationPageModule,
   InitialPageModule,
   VideosPageModule,
 ],
@@ -84,5 +80,3 @@ const cloudSettings: CloudSettings = {
   ]
 })
 export class AppModule {}
-
-

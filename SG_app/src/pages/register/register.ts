@@ -1,9 +1,9 @@
-import { Component,/* NgZone*/ } from '@angular/core';
+import { Component} from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController, Events} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { FirebaseListObservable, AngularFireDatabase, FirebaseObjectObservable } from "angularfire2/database";
+import { FirebaseListObservable, AngularFireDatabase } from "angularfire2/database";
 import { Network } from "../../models/network";
 import { Linea } from "../../models/line";
 
@@ -40,32 +40,59 @@ export class RegisterPage {
     });
   }
 
-  register(user: User) {    
-    this.reviewReference(this.reference).then(res => {
-      var cant = res;
-      if(res){
-        this.genReferCode();
-        this.auth.auth.createUserWithEmailAndPassword(user.email, user.password).then(res=>{
-          this.addUser(user);
-          if(cant <= 5){
-            this.addToNetwork(user, this.reference).then(res =>{
-              this.auxLine1(this.reference, user.email, user.referCode);
-            });
-          } else{
-            this.addToNetwork(user, "Null").then(res =>{
-            });
-          }
-        });
-      } else{
+  register(user: User) {
+    try{
+      this.reviewReference(this.reference).then(res => {
+        var cant = res;
+        if(res){
+          this.genReferCode();
+          this.auth.auth.createUserWithEmailAndPassword(user.email, user.password).then(res=>{
+            this.addUser(user);
+            if(cant <= 5){
+              this.addToNetwork(user, this.reference).then(res =>{
+                this.auxLine1(this.reference, user.email, user.referCode);
+              });
+            } else{
+              this.addToNetwork(user, "Null").then(res =>{
+              });
+            }
+          });
+        } else{
+          this.toast.create({
+            message: 'Incorrect code',
+            duration: 2000
+            }).present();
+          this.navCtrl.pop();
+        }
+      });
+    } catch(e){
+      if(e.code == "auth/argument-error"){
         this.toast.create({
-          message: 'Incorrect code',
+          message: "Indicate email and password",
           duration: 2000
-          }).present();
-        this.navCtrl.pop();
+        }).present();
+      } else if (e.code == "auth/weak-password"){
+        this.toast.create({
+          message: "Password 6 characters long or more",
+          duration: 2000
+        }).present();
+      } else if (e.code == "auth/invalid-email"){
+        this.toast.create({
+          message: "Invalid Email",
+          duration: 2000
+        }).present();
+      } else if (e.code == "auth/email-already-in-use"){
+        this.toast.create({
+          message: "Email is already in use",
+          duration: 2000
+        }).present();
+      } else {
+        this.toast.create({
+          message: "Error",
+          duration: 1000
+        }).present();
       }
-    }, error => {
-      console.log(error);
-    });
+    }
   }
 
   addUser(user: User){
@@ -86,7 +113,6 @@ export class RegisterPage {
   }
 
   reviewReference(reference: string){
-    var code;
     var res = false;
     return new Promise((resolve, reject) => {
       this.db.list('/network', {
