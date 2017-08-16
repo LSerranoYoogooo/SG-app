@@ -27,9 +27,8 @@
       <ion-item>
       <ion-label class="littleLetter">{{"label_country" | translate}}</ion-label>
       <ion-select [(ngModel)]="user.country" formControlName="country">
-        <ion-option value="CR">Costa Rica</ion-option>
-        <ion-option value="USA">United States</ion-option>
-        <ion-option value="MX">Mexico</ion-option>
+        <ion-option *ngFor="let ctry of countries" value="{{ctry.Sigla}}">{{ctry.Country}}</ion-option>
+        
       </ion-select>
     </ion-item>
     <ion-item>

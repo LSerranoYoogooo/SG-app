@@ -9,6 +9,8 @@ import { SignalsPage } from "../pages/signals/signals";
 import { NetworkPage } from "../pages/network/network";
 import { VideosPage } from "../pages/videos/videos";
 import { AngularFireDatabase } from "angularfire2/database";
+import { UserNet } from "../models/userNet";
+import { Network } from "../models/network";
 
 
 @Component({
@@ -61,7 +63,29 @@ export class MyApp {
   }
 
   goToPage(page) {
-    this.nav.setRoot(page);
+    if(page = NetworkPage){
+      var userNet: UserNet;
+      var network: Network;
+      this.auth.authState.subscribe(data => {
+        this.db.list('/users', {query: {indexOn: 'Email', orderByChild: 'Email',equalTo: data.email}
+          }).subscribe(UserList => { 
+            for (let user of UserList){
+              userNet = user;
+              this.db.list('/network', {query: {indexOn: 'Reference', orderByChild: 'Reference',equalTo: userNet.ReferCode}
+                }).subscribe(NetworkList => { 
+                  for (let net of NetworkList){ 
+                    network = net;
+                    this.nav.setRoot(page, {user: userNet, network: network});
+                  } 
+                });
+            }
+          }).unsubscribe;
+      });
+    } else {
+      this.nav.setRoot(page);
+    }
+    
+
   }
 
   logOut() {

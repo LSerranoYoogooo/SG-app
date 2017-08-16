@@ -7,7 +7,62 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
+      <p class="title">Email</p>
+      <p class="data"> {{user.Email}} </p>
+      <p class="title">Name</p>
+      <p class="data"> {{user.Name}} </p>
+      <p class="title">Telephone</p>
+      <p class="data"> {{user.Telephone}}  </p>
+      <p class="title">Referece code</p>
+      <p class="data"> {{user.ReferCode}}  </p>
+      <p class="title">Country</p>
+      <p class="data"> {{user.Country}}  </p>
+
+  <ion-card>
+    <ion-card-header class="cardTitle">
+      Network state
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-5> </ion-col>
+          <ion-col col-3>Line</ion-col>
+          <ion-col col-4>Mount per line</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-5>Line 1</ion-col>
+          <ion-col col-3>{{network.Line1.length - 1}}</ion-col>
+          <ion-col col-4>${{L1}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-5>Line 2</ion-col>
+          <ion-col col-3>{{network.Line2.length - 1}}</ion-col>
+          <ion-col col-4>${{L2}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-5>Line 3</ion-col>
+          <ion-col col-3>{{network.Line3.length  - 1}}</ion-col>
+          <ion-col col-4>${{L3}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-5>Line 4</ion-col>
+          <ion-col col-3>{{network.Line4.length  - 1}}</ion-col>
+          <ion-col col-4>${{L4}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-5>Line 5</ion-col>
+          <ion-col col-3>{{network.Line5.length  - 1}}</ion-col>
+          <ion-col col-4>${{L5}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-5> </ion-col>
+          <ion-col col-3> </ion-col>
+          <ion-col col-4>${{TL}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

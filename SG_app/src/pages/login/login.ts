@@ -102,7 +102,6 @@ export class LoginPage {
       var c = snapshot.length;
       if(c >= 1){
         for (let user of snapshot){
-        console.log(user);
         if(user.Intro){
           this.navCtrl.setRoot("InitialPage");
         } else {

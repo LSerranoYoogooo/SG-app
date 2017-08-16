@@ -6,6 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { FirebaseListObservable, AngularFireDatabase } from "angularfire2/database";
 import { Network } from "../../models/network";
 import { Linea } from "../../models/line";
+import { SignalsPage } from "../signals/signals";
 
 @IonicPage()
 @Component({
@@ -18,6 +19,7 @@ export class RegisterPage {
   users: FirebaseListObservable<any>;
   myDate: string = new Date().toLocaleString();
   reference: string;
+  countries: {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public toast: ToastController, public alertCtrl: AlertController,
@@ -26,7 +28,31 @@ export class RegisterPage {
       this.myForm = this.createMyForm();
       this.users = db.list('/users');
       this.user.createDate = this.myDate;
-     
+      this.countries = [
+        {Sigla: 'CAN', Country: 'Canadá'}, 
+        {Sigla: 'USA', Country: 'United States'}, 
+        {Sigla: 'MEX', Country: 'México'},  
+        {Sigla: 'GTM', Country: 'Guatemala'}, 
+        {Sigla: 'BLZ', Country: 'Belice'}, 
+        {Sigla: 'SLV', Country: 'El Salvador'},
+        {Sigla: 'HDN', Country: 'Honduras'},
+        {Sigla: 'NIC', Country: 'Nicaragua'},
+        {Sigla: 'CRI', Country: 'Costa Rica'},
+        {Sigla: 'PAN', Country: 'Panamá'},
+        {Sigla: 'COL', Country: 'Colombia'},
+        {Sigla: 'VEN', Country: 'Venezuela'},
+        {Sigla: 'ECU', Country: 'Ecuador'},
+        {Sigla: 'PER', Country: 'Peru'},
+        {Sigla: 'BRA', Country: 'Brasil'},
+        {Sigla: 'BOL', Country: 'Bolivia'},
+        {Sigla: 'CHL', Country: 'Chile'},
+        {Sigla: 'PRY', Country: 'Paraguay'},
+        {Sigla: 'ARG', Country: 'Argentina'},
+        {Sigla: 'URY', Country: 'Uruguay'},
+        {Sigla: 'TTO', Country: 'Trinidad y Tobago'},
+        {Sigla: 'DOM', Country: 'Republica Dominicana'},
+        {Sigla: 'HTI', Country: 'Haití'},
+        {Sigla: 'CUB', Country: 'Cuba'}];     
     }
 
   private createMyForm(){
@@ -48,15 +74,11 @@ export class RegisterPage {
           this.genReferCode();
           this.auth.auth.createUserWithEmailAndPassword(user.email, user.password).then(res=>{
             this.addUser(user);
-            if(cant <= 5){
-              this.addToNetwork(user, this.reference).then(res =>{
-                this.auxLine1(this.reference, user.email, user.referCode);
-              });
-            } else{
-              this.addToNetwork(user, "Null").then(res =>{
-              });
-            }
+            this.addToNetwork(user, this.reference).then(res =>{
+              this.auxLine1(this.reference, user.email, user.referCode, user.name);
+            });
           });
+          this.navCtrl.setRoot(SignalsPage);
         } else{
           this.toast.create({
             message: 'Incorrect code',
@@ -182,24 +204,22 @@ export class RegisterPage {
     });
   }
 
-  auxLine1(codeReference: string, email: string, codeGenerate: string){
+  auxLine1(codeReference: string, email: string, codeGenerate: string, name: string){
     var network1: any;
     var line = {} as Linea;
     var key1: any;
     line.Email = email;
     line.Reference = codeGenerate;
     line.State = "0";
+    line.Name = name;
     this.auxGetKey(codeReference).then(res =>{
       key1 = res;
       this.auxGetNetwork(codeReference).then( res => {
         network1 = res;
-        var cant = network1.Line1.length;
-        if(cant <= 5){
-          network1.Line1.push(line);
-          this.db.list('/network').update(key1, network1);
-          if(network1.FatherReference != 'Null'){
-            this.auxLine2(network1.FatherReference, line);
-          }
+        network1.Line1.push(line);
+        this.db.list('/network').update(key1, network1);
+        if(network1.FatherReference != 'Null'){
+          this.auxLine2(network1.FatherReference, line);
         }
       })
     });
@@ -210,16 +230,14 @@ export class RegisterPage {
     var network2: any;
     this.auxGetNetwork(fatherReference).then(res => {
       network2 = res;
-      if(network2.Line2.length <= 25){
-        network2.Line2.push(line);
-        this.auxGetKey(fatherReference).then(res =>{
-          key2 = res;
-          this.db.list('/network').update(key2, network2);
-          if(network2.FatherReference != 'Null'){
-            this.auxLine3(network2.FatherReference, line);
-          }
-        });
-      }
+      network2.Line2.push(line);
+      this.auxGetKey(fatherReference).then(res =>{
+        key2 = res;
+        this.db.list('/network').update(key2, network2);
+        if(network2.FatherReference != 'Null'){
+          this.auxLine3(network2.FatherReference, line);
+        }
+      });
     });
   }
 
@@ -228,16 +246,14 @@ export class RegisterPage {
     var network3: any;
     this.auxGetNetwork(fatherReference).then(res => {
       network3 = res;
-      if(network3.Line3.length <= 125){
-        network3.Line3.push(line);
-        this.auxGetKey(fatherReference).then(res =>{
-          key3 = res;
-          this.db.list('/network').update(key3, network3);
-          if(network3.FatherReference != 'Null'){
-            this.auxLine4(network3.FatherReference, line);
-          }
-        });
-      }
+      network3.Line3.push(line);
+      this.auxGetKey(fatherReference).then(res =>{
+        key3 = res;
+        this.db.list('/network').update(key3, network3);
+        if(network3.FatherReference != 'Null'){
+          this.auxLine4(network3.FatherReference, line);
+        }
+      });
     });
   }
 
@@ -246,16 +262,14 @@ export class RegisterPage {
     var network4: any;
     this.auxGetNetwork(fatherReference).then(res => {
       network4 = res;
-      if(network4.Line4.length <= 625){
-        network4.Line4.push(line);
-        this.auxGetKey(fatherReference).then(res =>{
-          key4 = res;
-          this.db.list('/network').update(key4, network4);
-          if(network4.FatherReference != 'Null'){
-            this.auxLine5(network4.FatherReference, line);
-          }
-        });
-      }
+      network4.Line4.push(line);
+      this.auxGetKey(fatherReference).then(res =>{
+        key4 = res;
+        this.db.list('/network').update(key4, network4);
+        if(network4.FatherReference != 'Null'){
+          this.auxLine5(network4.FatherReference, line);
+        }
+      });
     });
   }
 
@@ -264,13 +278,11 @@ export class RegisterPage {
     var network5: any;
     this.auxGetNetwork(fatherReference).then(res => {
       network5 = res;
-      if(network5.Line5.length <= 3125){
-        network5.Line5.push(line);
-        this.auxGetKey(fatherReference).then(res =>{
-          key5 = res;
-          this.db.list('/network').update(key5, network5);
-        });
-      }
+      network5.Line5.push(line);
+      this.auxGetKey(fatherReference).then(res =>{
+      key5 = res;
+      this.db.list('/network').update(key5, network5);
+      });
     });
   }
 
