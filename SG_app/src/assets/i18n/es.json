@@ -50,7 +50,19 @@
   "label_country": "Pais",
   "label_refer_cod": "Su codigo: ",
   "label_loget_as": "Conectado como",
-  "label_refer_code": "Codigo de referido"
-  
-
+  "label_refer_code": "Codigo de referido",
+  "label_net_name": "Nombre",
+  "label_net_tel": "Teléfono",
+  "label_net_code": "Código de referido",
+  "label_net_email": "Email",
+  "label_net_country": "País",
+  "label_net_title": "Estado de mi red",
+  "label_net_line": "Linea",
+  "label_net_mount": "Monto por línea",
+  "label_net_L1": "Linea 1",
+  "label_net_L2": "Linea 2",
+  "label_net_L3": "Linea 3",
+  "label_net_L4": "Linea 4",
+  "label_net_L5": "Linea 5",
+  "label_net_total": "Total"
 }

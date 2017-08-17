@@ -50,9 +50,7 @@ export class RegisterPage {
         {Sigla: 'ARG', Country: 'Argentina'},
         {Sigla: 'URY', Country: 'Uruguay'},
         {Sigla: 'TTO', Country: 'Trinidad y Tobago'},
-        {Sigla: 'DOM', Country: 'Republica Dominicana'},
-        {Sigla: 'HTI', Country: 'Haití'},
-        {Sigla: 'CUB', Country: 'Cuba'}];     
+        {Sigla: 'DOM', Country: 'Republica Dominicana'}];     
     }
 
   private createMyForm(){

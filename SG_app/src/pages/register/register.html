@@ -6,7 +6,6 @@
 
 <ion-content padding>
   <form [formGroup]="myForm">
-
     <ion-item>
       <ion-label floating>{{"log_email" | translate}}</ion-label>
       <ion-input formControlName="email" type="email" [(ngModel)]="user.email"></ion-input>
@@ -28,7 +27,6 @@
       <ion-label class="littleLetter">{{"label_country" | translate}}</ion-label>
       <ion-select [(ngModel)]="user.country" formControlName="country">
         <ion-option *ngFor="let ctry of countries" value="{{ctry.Sigla}}">{{ctry.Country}}</ion-option>
-        
       </ion-select>
     </ion-item>
     <ion-item>

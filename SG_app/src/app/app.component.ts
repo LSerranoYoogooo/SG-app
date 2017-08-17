@@ -63,7 +63,7 @@ export class MyApp {
   }
 
   goToPage(page) {
-    if(page = NetworkPage){
+    if(page == NetworkPage){
       var userNet: UserNet;
       var network: Network;
       this.auth.authState.subscribe(data => {
@@ -84,8 +84,6 @@ export class MyApp {
     } else {
       this.nav.setRoot(page);
     }
-    
-
   }
 
   logOut() {

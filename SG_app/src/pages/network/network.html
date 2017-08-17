@@ -4,62 +4,67 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{"title_page_network" | translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-      <p class="title">Email</p>
+      <p class="title">{{"label_net_email" | translate}}</p>
       <p class="data"> {{user.Email}} </p>
-      <p class="title">Name</p>
+      <p class="title">{{"label_net_name" | translate}}</p>
       <p class="data"> {{user.Name}} </p>
-      <p class="title">Telephone</p>
+      <p class="title">{{"label_net_tel" | translate}}</p>
       <p class="data"> {{user.Telephone}}  </p>
-      <p class="title">Referece code</p>
+      <p class="title">{{"label_net_code" | translate}}</p>
       <p class="data"> {{user.ReferCode}}  </p>
-      <p class="title">Country</p>
+      <p class="title">{{"label_net_country" | translate}}</p>
       <p class="data"> {{user.Country}}  </p>
 
   <ion-card>
     <ion-card-header class="cardTitle">
-      Network state
+      {{"label_net_title" | translate}}
     </ion-card-header>
 
     <ion-card-content>
       <ion-grid>
         <ion-row>
           <ion-col col-5> </ion-col>
-          <ion-col col-3>Line</ion-col>
-          <ion-col col-4>Mount per line</ion-col>
+          <ion-col col-2>{{"label_net_line" | translate}}</ion-col>
+          <ion-col col-5>{{"label_net_mount" | translate}}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-5>Line 1</ion-col>
-          <ion-col col-3>{{network.Line1.length - 1}}</ion-col>
-          <ion-col col-4>${{L1}}</ion-col>
+          <ion-col col-5>{{"label_net_L1" | translate}}</ion-col>
+          <ion-col col-2>{{network.Line1.length - 1}}</ion-col>
+          <ion-col col-5>${{L1}}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-5>Line 2</ion-col>
-          <ion-col col-3>{{network.Line2.length - 1}}</ion-col>
-          <ion-col col-4>${{L2}}</ion-col>
+          <ion-col col-5>{{"label_net_L2" | translate}}</ion-col>
+          <ion-col col-2>{{network.Line2.length - 1}}</ion-col>
+          <ion-col col-5>${{L2}}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-5>Line 3</ion-col>
-          <ion-col col-3>{{network.Line3.length  - 1}}</ion-col>
-          <ion-col col-4>${{L3}}</ion-col>
+          <ion-col col-5>{{"label_net_L3" | translate}}</ion-col>
+          <ion-col col-2>{{network.Line3.length  - 1}}</ion-col>
+          <ion-col col-5>${{L3}}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-5>Line 4</ion-col>
-          <ion-col col-3>{{network.Line4.length  - 1}}</ion-col>
-          <ion-col col-4>${{L4}}</ion-col>
+          <ion-col col-5>{{"label_net_L4" | translate}}</ion-col>
+          <ion-col col-2>{{network.Line4.length  - 1}}</ion-col>
+          <ion-col col-5>${{L4}}</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-5>Line 5</ion-col>
-          <ion-col col-3>{{network.Line5.length  - 1}}</ion-col>
-          <ion-col col-4>${{L5}}</ion-col>
+          <ion-col col-5>{{"label_net_L5" | translate}}</ion-col>
+          <ion-col col-2>{{network.Line5.length  - 1}}</ion-col>
+          <ion-col col-5>${{L5}}</ion-col>
         </ion-row>
         <ion-row>
           <ion-col col-5> </ion-col>
-          <ion-col col-3> </ion-col>
-          <ion-col col-4>${{TL}}</ion-col>
+          <ion-col col-2>{{"label_net_total" | translate}}</ion-col>
+          <ion-col col-5>${{TL}}</ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>

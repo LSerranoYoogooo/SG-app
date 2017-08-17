@@ -50,7 +50,19 @@
   "label_country": "Country",
   "label_refer_cod": "Your code: ",
   "label_loget_as": "Login as",
-  "label_refer_code": "Referral code"
-
-
+  "label_refer_code": "Referral code",
+  "label_net_name": "Name",
+  "label_net_tel": "Phone",
+  "label_net_code": "Referral code",
+  "label_net_email": "Email",
+  "label_net_country": "Country",
+  "label_net_title": "My network status",
+  "label_net_line": "Line",
+  "label_net_mount": "Amount per line",
+  "label_net_L1": "Line 1",
+  "label_net_L2": "Line 2",
+  "label_net_L3": "Line 3",
+  "label_net_L4": "Line 4",
+  "label_net_L5": "Line 5",
+  "label_net_total": "Total"
 }
