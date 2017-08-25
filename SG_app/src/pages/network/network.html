@@ -13,16 +13,42 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-grid>
+    <ion-row>
+    <ion-col col-12 class="linea">
       <p class="title">{{"label_net_email" | translate}}</p>
       <p class="data"> {{user.Email}} </p>
+    </ion-col>
+    </ion-row>
+    <ion-row>
+    <ion-col col-12 class="linea">
       <p class="title">{{"label_net_name" | translate}}</p>
       <p class="data"> {{user.Name}} </p>
-      <p class="title">{{"label_net_tel" | translate}}</p>
-      <p class="data"> {{user.Telephone}}  </p>
-      <p class="title">{{"label_net_code" | translate}}</p>
-      <p class="data"> {{user.ReferCode}}  </p>
-      <p class="title">{{"label_net_country" | translate}}</p>
-      <p class="data"> {{user.Country}}  </p>
+    </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 class="linea">
+        <p class="title">{{"label_net_tel" | translate}}</p>
+        <p class="data"> {{user.Telephone}}  </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 class="linea">
+        <p class="title">{{"label_net_code" | translate}}</p>
+        <p class="data"> {{user.ReferCode}}  </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6 class="linea">
+        <p class="title">{{"label_net_country" | translate}}</p>
+        <p class="data"> {{user.Country}}  </p>
+      </ion-col>
+      <ion-col col-6 class="linea">
+        <p class="title">{{"label_net_product" | translate}}</p>
+        <p class="data"> {{product}}  </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <ion-card>
     <ion-card-header class="cardTitle">
