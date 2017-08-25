@@ -8,6 +8,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { Push } from '@ionic-native/push';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -53,6 +54,7 @@ const cloudSettings: CloudSettings = {
   HttpModule,
   IonicModule.forRoot(MyApp),
   CloudModule.forRoot(cloudSettings),
+  IonicStorageModule.forRoot(),
   TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController, Events } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from "../../models/user";
-import { /*FirebaseListObservable,*/ AngularFireDatabase,/* FirebaseObjectObservable*/ } from "angularfire2/database";
-//import { UserInfo } from "../../models/userInfo";
-//mport firebase from 'firebase';
+import { AngularFireDatabase} from "angularfire2/database";
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -18,7 +17,8 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
     private auth: AngularFireAuth, private toast: ToastController,
-    public alertCtrl: AlertController, private db: AngularFireDatabase) {
+    public alertCtrl: AlertController, private db: AngularFireDatabase,
+    private storage: Storage, public events: Events) {
     }
 
   async login(user: User){
@@ -92,6 +92,7 @@ export class LoginPage {
   }
 
   reviewSessions(email: string){
+    var product: string;
     this.db.list('/users', {
       query: {
         indexOn: 'Email',
@@ -102,6 +103,16 @@ export class LoginPage {
       var c = snapshot.length;
       if(c >= 1){
         for (let user of snapshot){
+          this.storage.set('Country', user.Country);
+          this.storage.set('Date', user.Date);
+          this.storage.set('Email', user.Email);
+          this.storage.set('Intro', user.Intro);
+          this.storage.set('Name', user.Name);
+          this.storage.set('Product', user.Product);
+          this.storage.set('ReferCode', user.ReferCode);
+          this.storage.set('State', user.State);
+          this.storage.set('Telephone', user.Telephone);
+          this.events.publish('userLoget', product, user.Product)
         if(user.Intro){
           this.navCtrl.setRoot("InitialPage");
         } else {

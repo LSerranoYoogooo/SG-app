@@ -1,16 +1,18 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav, AlertController } from 'ionic-angular';
+import { Platform, Nav, AlertController, Events } from 'ionic-angular';
 import { Push, PushToken } from '@ionic/cloud-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { TranslateService } from '@ngx-translate/core';
+import { Storage } from '@ionic/storage';
 import { SignalsPage } from "../pages/signals/signals";
 import { NetworkPage } from "../pages/network/network";
 import { VideosPage } from "../pages/videos/videos";
 import { AngularFireDatabase } from "angularfire2/database";
 import { UserNet } from "../models/userNet";
 import { Network } from "../models/network";
+import { IbPage } from "../pages/ib/ib";
 
 
 @Component({
@@ -24,19 +26,65 @@ export class MyApp {
   public user: any;
   public UsrEmail: any;
   public UsrReferCode: any;
+  public UsrProduct: string;
 
   constructor(
     public platform: Platform, public statusBar: StatusBar,
     public splashScreen: SplashScreen, public translate: TranslateService,
     private auth: AngularFireAuth, public push: Push, public alertCtrl: AlertController,
-    private db: AngularFireDatabase) {
+    private db: AngularFireDatabase, private storage: Storage, public events: Events) {
     this.availableLang = ['es', 'en'];
     this.rootPage = SignalsPage;
-    this.pages = [
-      { titulo: 'btn_menu_Signal', component: SignalsPage, icon: 'analytics' },
-      { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
-      { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
-    ];
+
+    try {
+      storage.get('Product').then((val) => {
+        if(val == 'signal'){
+          this.pages = [
+            { titulo: 'btn_menu_Signal', component: SignalsPage, icon: 'analytics' },
+            { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
+            { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+          ];
+        } 
+        if(val == 'admin') {
+          this.pages = [
+            { titulo: 'btn_menu_IB', component: IbPage, icon: 'ios-link' },
+            { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
+            { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+          ];
+        }
+        if(val == null) {
+          this.pages = [
+            { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+          ];
+        }
+      });
+    } catch (error) {
+      console.log('not data');  
+    }
+
+    this.events.subscribe('userLoget', (product, val)=>{
+      try {
+        if(val == 'signal'){
+          this.pages = [
+            { titulo: 'btn_menu_Signal', component: SignalsPage, icon: 'analytics' },
+            { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
+            { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+          ];
+        } 
+        if(val == 'admin') {
+          console.log('admin');
+          this.pages = [
+            { titulo: 'btn_menu_IB', component: IbPage, icon: 'ios-link' },
+            { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
+            { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+          ];
+        }
+        this.setUserinfo();
+    } catch (error) {
+      console.log('not data');
+    }
+    });
+    
 
     platform.ready().then(() => {
       this.setUserinfo();
@@ -49,17 +97,12 @@ export class MyApp {
 
   setUserinfo(){
     this.AuxSetLang();
-    this.AuxUsrInfo().then( res => {
+    this.storage.get('Email').then(res =>{
       this.UsrEmail = res;
-      this.AuxUsrInfo2(this.UsrEmail).then(res => {
-        this.UsrReferCode = res;
-      }, error => {
-        console.log(error);
-      });
-      },
-      error =>{
-        console.log(error);
-      });
+    });
+    this.storage.get('ReferCode').then(res =>{
+      this.UsrReferCode = res;
+    });
   }
 
   goToPage(page) {
@@ -89,6 +132,15 @@ export class MyApp {
   logOut() {
     this.auth.auth.signOut();
     this.UnRegisterNotification();
+    this.storage.remove('Country');
+    this.storage.remove('Date');
+    this.storage.remove('Email');
+    this.storage.remove('Intro');
+    this.storage.remove('Name');
+    this.storage.remove('Product');
+    this.storage.remove('ReferCode');
+    this.storage.remove('State');
+    this.storage.remove('Telephone');
     this.nav.setRoot('LoginPage');
   }
 
@@ -127,36 +179,4 @@ export class MyApp {
       this.translate.use('en');
     }
   }
-
-  AuxUsrInfo(){
-    var email: string;
-    return new Promise((resolve, reject) => {
-      this.auth.authState.subscribe(data => {
-        email = data.email;
-        resolve(email);
-      });
-    });
-  }
-
-  private AuxUsrInfo2(email: string){
-    var code;
-    return new Promise((resolve, reject) => {
-      this.db.list('/users', {
-        query: {
-          indexOn: 'Email',
-          orderByChild: 'Email',
-          equalTo: email
-        }
-      }).subscribe(snapshot => { 
-        for (let user of snapshot){
-          if(user.Email == email){
-            code = user.ReferCode;
-            resolve(code);
-          }
-        }
-      }).unsubscribe;
-    });
-    
-  }
-  
 }

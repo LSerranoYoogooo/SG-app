@@ -4,6 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Push, PushToken } from '@ionic/cloud-angular';
 import firebase from 'firebase';
+import { Storage } from '@ionic/storage';
 import { SignalDetailsPage } from "../signal-details/signal-details";
 import { HistoryDetailsPage } from "../history-details/history-details";
 
@@ -28,16 +29,19 @@ export class SignalsPage {
     public alertCtrl: AlertController,
     private auth: AngularFireAuth,
     private db: AngularFireDatabase,
-    public push: Push
+    public push: Push,
+    private storage: Storage
     ) {
-      this.auth.authState.subscribe(data => {
+      this.signals = db.list('/signals');
+      this.history_signals = db.list('/history');
+      /*this.auth.authState.subscribe(data => {
         if(data){
           this.signals = db.list('/signals');
           this.history_signals = db.list('/history');
         } else {
           this.navCtrl.setRoot("LoginPage");
         }
-      }).unsubscribe;
+      }).unsubscribe;*/
     }
 
     openNavSignalsDetailsPage(signal) {
