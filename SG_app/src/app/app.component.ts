@@ -13,6 +13,7 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { UserNet } from "../models/userNet";
 import { Network } from "../models/network";
 import { IbPage } from "../pages/ib/ib";
+import { LoginPage } from "../pages/login/login";
 
 
 @Component({
@@ -34,7 +35,7 @@ export class MyApp {
     private auth: AngularFireAuth, public push: Push, public alertCtrl: AlertController,
     private db: AngularFireDatabase, private storage: Storage, public events: Events) {
     this.availableLang = ['es', 'en'];
-    this.rootPage = SignalsPage;
+    this.rootPage = LoginPage;
 
     try {
       storage.get('Product').then((val) => {

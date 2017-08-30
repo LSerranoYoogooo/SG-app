@@ -1,5 +1,8 @@
 {
   "name": "SequeiraGlobal App",
   "app_id": "98107872",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }

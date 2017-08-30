@@ -26,7 +26,6 @@ export class NetworkPage {
       this.user = this.navParams.get('user');
       this.network = this.navParams.get('network');
       this.storage.get('Product').then(res =>{
-        console.log(res);
         if(res == 'admin'){
           this.product = 'Account Management'
         } else {

@@ -9,6 +9,7 @@
   "title_page_config": "Configuration",
   "title_page_signal_details": "Signal detail",
   "title_page_history_details": "History detail",
+  "title_page_ib": "IB",
 
 
   "btn_Register": "Singup",
@@ -66,5 +67,9 @@
   "label_net_L3": "Line 3",
   "label_net_L4": "Line 4",
   "label_net_L5": "Line 5",
-  "label_net_total": "Total"
+  "label_net_total": "Total",
+  "label_ib_title": "Add broker Acount",
+  "label_ib_id": "Broker Id",
+  "label_ib_pass": "Password"
+
 }

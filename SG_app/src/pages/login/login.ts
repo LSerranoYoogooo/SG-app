@@ -19,6 +19,10 @@ export class LoginPage {
     private auth: AngularFireAuth, private toast: ToastController,
     public alertCtrl: AlertController, private db: AngularFireDatabase,
     private storage: Storage, public events: Events) {
+      this.auth.authState.subscribe(data=>{
+        this.reviewSessions(data.email);
+      })
+      
     }
 
   async login(user: User){
@@ -116,7 +120,11 @@ export class LoginPage {
         if(user.Intro){
           this.navCtrl.setRoot("InitialPage");
         } else {
-          this.navCtrl.setRoot("SignalsPage");
+          if(user.Product == 'signal'){
+            this.navCtrl.setRoot("SignalsPage");
+          } else{
+            this.navCtrl.setRoot("IbPage");
+          }
         }
       }
     } else{

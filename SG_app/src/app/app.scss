@@ -2,8 +2,9 @@
 {
     text-align: center;
     color: white;
-    position:absolute;
+    position:fixed;
     bottom:0;
+    z-index: 0;
 }
 
 .primary_color{

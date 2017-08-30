@@ -9,6 +9,7 @@
   "title_page_config": "Configuracion",
   "title_page_signal_details": "Detalle de señal",
   "title_page_history_details": "Detalle de historial",
+  "title_page_ib": "IB",
 
 
   "btn_Register": "Registrarse",
@@ -66,5 +67,8 @@
   "label_net_L3": "Linea 3",
   "label_net_L4": "Linea 4",
   "label_net_L5": "Linea 5",
-  "label_net_total": "Total"
+  "label_net_total": "Total",
+  "label_ib_title": "Agregar Cuenta",
+  "label_ib_id": "Cuenta",
+  "label_ib_pass": "Contraseña"
 }
