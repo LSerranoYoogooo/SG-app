@@ -70,6 +70,7 @@
   "label_net_total": "Total",
   "label_ib_title": "Add broker Acount",
   "label_ib_id": "Broker Id",
-  "label_ib_pass": "Password"
+  "label_ib_pass": "Password",
+  "label_ib_account_title": "Registered accounts"
 
 }

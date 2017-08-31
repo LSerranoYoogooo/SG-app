@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
 import { Account } from "../../models/account";
 import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -17,11 +17,36 @@ export class IbPage {
   brokerId: any;
   password: any;
   accounts = [];
+  accountsSize: any;
+  brokerList = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams , private storage: Storage,
-    public formBuilder: FormBuilder, private db: AngularFireDatabase) {
+    public formBuilder: FormBuilder, private db: AngularFireDatabase, public alertCtrl: AlertController) {
+      
       this.myForm = this.createMyForm();
-      this.getAccountsList();
+      this.getAccountsList(); 
+      
+        
+  }
+
+  showConfirm(key: string) {
+    let confirm = this.alertCtrl.create({
+      title: 'Delete confirmation',
+      message: 'Are you sure you want to delete the account?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {}
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.deleteAccount(key);
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   saveAccount(){
@@ -51,7 +76,6 @@ export class IbPage {
   }
 
   deleteAccount(key: string){
-    console.log(key);
     var item: FirebaseObjectObservable<any>;
     item = this.db.object('/account/' + key);
     item.update({State: "0"});
@@ -59,9 +83,9 @@ export class IbPage {
   }
 
   getAccountsList(){
+    var bro: any;
     this.accounts = [];
     this.storage.get('ReferCode').then(data =>{
-      //console.log(data);
       this.db.list('/account', {
         query: {
           indexOn: 'UsrReference',
@@ -69,17 +93,38 @@ export class IbPage {
           equalTo: data
         }
       }).subscribe(snapshot => {
-        for (let account of snapshot){
-          if(account.State > 0){
-            this.accounts.push(account)
-          }
+          for (let account of snapshot){
+            if(account.State > 0){
+              this.accounts.push(account)
+              bro = account.Broker;
+            }
         }
-      })
+        this.countAccounts();
+        this.setBrokerList(bro);
+      });
     });
   }
 
+  countAccounts(){
+    if(this.accounts.length >= 3){
+      this.accountsSize = true;
+    } else{
+      this.accountsSize = false;
+    }
+  }
+
+  setBrokerList(broker: string){
+    this.brokerList = [];
+    console.log('set');
+    if(this.accounts.length == 0){
+      console.log('if');
+      this.brokerList.push({Broker: 'IronFX'});
+      this.brokerList.push({Broker: 'Interective Brokers'});
+    } else {
+      console.log('else');
+      this.brokerList.push({Broker: broker});
+    }
+  }
   
 
 }
-
-

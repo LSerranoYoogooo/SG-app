@@ -70,5 +70,6 @@
   "label_net_total": "Total",
   "label_ib_title": "Agregar Cuenta",
   "label_ib_id": "Cuenta",
-  "label_ib_pass": "Contraseña"
+  "label_ib_pass": "Contraseña",
+  "label_ib_account_title": "Cuentas Registradas"
 }

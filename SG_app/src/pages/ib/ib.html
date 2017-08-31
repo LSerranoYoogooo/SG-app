@@ -10,7 +10,7 @@
 
 <ion-content padding>
   <form [formGroup]="myForm">
-    <ion-card>
+    <ion-card [hidden]="accountsSize">
       <ion-card-header class="card_header">
         {{"label_ib_title" | translate}}
       </ion-card-header>
@@ -25,9 +25,10 @@
         </ion-item>
         <ion-item>
           <ion-label>Broker</ion-label>
-          <ion-select [(ngModel)]="broker" formControlName="Broker">
-            <ion-option value="IronFx">IronFx</ion-option>
-            <ion-option value="Iteractive_Brokers">Interactive Brokers</ion-option>  
+          <ion-select [(ngModel)]="broker" formControlName="Broker" >
+            <ion-option value={{bro.Broker}} *ngFor="let bro of brokerList">
+              {{bro.Broker}}
+            </ion-option>
           </ion-select>
         </ion-item>
         <ion-fab right [hidden]="!myForm.valid">
@@ -37,23 +38,14 @@
     </ion-card>
   </form>
   <ion-grid>
+    <ion-label class="accountTitle">{{"label_ib_account_title" | translate}}</ion-label>
     <ion-row ion-item *ngFor="let account of accounts" >
       <ion-col col-12>
         {{ account.Broker }} - {{ account.BrokerID }}
-        <button ion-button color="danger" clear icon-only (click)="deleteAccount(account.$key)">
+        <button ion-button color="danger" clear icon-only (click)="showConfirm(account.$key)">
           <ion-icon name='trash' is-active="false"></ion-icon>
         </button>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <!--
-  <ion-list>
-    <ion-item ion-item *ngFor="let account of accounts">
-      {{ account.Broker }} - {{ account.BrokerID }}
-      <button ion-button color="danger" clear icon-only rigth>
-        <ion-icon name='trash' is-active="false"></ion-icon>
-      </button>
-    </ion-item>  
-  </ion-list>
--->
 </ion-content>
