@@ -28,3 +28,19 @@
   bottom:2.5em;
   right:3em;
 }
+.aqua{
+  filter:alpha(opacity=10);
+  opacity:.10;
+  background-size: 20em 20em;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.aquaDetail{
+  filter:alpha(opacity=10);
+  opacity:.10;
+  background-size: 20em 20em;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: 20%;
+}

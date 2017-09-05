@@ -19,6 +19,7 @@
 </ion-header>
 
 <ion-content>
+  <body background="assets/images/fondo_logo.png" class="aqua"></body>
   <div [ngSwitch]="state">
     <ion-list *ngSwitchCase="'signals'">
       <ion-card *ngFor="let signal of signals | async">

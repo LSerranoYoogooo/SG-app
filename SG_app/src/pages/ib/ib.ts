@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
-import { Account } from "../../models/account";
+import { IonicPage, NavController, NavParams, AlertController, LoadingController} from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { FirebaseListObservable, AngularFireDatabase, FirebaseObjectObservable } from "angularfire2/database";
+import { AngularFireDatabase, FirebaseObjectObservable } from "angularfire2/database";
 
 
 @IonicPage()
@@ -19,14 +18,11 @@ export class IbPage {
   accounts = [];
   accountsSize: any;
   brokerList = [];
+  loading: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams , private storage: Storage,
-    public formBuilder: FormBuilder, private db: AngularFireDatabase, public alertCtrl: AlertController) {
-      
-      this.myForm = this.createMyForm();
-      this.getAccountsList(); 
-      
-        
+  constructor(public navCtrl: NavController, public navParams: NavParams , private storage: Storage, public formBuilder: FormBuilder, private db: AngularFireDatabase, public alertCtrl: AlertController, public loadingCtrl: LoadingController){
+    this.myForm = this.createMyForm();
+    this.getAccountsList(); 
   }
 
   showConfirm(key: string) {
@@ -50,6 +46,8 @@ export class IbPage {
   }
 
   saveAccount(){
+    let loading = this.loadingCtrl.create({content: 'Loading...'});
+    loading.present();
     this.storage.get('ReferCode').then(data =>{
       var account = {
         Broker: this.broker,
@@ -64,6 +62,7 @@ export class IbPage {
       this.brokerId = null;
       this.password = null;
       this.getAccountsList();
+      loading.dismiss();
     })    
   }
 
@@ -115,16 +114,11 @@ export class IbPage {
 
   setBrokerList(broker: string){
     this.brokerList = [];
-    console.log('set');
     if(this.accounts.length == 0){
-      console.log('if');
       this.brokerList.push({Broker: 'IronFX'});
       this.brokerList.push({Broker: 'Interective Brokers'});
     } else {
-      console.log('else');
       this.brokerList.push({Broker: broker});
     }
   }
-  
-
 }

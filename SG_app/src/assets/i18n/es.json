@@ -51,6 +51,9 @@
   "label_tel": "Telefono",
   "label_country": "Pais",
   "label_refer_cod": "Su codigo: ",
+  "label_product": "Producto",
+  "label_product_signal": "Señales",
+  "label_product_admin": "Administracion de cuentas",
   "label_loget_as": "Conectado como",
   "label_refer_code": "Codigo de referido",
   "label_net_name": "Nombre",
@@ -72,4 +75,5 @@
   "label_ib_id": "Cuenta",
   "label_ib_pass": "Contraseña",
   "label_ib_account_title": "Cuentas Registradas"
+
 }

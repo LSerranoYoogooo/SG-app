@@ -13,9 +13,31 @@ page-ib {
 
 .label-md{
     margin: 0px !important;
+    min-height: 2em;
 }
 .accountTitle{
     text-align: center;
     font-size: large;
 }
-
+.rigthArrowS{
+    right: 1em;
+    position: fixed;
+}
+.grid{
+    padding: 0px !important;
+}
+.minAncho{
+    min-width: 80%;
+    margin: 5px;
+    font-size: 1.8rem;
+    padding-top: .5rem;
+    padding-left: 1rem;
+}
+.aquaIB{
+    filter:alpha(opacity=10);
+    opacity:.10;
+    background-size: 20em 20em;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 18%;
+  }

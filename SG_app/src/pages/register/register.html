@@ -5,7 +5,10 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="myForm">
+  <div class="logoR">
+    <img src="assets/images/fondo_logo.png"/>
+  </div>
+  <form [formGroup]="myForm" class="formStyle">
     <ion-item>
       <ion-label floating>{{"log_email" | translate}}</ion-label>
       <ion-input formControlName="email" type="email" [(ngModel)]="user.email"></ion-input>
@@ -29,6 +32,13 @@
         <ion-option *ngFor="let ctry of countries" value="{{ctry.Sigla}}">{{ctry.Country}}</ion-option>
       </ion-select>
     </ion-item>
+    <ion-item>
+        <ion-label class="littleLetter">{{"label_product" | translate}}</ion-label>
+        <ion-select [(ngModel)]="user.product" formControlName="product">
+          <ion-option value="signal">{{"label_product_signal" | translate}}</ion-option>
+          <ion-option value="admin">{{"label_product_admin" | translate}}</ion-option>
+        </ion-select>
+      </ion-item>
     <ion-item>
       <ion-label floating class="littleLetter">{{"label_refer_code" | translate}}</ion-label>
       <ion-input formControlName="code" type="text" [(ngModel)]="reference"></ion-input>

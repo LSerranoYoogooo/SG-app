@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav, AlertController, Events } from 'ionic-angular';
-import { Push, PushToken } from '@ionic/cloud-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -32,7 +31,7 @@ export class MyApp {
   constructor(
     public platform: Platform, public statusBar: StatusBar,
     public splashScreen: SplashScreen, public translate: TranslateService,
-    private auth: AngularFireAuth, public push: Push, public alertCtrl: AlertController,
+    private auth: AngularFireAuth, /*public push: Push,*/ public alertCtrl: AlertController,
     private db: AngularFireDatabase, private storage: Storage, public events: Events) {
     this.availableLang = ['es', 'en'];
     this.rootPage = LoginPage;
@@ -91,8 +90,8 @@ export class MyApp {
       this.setUserinfo();
       statusBar.styleDefault();
       splashScreen.hide();
-      this.RegisterNotificaction();
-      this.Notification();
+      //this.RegisterNotificaction();
+      //this.Notification();
     });
   }
 
@@ -132,7 +131,7 @@ export class MyApp {
 
   logOut() {
     this.auth.auth.signOut();
-    this.UnRegisterNotification();
+    //this.UnRegisterNotification();
     this.storage.remove('Country');
     this.storage.remove('Date');
     this.storage.remove('Email');
@@ -144,7 +143,7 @@ export class MyApp {
     this.storage.remove('Telephone');
     this.nav.setRoot('LoginPage');
   }
-
+/*
   private RegisterNotificaction() {
     this.push.register().then((t: PushToken) => {
       return this.push.saveToken(t);
@@ -163,6 +162,7 @@ export class MyApp {
   private UnRegisterNotification(){
     this.push.unregister();
   }
+  */
 
   private AuxSetLang(){
     var dispLang = this.translate.getBrowserLang();

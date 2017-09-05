@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController, Events } from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { IonicPage, NavController, NavParams, ToastController, AlertController, Events, LoadingController } from 'ionic-angular';
 import { User } from "../../models/user";
-import { AngularFireDatabase} from "angularfire2/database";
 import { Storage } from '@ionic/storage';
+import { AngularFireAuth } from "angularfire2/auth";
+import { AngularFireDatabase } from "angularfire2/database";
 
 @IonicPage()
 @Component({
@@ -18,14 +18,23 @@ export class LoginPage {
     public navCtrl: NavController, public navParams: NavParams,
     private auth: AngularFireAuth, private toast: ToastController,
     public alertCtrl: AlertController, private db: AngularFireDatabase,
-    private storage: Storage, public events: Events) {
+    private storage: Storage, public events: Events, public loadingCtrl: LoadingController) {
       this.auth.authState.subscribe(data=>{
         this.reviewSessions(data.email);
       })
       
     }
+  
+    presentLoading() {
+      this.loadingCtrl.create({
+        content: 'Please wait...',
+        duration: 4000,
+        dismissOnPageChange: true
+      }).present();
+    }
 
   async login(user: User){
+    this.presentLoading();
     try {
       await this.auth.auth.signInWithEmailAndPassword(user.email, user.password);
       this.auth.authState.subscribe(data => {
@@ -57,8 +66,8 @@ export class LoginPage {
         }).present();
       } else {
         this.toast.create({
-          message: "Error",
-          duration: 1000
+          message: e.code,
+          duration: 10000
         }).present();
       }
     }
@@ -116,7 +125,7 @@ export class LoginPage {
           this.storage.set('ReferCode', user.ReferCode);
           this.storage.set('State', user.State);
           this.storage.set('Telephone', user.Telephone);
-          this.events.publish('userLoget', product, user.Product)
+          this.events.publish('userLoget', product, user.Product);
         if(user.Intro){
           this.navCtrl.setRoot("InitialPage");
         } else {

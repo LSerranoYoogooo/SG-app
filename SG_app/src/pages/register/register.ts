@@ -1,12 +1,12 @@
 import { Component} from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController, Events} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController, Events, LoadingController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FirebaseListObservable, AngularFireDatabase } from "angularfire2/database";
 import { Network } from "../../models/network";
 import { Linea } from "../../models/line";
-import { SignalsPage } from "../signals/signals";
+import { LoginPage } from "../login/login";
 
 @IonicPage()
 @Component({
@@ -24,7 +24,7 @@ export class RegisterPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public toast: ToastController, public alertCtrl: AlertController,
     private auth: AngularFireAuth, private db: AngularFireDatabase,
-    public formBuilder: FormBuilder, public events: Events) {
+    public formBuilder: FormBuilder, public events: Events, public loadingCtrl: LoadingController) {
       this.myForm = this.createMyForm();
       this.users = db.list('/users');
       this.user.createDate = this.myDate;
@@ -53,6 +53,14 @@ export class RegisterPage {
         {Sigla: 'DOM', Country: 'Republica Dominicana'}];     
     }
 
+    presentLoading() {
+      this.loadingCtrl.create({
+        content: 'Please wait...',
+        duration: 4000,
+        dismissOnPageChange: true
+      }).present();
+    }
+
   private createMyForm(){
     return this.formBuilder.group({
       email: ['', Validators.required],
@@ -61,22 +69,24 @@ export class RegisterPage {
       password: ['', Validators.required],
       country: ['', Validators.required],
       code: ['', Validators.required],
+      product: ['', Validators.required]
     });
   }
 
   register(user: User) {
+    this.presentLoading();
     try{
       this.reviewReference(this.reference).then(res => {
         var cant = res;
         if(res){
-          this.genReferCode();
+          this.genReferCode(user.product);
           this.auth.auth.createUserWithEmailAndPassword(user.email, user.password).then(res=>{
             this.addUser(user);
             this.addToNetwork(user, this.reference).then(res =>{
               this.auxLine1(this.reference, user.email, user.referCode, user.name);
             });
           });
-          this.navCtrl.setRoot(SignalsPage);
+          this.navCtrl.pop();
         } else{
           this.toast.create({
             message: 'Incorrect code',
@@ -123,13 +133,18 @@ export class RegisterPage {
       Telephone: user.telephone,
       Country: user.country,
       Date: user.createDate,
-      ReferCode: user.referCode
+      ReferCode: user.referCode,
+      Product: user.product
     });
   }
 
-  genReferCode(){
+  genReferCode(product: string){
     var unique = new Date().getTime();
-    this.user.referCode = this.user.country + unique;
+    if(product == 'admin'){
+      this.user.referCode = this.user.country + unique + '-1';
+    } else{
+      this.user.referCode = this.user.country + unique + '-2';
+    }
   }
 
   reviewReference(reference: string){

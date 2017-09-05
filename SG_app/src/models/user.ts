@@ -6,4 +6,5 @@ export interface User {
   country: string;
   createDate: string;
   referCode: string;
+  product: string;
 }

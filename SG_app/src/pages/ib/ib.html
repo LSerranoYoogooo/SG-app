@@ -9,6 +9,7 @@
 
 
 <ion-content padding>
+    <body background="assets/images/fondo_logo.png" class="aquaIB"></body>
   <form [formGroup]="myForm">
     <ion-card [hidden]="accountsSize">
       <ion-card-header class="card_header">
@@ -39,13 +40,11 @@
   </form>
   <ion-grid>
     <ion-label class="accountTitle">{{"label_ib_account_title" | translate}}</ion-label>
-    <ion-row ion-item *ngFor="let account of accounts" >
-      <ion-col col-12>
-        {{ account.Broker }} - {{ account.BrokerID }}
-        <button ion-button color="danger" clear icon-only (click)="showConfirm(account.$key)">
-          <ion-icon name='trash' is-active="false"></ion-icon>
-        </button>
-      </ion-col>
+    <ion-row  *ngFor="let account of accounts" >
+      <p class="minAncho">{{ account.Broker }} - {{ account.BrokerID }}</p>
+      <button ion-button color="danger" clear icon-only (click)="showConfirm(account.$key)" >
+        <ion-icon name='trash' is-active="false"></ion-icon>
+      </button>
     </ion-row>
   </ion-grid>
 </ion-content>
