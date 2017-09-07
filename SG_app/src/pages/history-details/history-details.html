@@ -11,13 +11,34 @@
   <div class="H_centerImg">
     <img src="{{imgsource}}" class="H_viewImg"/>
   </div>
-  <div class="H_signalInfo">
-      <p class="H_row">{{"label_priceA" | translate}} {{History.Price_a}}</p>
-      <p class="H_row">{{"label_price_cierre" | translate}} {{History.Price_c}}</p>
-      <p class="H_row">{{"label_trend" | translate}} {{Trend_E | translate}}</p>
-      <p class="H_row">{{"label_trend_real" | translate}} {{Trend_R | translate}}</p>
-      <p class="H_row">{{"label_pips" | translate}} {{History.Pips}}</p>
-      <p class="H_row">{{"label_date" | translate}} {{History.Date_A}}</p>
-      <p class="H_row">{{"label_date_cierre" | translate}} {{History.Date_C}}</p>
-  </div>
+  <ion-grid class="general_grid">
+      <ion-row>
+        <ion-col col-7 class="tittle">{{"label_priceA" | translate}}</ion-col>
+        <ion-col col-4 class="info">{{History.Price_a}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-7 class="tittle">{{"label_price_cierre" | translate}} </ion-col>
+        <ion-col col-4 class="info">{{History.Price_c}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-7 class="tittle">{{"label_trend" | translate}}</ion-col>
+        <ion-col col-4 class="info">{{Trend_E | translate}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-7 class="tittle">{{"label_trend_real" | translate}}</ion-col>
+        <ion-col col-4 class="info">{{Trend_R | translate}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-7 class="tittle">{{"label_pips" | translate}}</ion-col>
+        <ion-col col-4 class="info">{{History.Date_A}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-7 class="tittle">{{"label_date" | translate}}</ion-col>
+        <ion-col col-4 class="info">{{History.Pips}}</ion-col>
+      </ion-row>  
+      <ion-row>
+        <ion-col col-7 class="tittle">{{"label_date_cierre" | translate}}</ion-col>
+        <ion-col col-4 class="info">{{History.Date_C}}</ion-col>
+      </ion-row>  
+    </ion-grid>
 </ion-content>

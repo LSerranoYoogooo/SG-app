@@ -12,12 +12,26 @@
   <div class="S_centerImg">
     <img src="{{imgsource}}" class="S_viewImg"/>
   </div>
-  <div class="S_signalInfo">
-      <h5>{{"label_priceA" | translate}} {{Signal.Price_a}}</h5>
-      <h5>{{"label_trend" | translate}} {{Trend | translate}}</h5>
-      <h5>{{"label_tp1" | translate}} {{Signal.TP1}}</h5>
-      <h5>{{"label_tp2" | translate}} {{Signal.TP2}} </h5>
-      <h5>{{"label_sl" | translate}} {{Signal.SL}}</h5>
-  </div>
-  
+  <ion-grid class="general_grid">
+      <ion-row>
+        <ion-col col-6 class="tittle">{{"label_priceA" | translate}}</ion-col>
+        <ion-col col-4 class="info">{{Signal.Price_a}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6 class="tittle">{{"label_trend" | translate}}</ion-col>
+        <ion-col col-4 class="info">{{Trend}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6 class="tittle">{{"label_tp1" | translate}}</ion-col>
+        <ion-col col-4 class="info">{{Signal.TP1}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6 class="tittle">{{"label_tp2" | translate}}</ion-col>
+        <ion-col col-4 class="info">{{Signal.TP2}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6 class="tittle">{{"label_sl" | translate}}</ion-col>
+        <ion-col col-4 class="info">{{Signal.SL}}</ion-col>
+      </ion-row>   
+    </ion-grid>
 </ion-content>
