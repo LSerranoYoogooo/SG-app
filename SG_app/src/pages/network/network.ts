@@ -40,8 +40,4 @@ export class NetworkPage {
       this.L5 = (this.network.Line5.length - 1)*(125*0.06);
       this.TL = this.L1 + this.L2 + this.L3 + this.L4 + this.L5;
     }
-
-    get_data(){
-      
-    }
 }

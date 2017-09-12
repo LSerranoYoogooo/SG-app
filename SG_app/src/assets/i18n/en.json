@@ -74,6 +74,22 @@
   "label_ib_title": "Add broker Acount",
   "label_ib_id": "Broker Id",
   "label_ib_pass": "Password",
-  "label_ib_account_title": "Registered accounts"
+  "label_ib_account_title": "Registered accounts",
+
+  "month_view": "Month to show: ",
+  "month_default": "last three months",
+  "month1": "January",
+  "month2": "February",
+  "month3": "March",
+  "month4": "April",
+  "month5": "May",
+  "month6": "June",
+  "month7": "July",
+  "month8": "August",
+  "month9": "September",
+  "month10": "Octuber",
+  "month11": "November",
+  "month12": "December"
+
 
 }

@@ -74,6 +74,21 @@
   "label_ib_title": "Agregar Cuenta",
   "label_ib_id": "Cuenta",
   "label_ib_pass": "Contraseña",
-  "label_ib_account_title": "Cuentas Registradas"
+  "label_ib_account_title": "Cuentas Registradas",
+  
+  "month_view": "Mes a mostrar: ",
+  "month_default": "Ultimos tres meses",
+  "month1": "Enero",
+  "month2": "Febrero",
+  "month3": "Marzo",
+  "month4": "Abril",
+  "month5": "Mayo",
+  "month6": "Junio",
+  "month7": "Julio",
+  "month8": "Agosto",
+  "month9": "Septiembre",
+  "month10": "Octubre",
+  "month11": "Noviembre",
+  "month12": "Diciembre"
 
 }

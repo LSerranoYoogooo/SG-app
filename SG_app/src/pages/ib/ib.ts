@@ -50,6 +50,7 @@ export class IbPage {
     loading.present();
     this.storage.get('ReferCode').then(data =>{
       var account = {
+        Block: 'false',
         Broker: this.broker,
         BrokerID: this.brokerId,
         Password: this.password,
@@ -116,7 +117,7 @@ export class IbPage {
     this.brokerList = [];
     if(this.accounts.length == 0){
       this.brokerList.push({Broker: 'IronFX'});
-      this.brokerList.push({Broker: 'Interective Brokers'});
+      this.brokerList.push({Broker: 'Interactive Brokers'});
     } else {
       this.brokerList.push({Broker: broker});
     }

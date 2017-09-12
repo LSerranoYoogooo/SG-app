@@ -14,31 +14,31 @@
   <ion-grid class="general_grid">
       <ion-row>
         <ion-col col-7 class="tittle">{{"label_priceA" | translate}}</ion-col>
-        <ion-col col-4 class="info">{{History.Price_a}}</ion-col>
+        <ion-col col-5 class="info">{{History.Price_a}}</ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-7 class="tittle">{{"label_price_cierre" | translate}} </ion-col>
-        <ion-col col-4 class="info">{{History.Price_c}}</ion-col>
+        <ion-col col-5 class="info">{{History.Price_c}}</ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-7 class="tittle">{{"label_trend" | translate}}</ion-col>
-        <ion-col col-4 class="info">{{Trend_E | translate}}</ion-col>
+        <ion-col col-5 class="info">{{Trend_E | translate}}</ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-7 class="tittle">{{"label_trend_real" | translate}}</ion-col>
-        <ion-col col-4 class="info">{{Trend_R | translate}}</ion-col>
+        <ion-col col-5 class="info">{{Trend_R | translate}}</ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-7 class="tittle">{{"label_pips" | translate}}</ion-col>
-        <ion-col col-4 class="info">{{History.Date_A}}</ion-col>
+        <ion-col col-5 class="info">{{History.Pips}}</ion-col>
       </ion-row>
       <ion-row>
         <ion-col col-7 class="tittle">{{"label_date" | translate}}</ion-col>
-        <ion-col col-4 class="info">{{History.Pips}}</ion-col>
+        <ion-col col-5 class="info">{{History.Date_A}} {{History.Initial_Hour}}</ion-col>
       </ion-row>  
       <ion-row>
         <ion-col col-7 class="tittle">{{"label_date_cierre" | translate}}</ion-col>
-        <ion-col col-4 class="info">{{History.Date_C}}</ion-col>
+        <ion-col col-5 class="info">{{History.Date_C}} {{History.Final_Hour}}</ion-col>
       </ion-row>  
     </ion-grid>
 </ion-content>
