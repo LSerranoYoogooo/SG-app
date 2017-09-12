@@ -10,10 +10,11 @@ import { AngularFireAuthModule} from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { IonicStorageModule } from '@ionic/storage';
 
-import { Push } from '@ionic-native/push';
+//import { Push } from '@ionic-native/push';
+import { FCM } from '@ionic-native/fcm';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+//import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 
 import { MyApp } from './app.component';
 import { FIREBASE_CONFIG } from './app.firebase.config';
@@ -28,6 +29,7 @@ export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+/*
 const cloudSettings: CloudSettings = {
   'core': {
     'app_id': '98107872'
@@ -44,7 +46,7 @@ const cloudSettings: CloudSettings = {
       }
     }
   }
-};
+};*/
 
 @NgModule({
   declarations: [
@@ -54,7 +56,7 @@ const cloudSettings: CloudSettings = {
   BrowserModule,
   HttpModule,
   IonicModule.forRoot(MyApp),
-  CloudModule.forRoot(cloudSettings),
+  //CloudModule.forRoot(cloudSettings),
   IonicStorageModule.forRoot(),
   TranslateModule.forRoot({
     loader: {
@@ -80,7 +82,8 @@ const cloudSettings: CloudSettings = {
   providers: [
     StatusBar,
     SplashScreen,
-    Push,
+    FCM,
+    //Push,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

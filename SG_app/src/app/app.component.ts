@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav, AlertController, Events } from 'ionic-angular';
+import { Component, ViewChild, NgZone } from '@angular/core';
+import { Platform, Nav, AlertController, Events, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -13,6 +13,7 @@ import { UserNet } from "../models/userNet";
 import { Network } from "../models/network";
 import { IbPage } from "../pages/ib/ib";
 import { LoginPage } from "../pages/login/login";
+import { FCM } from '@ionic-native/fcm';
 
 
 @Component({
@@ -31,68 +32,94 @@ export class MyApp {
   constructor(
     public platform: Platform, public statusBar: StatusBar,
     public splashScreen: SplashScreen, public translate: TranslateService,
-    private auth: AngularFireAuth, /*public push: Push,*/ public alertCtrl: AlertController,
-    private db: AngularFireDatabase, private storage: Storage, public events: Events) {
-    this.availableLang = ['es', 'en'];
-    this.rootPage = LoginPage;
+    private auth: AngularFireAuth, private fcm: FCM, public alertCtrl: AlertController,
+    private db: AngularFireDatabase, private storage: Storage, public events: Events, 
+    public zone: NgZone, private toast: ToastController) {
+      this.availableLang = ['es', 'en'];
+      this.rootPage = LoginPage;
 
-    try {
-      storage.get('Product').then((val) => {
-        if(val == 'signal'){
-          this.pages = [
-            { titulo: 'btn_menu_Signal', component: SignalsPage, icon: 'analytics' },
-            { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
-            { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
-          ];
-        } 
-        if(val == 'admin') {
-          this.pages = [
-            { titulo: 'btn_menu_IB', component: IbPage, icon: 'ios-link' },
-            { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
-            { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
-          ];
-        }
-        if(val == null) {
-          this.pages = [
-            { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
-          ];
-        }
+      fcm.getToken().then(token=>{
+        //backend.registerToken(token);
+        this.toast.create({
+          message: token,
+          duration: 4000
+        }).present();
       });
-    } catch (error) {
-      console.log('not data');  
-    }
 
-    this.events.subscribe('userLoget', (product, val)=>{
+      //fcm.subscribeToTopic('marketing');
+
+      fcm.onNotification().subscribe(data=>{
+        if(data.wasTapped){
+          console.log("Received in background");
+          this.toast.create({
+            message: "Received in background",
+            duration: 4000
+          }).present();
+        } else {
+          console.log("Received in foreground");
+          this.toast.create({
+            message: "Received in foreground",
+            duration: 4000
+          }).present();
+        };
+      })
+
+      
       try {
-        if(val == 'signal'){
-          this.pages = [
-            { titulo: 'btn_menu_Signal', component: SignalsPage, icon: 'analytics' },
-            { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
-            { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
-          ];
-        } 
-        if(val == 'admin') {
-          console.log('admin');
-          this.pages = [
-            { titulo: 'btn_menu_IB', component: IbPage, icon: 'ios-link' },
-            { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
-            { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
-          ];
-        }
-        this.setUserinfo();
-    } catch (error) {
-      console.log('not data');
-    }
-    });
-    
+        storage.get('Product').then((val) => {
+          if(val == 'signal'){
+            this.pages = [
+              { titulo: 'btn_menu_Signal', component: SignalsPage, icon: 'analytics' },
+              { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
+              { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+            ];
+          } 
+          if(val == 'admin') {
+            this.pages = [
+              { titulo: 'btn_menu_IB', component: IbPage, icon: 'ios-link' },
+              { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
+              { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+            ];
+          }
+          if(val == null) {
+            this.pages = [
+              { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+            ];
+          }
+        });
+      } catch (error) {
+        console.log('not data');  
+      }
 
-    platform.ready().then(() => {
-      this.setUserinfo();
-      statusBar.styleDefault();
-      splashScreen.hide();
-      //this.RegisterNotificaction();
-      //this.Notification();
-    });
+      this.events.subscribe('userLoget', (product, val)=>{
+        try {
+          if(val == 'signal'){
+            this.pages = [
+              { titulo: 'btn_menu_Signal', component: SignalsPage, icon: 'analytics' },
+              { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
+              { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+            ];
+          } 
+          if(val == 'admin') {
+            console.log('admin');
+            this.pages = [
+              { titulo: 'btn_menu_IB', component: IbPage, icon: 'ios-link' },
+              { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
+              { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+            ];
+          }
+          this.setUserinfo();
+      } catch (error) {
+        console.log('not data');
+      }
+      });
+      
+
+      platform.ready().then(() => {
+        this.setUserinfo();
+        statusBar.styleDefault();
+        splashScreen.hide();
+      });
   }
 
   setUserinfo(){
@@ -131,7 +158,6 @@ export class MyApp {
 
   logOut() {
     this.auth.auth.signOut();
-    //this.UnRegisterNotification();
     this.storage.remove('Country');
     this.storage.remove('Date');
     this.storage.remove('Email');
@@ -143,26 +169,6 @@ export class MyApp {
     this.storage.remove('Telephone');
     this.nav.setRoot('LoginPage');
   }
-/*
-  private RegisterNotificaction() {
-    this.push.register().then((t: PushToken) => {
-      return this.push.saveToken(t);
-    }).then((t: PushToken) => {
-      console.log('Token saved:', t.token);
-    });
-  }
-
-  private Notification() {
-    this.push.rx.notification()
-      .subscribe((msg) => {
-        alert(msg.title + ': ' + msg.text);
-      });
-  }
-
-  private UnRegisterNotification(){
-    this.push.unregister();
-  }
-  */
 
   private AuxSetLang(){
     var dispLang = this.translate.getBrowserLang();
@@ -180,4 +186,6 @@ export class MyApp {
       this.translate.use('en');
     }
   }
+
+  
 }
