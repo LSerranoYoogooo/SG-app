@@ -96,6 +96,7 @@ export class RegisterPage {
         }
       });
     } catch(e){
+      //this.loadingCtrl.dimiss;
       if(e.code == "auth/argument-error"){
         this.toast.create({
           message: "Indicate email and password",
@@ -125,16 +126,35 @@ export class RegisterPage {
     }
   }
 
+  reviewPreviusUsr(email: string){
+    var result = false;
+    return new Promise((resolve, reject) => {
+      this.db.list('/users', {
+        query: {
+          indexOn: 'Email',
+          orderByChild: 'Email',
+          equalTo: email
+        }
+      }).subscribe(snapshot => {
+        for (let user of snapshot){
+          result = true;
+        }
+        resolve(result);
+      }).unsubscribe;
+    });
+  }
+
   addUser(user: User){
     this.users.push({
       Email: user.email,
-      Intro: '1',
+      Intro: 'true',
       Name: user.name,
       Telephone: user.telephone,
       Country: user.country,
       Date: user.createDate,
       ReferCode: user.referCode,
-      Product: user.product
+      Product: user.product,
+      State: "true"
     });
   }
 

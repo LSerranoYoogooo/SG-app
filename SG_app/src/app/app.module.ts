@@ -24,6 +24,7 @@ import { InitialPageModule } from "../pages/initial/initial.module";
 import { VideosPageModule } from "../pages/videos/videos.module";
 import { IbPageModule } from "../pages/ib/ib.module";
 import { LoginPageModule } from "../pages/login/login.module";
+import { RecoverPageModule } from "../pages/recover/recover.module";
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -73,6 +74,7 @@ const cloudSettings: CloudSettings = {
   InitialPageModule,
   VideosPageModule,
   IbPageModule,
+  RecoverPageModule,
   LoginPageModule
 ],
   bootstrap: [IonicApp],

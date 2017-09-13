@@ -25,13 +25,13 @@ export class LoginPage {
       
     }
   
-    presentLoading() {
-      this.loadingCtrl.create({
-        content: 'Please wait...',
-        duration: 4000,
-        dismissOnPageChange: true
-      }).present();
-    }
+  presentLoading() {
+    this.loadingCtrl.create({
+      content: 'Please wait...',
+      duration: 4000,
+      dismissOnPageChange: true
+    }).present();
+  }
 
   async login(user: User){
     this.presentLoading();
@@ -143,5 +143,9 @@ export class LoginPage {
       }).present();
     }   
     }).closed; 
+  }
+
+  recover(){
+    this.navCtrl.push("RecoverPage");
   }
 }

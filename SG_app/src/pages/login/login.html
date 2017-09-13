@@ -22,17 +22,22 @@
   </button>
   <ion-grid>
     <ion-row>
-      <ion-col col-6>
-        <button  class="bloque1" ion-button full clear (click)="register()">
-          <ion-icon name="person"></ion-icon>
-            {{"btn_Register" | translate}}
-        </button>
-      </ion-col>
+      <button  class="bloque1" ion-button full clear (click)="register()">
+        <ion-icon name="person"></ion-icon>
+          {{"btn_Register" | translate}}
+      </button>
+    </ion-row>
+    <ion-row>
       <ion-col col-6>
         <button  class="bloque2" ion-button full clear (click)="resetPass(user.email)">
           {{"btn_Pass" | translate}}
         </button>
       </ion-col>
+      <ion-col col-6>
+          <button  class="bloque2" ion-button full clear (click)="recover()">
+            {{"btn_RecoverAcount" | translate}}
+          </button>
+        </ion-col>
     </ion-row>
   </ion-grid>
   </div>
