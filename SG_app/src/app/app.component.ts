@@ -37,33 +37,6 @@ export class MyApp {
     public zone: NgZone, private toast: ToastController) {
       this.availableLang = ['es', 'en'];
       this.rootPage = LoginPage;
-
-      fcm.getToken().then(token=>{
-        //backend.registerToken(token);
-        this.toast.create({
-          message: token,
-          duration: 4000
-        }).present();
-      });
-
-      //fcm.subscribeToTopic('marketing');
-
-      fcm.onNotification().subscribe(data=>{
-        if(data.wasTapped){
-          console.log("Received in background");
-          this.toast.create({
-            message: "Received in background",
-            duration: 4000
-          }).present();
-        } else {
-          console.log("Received in foreground");
-          this.toast.create({
-            message: "Received in foreground",
-            duration: 4000
-          }).present();
-        };
-      })
-
       
       try {
         storage.get('Product').then((val) => {
@@ -157,6 +130,7 @@ export class MyApp {
   }
 
   logOut() {
+    this.UnSuscribeTopic();
     this.auth.auth.signOut();
     this.storage.remove('Country');
     this.storage.remove('Date');
@@ -185,6 +159,10 @@ export class MyApp {
       this.translate.setDefaultLang('en');
       this.translate.use('en');
     }
+  }
+
+  private UnSuscribeTopic(){
+    this.fcm.unsubscribeFromTopic("Signals")
   }
 
   
