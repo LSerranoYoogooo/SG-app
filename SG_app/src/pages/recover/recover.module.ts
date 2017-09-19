@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { RecoverPage } from './recover';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { RecoverPage } from './recover';
   ],
   imports: [
     IonicPageModule.forChild(RecoverPage),
+    TranslateModule
   ],
   exports: [
     RecoverPage

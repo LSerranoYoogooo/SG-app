@@ -51,7 +51,8 @@ export class NetworkPage {
         inputs: [
           {
             name: 'pass',
-            placeholder: 'Password'
+            placeholder: 'Password',
+            type: "password"
           },
         ],
         buttons: [
@@ -103,6 +104,7 @@ export class NetworkPage {
     logOut() {
       this.UnSuscribeTopic();
       this.auth.auth.signOut();
+      this.navCtrl.setRoot('LoginPage');
       this.storage.remove('Country');
       this.storage.remove('Date');
       this.storage.remove('Email');
@@ -111,8 +113,7 @@ export class NetworkPage {
       this.storage.remove('Product');
       this.storage.remove('ReferCode');
       this.storage.remove('State');
-      this.storage.remove('Telephone');
-      this.navCtrl.setRoot('LoginPage');
+      this.storage.remove('Telephone'); 
     }
 
     private UnSuscribeTopic(){

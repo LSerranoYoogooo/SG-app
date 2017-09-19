@@ -126,24 +126,6 @@ export class RegisterPage {
     }
   }
 
-  reviewPreviusUsr(email: string){
-    var result = false;
-    return new Promise((resolve, reject) => {
-      this.db.list('/users', {
-        query: {
-          indexOn: 'Email',
-          orderByChild: 'Email',
-          equalTo: email
-        }
-      }).subscribe(snapshot => {
-        for (let user of snapshot){
-          result = true;
-        }
-        resolve(result);
-      }).unsubscribe;
-    });
-  }
-
   addUser(user: User){
     this.users.push({
       Email: user.email,

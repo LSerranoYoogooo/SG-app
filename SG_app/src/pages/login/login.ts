@@ -84,7 +84,8 @@ export class LoginPage {
       inputs: [
         {
           name: 'email',
-          placeholder: 'Email'
+          placeholder: 'Email',
+          type: 'email'
         },
       ],
       buttons: [
@@ -116,29 +117,36 @@ export class LoginPage {
       var c = snapshot.length;
       if(c >= 1){
         for (let user of snapshot){
-          this.storage.set('Country', user.Country);
-          this.storage.set('Date', user.Date);
-          this.storage.set('Email', user.Email);
-          this.storage.set('Intro', user.Intro);
-          this.storage.set('Name', user.Name);
-          this.storage.set('Product', user.Product);
-          this.storage.set('ReferCode', user.ReferCode);
-          this.storage.set('State', user.State);
-          this.storage.set('Telephone', user.Telephone);
-          this.events.publish('userLoget', product, user.Product);
-        if(user.Intro){
-          this.navCtrl.setRoot("InitialPage");
-        } else {
-          if(user.Product == 'signal'){
-            this.navCtrl.setRoot("SignalsPage");
+          if(user.State == "true"){
+            this.storage.set('Country', user.Country);
+            this.storage.set('Date', user.Date);
+            this.storage.set('Email', user.Email);
+            this.storage.set('Intro', user.Intro);
+            this.storage.set('Name', user.Name);
+            this.storage.set('Product', user.Product);
+            this.storage.set('ReferCode', user.ReferCode);
+            this.storage.set('State', user.State);
+            this.storage.set('Telephone', user.Telephone);
+            this.events.publish('userLoget', product, user.Product);
+            if(user.Intro){
+              this.navCtrl.setRoot("InitialPage");
+            } else {
+              if(user.Product == 'signal'){
+                this.navCtrl.setRoot("SignalsPage");
+              } else{
+                this.navCtrl.setRoot("IbPage");
+              }
+            }
           } else{
-            this.navCtrl.setRoot("IbPage");
+            this.toast.create({
+              message: "Unauthorized user",
+              duration: 2000
+            }).present();
           }
-        }
       }
     } else{
       this.toast.create({
-        message: "unauthorized user",
+        message: "Unauthorized user",
         duration: 2000
       }).present();
     }   
