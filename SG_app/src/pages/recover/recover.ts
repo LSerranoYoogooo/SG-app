@@ -40,9 +40,10 @@ export class RecoverPage {
     loading.present();
     this.reviewPreviusUsr(user.email).then(res=>{
       if(res != "false"){
-        this.recoverAccount(user.email, user.password, res);
+        this.recoverAccount(user.email, user.password, res, loading);
         loading.dismissAll();
       } else {
+        loading.dismissAll();
         this.toast.create({
           message: "Invalid Email",
           duration: 3000
@@ -76,7 +77,7 @@ export class RecoverPage {
     item = null;
   }
 
-  private async recoverAccount(email: string, password: string, res: any){
+  private async recoverAccount(email: string, password: string, res: any, loading: any){
     try {
       await this.auth.auth.createUserWithEmailAndPassword(email, password).then(resp=>{
         this.updateUser(res);
@@ -85,15 +86,21 @@ export class RecoverPage {
         this.navCtrl.pop();
       });
     } catch (error) {
+      loading.dismissAll();
       if(error.code == "auth/email-already-in-use"){
         this.toast.create({
           message: "currently active account",
           duration: 3000
         }).present();
-      } else{
+      } else if (error.code == "auth/weak-password"){
+        this.toast.create({
+          message: "Password 6 characters long or more",
+          duration: 3000
+        }).present();
+      } else {
         this.toast.create({
           message: "Error",
-          duration: 3000
+          duration: 2000
         }).present();
       }
     }
