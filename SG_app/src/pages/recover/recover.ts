@@ -14,16 +14,18 @@ export class RecoverPage {
   myForm: FormGroup;
   user = {} as User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
-    public toast: ToastController, public alertCtrl: AlertController,
-    private auth: AngularFireAuth, private db: AngularFireDatabase,
-    public formBuilder: FormBuilder, public events: Events, public loadingCtrl: LoadingController) {
-  
-      this.myForm = this.createMyForm();
-    }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RecoverPage');
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams, 
+    public toast: ToastController,
+    public alertCtrl: AlertController,
+    private auth: AngularFireAuth,
+    private db: AngularFireDatabase,
+    public formBuilder: FormBuilder,
+    public events: Events,
+    public loadingCtrl: LoadingController
+  ){
+    this.myForm = this.createMyForm();
   }
 
   private createMyForm(){
@@ -34,23 +36,23 @@ export class RecoverPage {
   }
 
   private recover(user: User){
+    let loading = this.loadingCtrl.create({content : "Processing, please wait..."});
+    loading.present();
     this.reviewPreviusUsr(user.email).then(res=>{
-      if(!res){
+      if(res != "false"){
+        this.recoverAccount(user.email, user.password, res);
+        loading.dismissAll();
+      } else {
         this.toast.create({
           message: "Invalid Email",
           duration: 3000
         }).present();
-      } else {
-        this.auth.auth.createUserWithEmailAndPassword(user.email, user.password).then(resp=>{
-          this.updateUser(res);
-          this.navCtrl.setRoot('LoginPage');
-        });
       }
-    });
+    });  
   }
 
   private reviewPreviusUsr(email: string){
-    var result = false;
+    var result = "false";
     return new Promise((resolve, reject) => {
       this.db.list('/users', {
         query: {
@@ -67,10 +69,34 @@ export class RecoverPage {
     });
   }
 
-  updateUser(key: any){
+  private updateUser(key: any){
     var item: FirebaseObjectObservable<any>;
     item = this.db.object('/users/' + key);
     item.update({State: "true"});
+    item = null;
+  }
+
+  private async recoverAccount(email: string, password: string, res: any){
+    try {
+      await this.auth.auth.createUserWithEmailAndPassword(email, password).then(resp=>{
+        this.updateUser(res);
+      }).then(resp2=>{
+        this.auth.auth.signOut();
+        this.navCtrl.pop();
+      });
+    } catch (error) {
+      if(error.code == "auth/email-already-in-use"){
+        this.toast.create({
+          message: "currently active account",
+          duration: 3000
+        }).present();
+      } else{
+        this.toast.create({
+          message: "Error",
+          duration: 3000
+        }).present();
+      }
+    }
   }
 
 }

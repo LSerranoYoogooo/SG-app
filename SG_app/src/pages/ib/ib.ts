@@ -4,7 +4,6 @@ import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AngularFireDatabase, FirebaseObjectObservable } from "angularfire2/database";
 
-
 @IonicPage()
 @Component({
   selector: 'page-ib',
@@ -20,7 +19,15 @@ export class IbPage {
   brokerList = [];
   loading: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams , private storage: Storage, public formBuilder: FormBuilder, private db: AngularFireDatabase, public alertCtrl: AlertController, public loadingCtrl: LoadingController){
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams ,
+    private storage: Storage,
+    public formBuilder: FormBuilder,
+    private db: AngularFireDatabase,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController
+  ){
     this.myForm = this.createMyForm();
     this.getAccountsList(); 
   }

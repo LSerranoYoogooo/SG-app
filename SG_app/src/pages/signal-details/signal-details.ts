@@ -14,8 +14,11 @@ export class SignalDetailsPage {
   firestore = firebase.storage();
   imgsource: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              public zone: NgZone) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public zone: NgZone
+  ) {
     this.Signal = navParams.data.Signal;
     if (this.Signal.E_Trend == "arrow-dropup-circle"){
       this.Trend = "Buy";

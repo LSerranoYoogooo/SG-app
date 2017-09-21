@@ -21,44 +21,43 @@ export class RegisterPage {
   reference: string;
   countries: {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
-    public toast: ToastController, public alertCtrl: AlertController,
-    private auth: AngularFireAuth, private db: AngularFireDatabase,
-    public formBuilder: FormBuilder, public events: Events, public loadingCtrl: LoadingController) {
-      this.myForm = this.createMyForm();
-      this.users = db.list('/users');
-      this.user.createDate = this.myDate;
-      this.countries = [
-        {Sigla: 'CAN', Country: 'Canadá'}, 
-        {Sigla: 'USA', Country: 'United States'}, 
-        {Sigla: 'MEX', Country: 'México'},  
-        {Sigla: 'GTM', Country: 'Guatemala'}, 
-        {Sigla: 'BLZ', Country: 'Belice'}, 
-        {Sigla: 'SLV', Country: 'El Salvador'},
-        {Sigla: 'HDN', Country: 'Honduras'},
-        {Sigla: 'NIC', Country: 'Nicaragua'},
-        {Sigla: 'CRI', Country: 'Costa Rica'},
-        {Sigla: 'PAN', Country: 'Panamá'},
-        {Sigla: 'COL', Country: 'Colombia'},
-        {Sigla: 'VEN', Country: 'Venezuela'},
-        {Sigla: 'ECU', Country: 'Ecuador'},
-        {Sigla: 'PER', Country: 'Peru'},
-        {Sigla: 'BRA', Country: 'Brasil'},
-        {Sigla: 'BOL', Country: 'Bolivia'},
-        {Sigla: 'CHL', Country: 'Chile'},
-        {Sigla: 'PRY', Country: 'Paraguay'},
-        {Sigla: 'ARG', Country: 'Argentina'},
-        {Sigla: 'URY', Country: 'Uruguay'},
-        {Sigla: 'TTO', Country: 'Trinidad y Tobago'},
-        {Sigla: 'DOM', Country: 'Republica Dominicana'}];     
-    }
-
-    presentLoading() {
-      this.loadingCtrl.create({
-        content: 'Please wait...',
-        duration: 4000,
-        dismissOnPageChange: true
-      }).present();
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public toast: ToastController, 
+    public alertCtrl: AlertController,
+    private auth: AngularFireAuth, 
+    private db: AngularFireDatabase,
+    public formBuilder: FormBuilder, 
+    public events: Events, 
+    public loadingCtrl: LoadingController
+  ) {
+    this.myForm = this.createMyForm();
+    this.users = db.list('/users');
+    this.user.createDate = this.myDate;
+    this.countries = [
+      {Sigla: 'CAN', Country: 'Canadá'}, 
+      {Sigla: 'USA', Country: 'United States'}, 
+      {Sigla: 'MEX', Country: 'México'},  
+      {Sigla: 'GTM', Country: 'Guatemala'}, 
+      {Sigla: 'BLZ', Country: 'Belice'}, 
+      {Sigla: 'SLV', Country: 'El Salvador'},
+      {Sigla: 'HDN', Country: 'Honduras'},
+      {Sigla: 'NIC', Country: 'Nicaragua'},
+      {Sigla: 'CRI', Country: 'Costa Rica'},
+      {Sigla: 'PAN', Country: 'Panamá'},
+      {Sigla: 'COL', Country: 'Colombia'},
+      {Sigla: 'VEN', Country: 'Venezuela'},
+      {Sigla: 'ECU', Country: 'Ecuador'},
+      {Sigla: 'PER', Country: 'Peru'},
+      {Sigla: 'BRA', Country: 'Brasil'},
+      {Sigla: 'BOL', Country: 'Bolivia'},
+      {Sigla: 'CHL', Country: 'Chile'},
+      {Sigla: 'PRY', Country: 'Paraguay'},
+      {Sigla: 'ARG', Country: 'Argentina'},
+      {Sigla: 'URY', Country: 'Uruguay'},
+      {Sigla: 'TTO', Country: 'Trinidad y Tobago'},
+      {Sigla: 'DOM', Country: 'Republica Dominicana'}];     
     }
 
   private createMyForm(){
@@ -73,30 +72,48 @@ export class RegisterPage {
     });
   }
 
-  register(user: User) {
-    this.presentLoading();
+  private register(user: User) {
+    let loading = this.loadingCtrl.create({content : "Processing, please wait..."});
+    loading.present();
+    user.email = user.email.toLocaleLowerCase();
+    user.name = user.name.toLocaleUpperCase();
+    this.reference = this.reference.toUpperCase();
     try{
       this.reviewReference(this.reference).then(res => {
         var cant = res;
         if(res){
           this.genReferCode(user.product);
-          this.auth.auth.createUserWithEmailAndPassword(user.email, user.password).then(res=>{
-            this.addUser(user);
-            this.addToNetwork(user, this.reference).then(res =>{
-              this.auxLine1(this.reference, user.email, user.referCode, user.name);
-            });
-          });
-          this.navCtrl.pop();
+          this.registerAux(user, loading);
         } else{
+          loading.dismissAll();
           this.toast.create({
             message: 'Incorrect code',
             duration: 2000
-            }).present();
-          this.navCtrl.pop();
+            }).present().then(x=>{
+          });
         }
       });
     } catch(e){
-      //this.loadingCtrl.dimiss;
+      loading.dismissAll();
+      this.toast.create({
+        message: "Error",
+        duration: 1000
+      }).present();
+    }
+  }
+
+  private async registerAux(user: User, loading: any){
+    try {
+      await this.auth.auth.createUserWithEmailAndPassword(user.email, user.password).then(res=>{
+        this.addUser(user);
+        this.addToNetwork(user, this.reference).then(res =>{
+          this.auxLine1(this.reference, user.email, user.referCode, user.name);
+        });
+        loading.dismissAll();
+        this.navCtrl.pop();
+      });
+    } catch (e) {
+      loading.dismissAll();
       if(e.code == "auth/argument-error"){
         this.toast.create({
           message: "Indicate email and password",
@@ -123,13 +140,15 @@ export class RegisterPage {
           duration: 1000
         }).present();
       }
+      
     }
+    
   }
 
   addUser(user: User){
     this.users.push({
       Email: user.email,
-      Intro: 'true',
+      Intro: false,
       Name: user.name,
       Telephone: user.telephone,
       Country: user.country,

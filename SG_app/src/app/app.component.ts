@@ -1,5 +1,5 @@
 import { Component, ViewChild, NgZone } from '@angular/core';
-import { Platform, Nav, AlertController, Events, ToastController } from 'ionic-angular';
+import { Platform, Nav, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Storage } from '@ionic/storage';
 import { SignalsPage } from "../pages/signals/signals";
 import { NetworkPage } from "../pages/network/network";
-import { VideosPage } from "../pages/videos/videos";
+//import { VideosPage } from "../pages/videos/videos";
 import { AngularFireDatabase } from "angularfire2/database";
 import { UserNet } from "../models/userNet";
 import { Network } from "../models/network";
@@ -30,12 +30,19 @@ export class MyApp {
   public UsrProduct: string;
 
   constructor(
-    public platform: Platform, public statusBar: StatusBar,
-    public splashScreen: SplashScreen, public translate: TranslateService,
-    private auth: AngularFireAuth, private fcm: FCM, public alertCtrl: AlertController,
-    private db: AngularFireDatabase, private storage: Storage, public events: Events, 
-    public zone: NgZone, private toast: ToastController) {
-      this.availableLang = ['es', 'en'];
+    public platform: Platform, 
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen, 
+    private translate: TranslateService,
+    private auth: AngularFireAuth, 
+    private fcm: FCM,
+    private db: AngularFireDatabase, 
+    private storage: Storage, 
+    public events: Events, 
+    public zone: NgZone,
+  ) {
+
+      this.availableLang = ['es', 'en'];  //lista de idiomas aceptados
       this.rootPage = LoginPage;
       
       try {
@@ -44,47 +51,46 @@ export class MyApp {
             this.pages = [
               { titulo: 'btn_menu_Signal', component: SignalsPage, icon: 'analytics' },
               { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
-              { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+              //{ titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' } //a la espera de lo videos
             ];
           } 
           if(val == 'admin') {
             this.pages = [
               { titulo: 'btn_menu_IB', component: IbPage, icon: 'ios-link' },
               { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
-              { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+              //{ titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' } a la espera de los videos
             ];
           }
           if(val == null) {
             this.pages = [
-              { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+              //{ titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' } a la espera de los videos
             ];
           }
         });
       } catch (error) {
-        console.log('not data');  
+        console.log('not data');
       }
 
-      this.events.subscribe('userLoget', (product, val)=>{
+      this.events.subscribe('userLoget', (product, val)=>{ //evento nuevo usuario conectado
         try {
           if(val == 'signal'){
             this.pages = [
               { titulo: 'btn_menu_Signal', component: SignalsPage, icon: 'analytics' },
               { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
-              { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+              //{ titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
             ];
           } 
           if(val == 'admin') {
-            console.log('admin');
             this.pages = [
               { titulo: 'btn_menu_IB', component: IbPage, icon: 'ios-link' },
               { titulo: 'btn_menu_Red', component: NetworkPage, icon: 'card' },
-              { titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
+              //{ titulo: 'btn_menu_Videos', component: VideosPage, icon: 'videocam' }
             ];
           }
           this.setUserinfo();
       } catch (error) {
         console.log('not data');
-      }
+        }
       });
       
 
@@ -95,7 +101,7 @@ export class MyApp {
       });
   }
 
-  setUserinfo(){
+  private setUserinfo(){ //carga de informacion basica del usario a mostrar en el menu lateral
     this.AuxSetLang();
     this.storage.get('Email').then(res =>{
       this.UsrEmail = res;
@@ -105,7 +111,7 @@ export class MyApp {
     });
   }
 
-  goToPage(page) {
+  private goToPage(page) { //redirecconamiento a las distintas pantallas, en caso de visitar network se envia la info correspondiente al usuario
     if(page == NetworkPage){
       var userNet: UserNet;
       var network: Network;
@@ -129,7 +135,7 @@ export class MyApp {
     }
   }
 
-  logOut() {
+  public logOut() { //cierre de session y eliminiacion de toda la info almacenada del usuario
     this.UnSuscribeTopic();
     this.auth.auth.signOut();
     this.storage.remove('Country');
@@ -141,10 +147,11 @@ export class MyApp {
     this.storage.remove('ReferCode');
     this.storage.remove('State');
     this.storage.remove('Telephone');
+    this.nav._cleanup;
     this.nav.setRoot('LoginPage');
   }
 
-  private AuxSetLang(){
+  private AuxSetLang(){ //set del lenguaje a mostrar, si este se encuentra en la lista de idiomas permitidos, caso contrario ingles por default
     var dispLang = this.translate.getBrowserLang();
     var res: boolean;
     for (let lang of this.availableLang){
@@ -161,9 +168,7 @@ export class MyApp {
     }
   }
 
-  private UnSuscribeTopic(){
+  private UnSuscribeTopic(){ //Suscripcion a alertas
     this.fcm.unsubscribeFromTopic("Signals")
-  }
-
-  
+  }  
 }

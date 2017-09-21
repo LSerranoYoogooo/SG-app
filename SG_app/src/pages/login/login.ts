@@ -15,35 +15,53 @@ export class LoginPage {
   user = {} as User;
 
   constructor(
-    public navCtrl: NavController, public navParams: NavParams,
-    private auth: AngularFireAuth, private toast: ToastController,
-    public alertCtrl: AlertController, private db: AngularFireDatabase,
-    private storage: Storage, public events: Events, public loadingCtrl: LoadingController) {
-      this.auth.authState.subscribe(data=>{
-        this.reviewSessions(data.email);
-      })
-      
-    }
-  
-  presentLoading() {
-    this.loadingCtrl.create({
-      content: 'Please wait...',
-      duration: 4000,
-      dismissOnPageChange: true
-    }).present();
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private auth: AngularFireAuth,
+    private toast: ToastController,
+    public alertCtrl: AlertController,
+    private db: AngularFireDatabase,
+    private storage: Storage,
+    public events: Events,
+    public loadingCtrl: LoadingController
+  ){
+    this.autoLogin();         
   }
 
-  async login(user: User){
-    this.presentLoading();
+  private async autoLogin(){
+    try {
+      await this.auth.authState.subscribe(data=>{
+        console.log(data.uid);
+          try {
+            if(data.uid != null){
+              console.log('review');
+              this.reviewSessions(data.email);
+            }
+          } catch (error) {
+            console.log('not uid, try 2');
+          }
+        });
+    } catch (error) {
+      console.log('not uid, try 1');
+    }
+    
+  }
+
+  private async login(user: User){
+    let loading = this.loadingCtrl.create({content : "Processing, please wait..."});
+    loading.present();
     try {
       await this.auth.auth.signInWithEmailAndPassword(user.email, user.password);
       this.auth.authState.subscribe(data => {
+        console.log(data);
         if (data.uid){
           this.reviewSessions(data.email);
+          loading.dismissAll();
         } 
       })
     }
     catch (e){
+      loading.dismissAll();
       if(e.code == "auth/argument-error"){
         this.toast.create({
           message: "Indicate email and password",
@@ -73,8 +91,12 @@ export class LoginPage {
     }
   }
 
-  register() {
+  private register() {
     this.navCtrl.push("RegisterPage");
+  }
+
+  private recover(){
+    this.navCtrl.push("RecoverPage");
   }
 
   resetPass(email: string) {
@@ -151,9 +173,5 @@ export class LoginPage {
       }).present();
     }   
     }).closed; 
-  }
-
-  recover(){
-    this.navCtrl.push("RecoverPage");
   }
 }

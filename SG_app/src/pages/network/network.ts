@@ -16,15 +16,16 @@ export class NetworkPage {
   network: any;
   user: any;
   product: any;
-  L1: any;
-  L2: any;
-  L3: any;
-  L4: any;
-  L5: any;
-  TL: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private auth: AngularFireAuth, private db: AngularFireDatabase, 
-    private storage: Storage, private alertCtrl: AlertController, private fcm: FCM) {
+  L1: any; L2: any; L3: any; L4: any; L5: any; TL: any;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private auth: AngularFireAuth,
+    private db: AngularFireDatabase, 
+    private storage: Storage,
+    private alertCtrl: AlertController,
+    private fcm: FCM
+  ) {
       this.user = this.navParams.get('user');
       this.network = this.navParams.get('network');
       this.storage.get('Product').then(res =>{
@@ -33,8 +34,7 @@ export class NetworkPage {
         } else {
           this.product = 'Signals'
         }
-      })
-      
+      });
       this.L1 = (this.network.Line1.length - 1)*(125*0.02);
       this.L2 = (this.network.Line2.length - 1)*(125*0.03);
       this.L3 = (this.network.Line3.length - 1)*(125*0.04);
@@ -43,8 +43,7 @@ export class NetworkPage {
       this.TL = this.L1 + this.L2 + this.L3 + this.L4 + this.L5;
     }
 
-    disableAccount(){
-
+    private disableAccount(){
       let prompt = this.alertCtrl.create({
         title: 'Disable Account',
         message: "Please enter your password",
@@ -64,47 +63,56 @@ export class NetworkPage {
           {
             text: 'OK',
             handler: data => {
-
               var currentUID;
               var currentEmail;
               this.auth.authState.subscribe(dataAuth => {
                 currentUID = dataAuth.uid;
                 currentEmail = dataAuth.email;
-                this.auth.auth.signInWithEmailAndPassword(currentEmail, data.pass).then(res =>{
-                  this.auth.auth.currentUser.delete();
-                  this.db.list('/users', {
-                    query: {
-                      indexOn: 'Email',
-                      orderByChild: 'Email',
-                      equalTo: currentEmail
-                    }
-                  }).subscribe(snapshot => {
-                    for (let user of snapshot){
-                      this.updateUser(user.$key);
-                      this.logOut();
-                    }
+                this.searchUserKey(currentEmail).then(response=>{
+                  console.log('key --> ' + response);
+                  this.updateUser(response);
+                  this.auth.auth.signInWithEmailAndPassword(currentEmail, data.pass).then(res =>{
+                    this.auth.auth.currentUser.delete();   
+                    this.logOut();
                   });
-                });
+                  
+                  //this.logOut();
+                })
               })
-              
-              console.log(data);
             }
           }
         ]
       });
       prompt.present();
-     }
+    }
 
-    updateUser(key: string){
+    private searchUserKey(email: string){
+      var key = null;
+      return new Promise((resolve, reject) => {
+        this.db.list('/users', {
+          query: {
+            indexOn: 'Email',
+            orderByChild: 'Email',
+            equalTo: email
+          }
+        }).subscribe(snapshot => {
+          for (let user of snapshot){
+            key = user.$key;
+          }
+          resolve(key)
+        });
+      });
+    }
+
+    private updateUser(key: any){
       var item: FirebaseObjectObservable<any>;
       item = this.db.object('/users/' + key);
       item.update({State: "false"});
     }
 
-    logOut() {
+    private logOut() {
       this.UnSuscribeTopic();
       this.auth.auth.signOut();
-      this.navCtrl.setRoot('LoginPage');
       this.storage.remove('Country');
       this.storage.remove('Date');
       this.storage.remove('Email');
@@ -113,7 +121,8 @@ export class NetworkPage {
       this.storage.remove('Product');
       this.storage.remove('ReferCode');
       this.storage.remove('State');
-      this.storage.remove('Telephone'); 
+      this.storage.remove('Telephone');
+      this.navCtrl.setRoot('LoginPage');
     }
 
     private UnSuscribeTopic(){

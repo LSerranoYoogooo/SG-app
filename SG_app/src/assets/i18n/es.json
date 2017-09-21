@@ -1,5 +1,4 @@
-{
-  "title": "Sequeira Global Inc",
+{ "title": "Sequeira Global Inc",
 
   "title_page_register": "Registro",
   "title_page_initial": "Bienvenido",
@@ -10,7 +9,6 @@
   "title_page_signal_details": "Detalle de señal",
   "title_page_history_details": "Detalle de historial",
   "title_page_ib": "IB",
-
 
   "btn_Register": "Registrarse",
   "btn_Pass": "Olvidé mi contraseña",
@@ -26,13 +24,11 @@
   "btn_slide_History": "Historial de señales",
   "LOGOUT": "Cerrar Sesion",
 
-
   "msg_userCreate": "Registro satisfactorio",
   "msg_notuserCreateEmail": "Email invalido",
   "msg_notuserCreatePassword": "Contraseña minimo 6 caracteres",
   "msg_errorRegister": "Favor indicar datos",
   "msg_DontShow": "No mostrar mas",
-
 
   "label_trend_A": "Alcista",
   "label_trend_B": "Bajista",
@@ -91,5 +87,4 @@
   "month10": "Octubre",
   "month11": "Noviembre",
   "month12": "Diciembre"
-
 }
