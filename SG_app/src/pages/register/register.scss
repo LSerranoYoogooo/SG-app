@@ -1,5 +1,5 @@
 page-register {
-
+    padding: 5px !important;
 }
 .littleLetter{
     font-size: 1.3rem;
@@ -8,7 +8,8 @@ page-register {
     padding: 0 !important;
 }
 .formStyle{
-    margin-top: 19%;
+    margin-top: 20%;
+    margin-right: 2%;
 }
 .logoR{
     margin-top: 1em;
@@ -17,3 +18,6 @@ page-register {
     margin-left: auto;
     margin-right: auto;
   }
+.btnRegister{
+    padding-bottom: 4em;
+}

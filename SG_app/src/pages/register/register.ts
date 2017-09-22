@@ -105,12 +105,14 @@ export class RegisterPage {
   private async registerAux(user: User, loading: any){
     try {
       await this.auth.auth.createUserWithEmailAndPassword(user.email, user.password).then(res=>{
+        this.auth.auth.currentUser.sendEmailVerification();
         this.addUser(user);
         this.addToNetwork(user, this.reference).then(res =>{
           this.auxLine1(this.reference, user.email, user.referCode, user.name);
         });
         loading.dismissAll();
-        this.navCtrl.pop();
+        this.events.publish('goToLogin');
+        //this.navCtrl.pop();
       });
     } catch (e) {
       loading.dismissAll();
@@ -155,7 +157,8 @@ export class RegisterPage {
       Date: user.createDate,
       ReferCode: user.referCode,
       Product: user.product,
-      State: "true"
+      State: "true",
+      Payment: "trial"      
     });
   }
 

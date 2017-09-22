@@ -80,11 +80,13 @@ export class RecoverPage {
   private async recoverAccount(email: string, password: string, res: any, loading: any){
     try {
       await this.auth.auth.createUserWithEmailAndPassword(email, password).then(resp=>{
+        this.auth.auth.currentUser.sendEmailVerification();
         this.updateUser(res);
-      }).then(resp2=>{
         this.auth.auth.signOut();
-        this.navCtrl.pop();
+        this.events.publish('goToLogin');
+        //this.navCtrl.pop();
       });
+      this.auth.auth.signOut();
     } catch (error) {
       loading.dismissAll();
       if(error.code == "auth/email-already-in-use"){

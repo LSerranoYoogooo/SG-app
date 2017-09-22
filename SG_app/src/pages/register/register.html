@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <div class="logoR">
     <img src="assets/images/fondo_logo.png"/>
   </div>
@@ -45,7 +45,7 @@
     </ion-item>
     </div>
 
-    <div padding>
+    <div class="btnRegister">
       <button ion-button full clear [disabled]="!myForm.valid" (click)="register(user)">
         <ion-icon name="person"></ion-icon>
         {{"btn_Register" | translate}}

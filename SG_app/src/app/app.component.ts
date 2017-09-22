@@ -21,7 +21,7 @@ import { FCM } from '@ionic-native/fcm';
 })
 export class MyApp {
   @ViewChild('NAV') nav: Nav;
-  public rootPage: any;
+  public rootPage: any = LoginPage;
   public pages: Array<{ titulo: string, component: any, icon: string }>;
   private availableLang: Array<string>;
   public user: any;
@@ -92,8 +92,20 @@ export class MyApp {
         console.log('not data');
         }
       });
-      
 
+      this.events.subscribe('goToLogin', val =>{
+        this.logOut();
+        /*this.storage.remove('Email');
+        this.storage.remove('ReferCode');
+        this.storage.remove('Verified');
+        this.auth.auth.signOut();
+        //this.nav._removeView(this.nav.getActive());
+        //this.nav._cleanup(this.nav.getActive());
+        //this.storage.clear();
+        this.nav.setRoot('LoginPage');
+        this.nav.goToRoot;*/
+      });
+      
       platform.ready().then(() => {
         this.setUserinfo();
         statusBar.styleDefault();
@@ -113,42 +125,59 @@ export class MyApp {
 
   private goToPage(page) { //redirecconamiento a las distintas pantallas, en caso de visitar network se envia la info correspondiente al usuario
     if(page == NetworkPage){
-      var userNet: UserNet;
-      var network: Network;
-      this.auth.authState.subscribe(data => {
-        this.db.list('/users', {query: {indexOn: 'Email', orderByChild: 'Email',equalTo: data.email}
-          }).subscribe(UserList => { 
-            for (let user of UserList){
-              userNet = user;
-              this.db.list('/network', {query: {indexOn: 'Reference', orderByChild: 'Reference',equalTo: userNet.ReferCode}
-                }).subscribe(NetworkList => { 
-                  for (let net of NetworkList){ 
-                    network = net;
-                    this.nav.setRoot(page, {user: userNet, network: network});
-                  } 
-                });
-            }
-          }).unsubscribe;
-      });
+      this.auxGoToNetwork(page)
     } else {
       this.nav.setRoot(page);
     }
   }
 
-  public logOut() { //cierre de session y eliminiacion de toda la info almacenada del usuario
+  private  auxGoToNetwork(page: any){
+    var Email_login;
+    this.storage.get('Email').then(res=>{
+      console.log(res);
+      this.searchUser(res, page);
+    });
+    
+  }
+
+  private searchUser(email: string, page: any){
+    this.db.list('/users', {
+      query: {
+        indexOn: 'Email',
+        orderByChild: 'Email',
+        equalTo: email
+      }
+    }).subscribe(snapshot => {
+      for (let user of snapshot){
+        this.storage.set('userInfo', user);
+        this.searchNetwork(user, page);
+      }
+    });
+  }
+
+  private searchNetwork(User: any, page: any){
+    this.db.list('/network', {
+      query: {
+        indexOn: 'Reference',
+        orderByChild: 'Reference',
+        equalTo: User.ReferCode
+      }
+    }).subscribe(snapshot => {
+      for (let network of snapshot){
+        this.storage.set('networkInfo', network);
+        this.nav.setRoot(page, {user: User, network: network});
+      }
+    });
+  }
+
+  private logOut() { //cierre de session y eliminiacion de toda la info almacenada del usuario
     this.UnSuscribeTopic();
     this.auth.auth.signOut();
-    this.storage.remove('Country');
-    this.storage.remove('Date');
     this.storage.remove('Email');
-    this.storage.remove('Intro');
-    this.storage.remove('Name');
-    this.storage.remove('Product');
     this.storage.remove('ReferCode');
-    this.storage.remove('State');
-    this.storage.remove('Telephone');
-    this.nav._cleanup;
-    this.nav.setRoot('LoginPage');
+    this.storage.remove('Verified');
+    //this.nav._cleanup;
+    this.nav.setRoot(LoginPage);
   }
 
   private AuxSetLang(){ //set del lenguaje a mostrar, si este se encuentra en la lista de idiomas permitidos, caso contrario ingles por default
