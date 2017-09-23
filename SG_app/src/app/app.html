@@ -1,7 +1,6 @@
-
 <ion-menu [content]="NAV">
   <ion-content>
-    <img src="assets/images/cover.jpg" >
+    <img src="assets/images/fondoapp.jpg" >
     <ion-list>
       <button ion-item *ngFor="let page of pages" (click)="goToPage(page.component)" menuClose>
         <ion-icon item-left name="{{ page.icon }}"></ion-icon>
@@ -11,11 +10,21 @@
         <ion-icon item-left name="key"></ion-icon>
           {{"LOGOUT" | translate}}
       </button>
+      <h6 class="TRefCod">
+        {{"label_refer_cod" | translate}}
+      </h6>
+      <h6 class="refcode">
+        {{UsrReferCode}}
+      </h6>
+      <p class="loget">{{"label_loget_as" | translate}} {{UsrEmail}}</p>
     </ion-list>
   </ion-content>
 </ion-menu>
 
-<ion-nav #NAV [root]="rootPage"></ion-nav>
+<ion-nav #NAV [root]="rootPage">
+  
+</ion-nav>
+
 <ion-footer class="bottom_bar primary_color">
   <p>Sequeira Global Inc.</p>
 </ion-footer>

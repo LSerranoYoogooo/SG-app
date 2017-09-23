@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>{{"title_page_ib" | translate}}</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+<div class="workArea">
+    <body background="assets/images/fondo_logo.png" class="aquaIB"></body>
+  <form [formGroup]="myForm">
+    <ion-card [hidden]="accountsSize">
+      <ion-card-header class="card_header">
+        {{"label_ib_title" | translate}}
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label floating>{{"label_ib_id" | translate}}</ion-label>
+          <ion-input type="number" [(ngModel)]="brokerId" formControlName="BrokerID"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>{{"label_ib_pass" | translate}}</ion-label>
+          <ion-input type="password" [(ngModel)]="password" formControlName="Password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Broker</ion-label>
+          <ion-select [(ngModel)]="broker" formControlName="Broker" >
+            <ion-option value={{bro.Broker}} *ngFor="let bro of brokerList">
+              {{bro.Broker}}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-fab right [hidden]="!myForm.valid">
+          <button ion-fab color="light" (click)="saveAccount()"><ion-icon name="md-add"></ion-icon></button>
+        </ion-fab>
+      </ion-card-content>
+    </ion-card>
+  </form>
+  <ion-grid>
+    <ion-label class="accountTitle">{{"label_ib_account_title" | translate}}</ion-label>
+    <ion-row  *ngFor="let account of accounts" >
+      <p class="minAncho">{{ account.Broker }} - {{ account.BrokerID }}</p>
+      <button ion-button color="danger" clear icon-only (click)="showConfirm(account.$key)" >
+        <ion-icon name='trash' is-active="false"></ion-icon>
+      </button>
+    </ion-row>
+  </ion-grid>
+</div>
+</ion-content>

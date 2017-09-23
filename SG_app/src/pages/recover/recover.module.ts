@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { ConfigurationPage } from './configuration';
+import { RecoverPage } from './recover';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
-    ConfigurationPage,
+    RecoverPage,
   ],
   imports: [
-    IonicPageModule.forChild(ConfigurationPage),
+    IonicPageModule.forChild(RecoverPage),
     TranslateModule
   ],
   exports: [
-    ConfigurationPage
+    RecoverPage
   ]
 })
-export class ConfigurationPageModule {}
+export class RecoverPageModule {}

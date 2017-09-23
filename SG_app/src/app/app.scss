@@ -2,9 +2,49 @@
 {
     text-align: center;
     color: white;
+    position:fixed;
+    bottom:0;
+    z-index: 0;
 }
 
 .primary_color{
-  background-color: #387ef5;
+  background-color: #2A214E;
   position: absolute;
+}
+
+.TRefCod{
+  margin-left: 1em;
+  padding-bottom: 0 !important;
+}
+
+.refcode{
+  margin-left: 3em;
+  margin-top: 1rem !important;
+}
+
+.loget{
+  color: #BDBDBD;
+  position:absolute;
+  bottom:2.5em;
+  right:3em;
+}
+.aqua{
+  filter:alpha(opacity=10);
+  opacity:.01;
+  background-size: 20em 20em;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: 25%;
+}
+
+.aquaDetail{
+  filter:alpha(opacity=10);
+  opacity:.01;
+  background-size: 20em 20em;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: 25%;
+}
+.workArea{
+  padding-bottom: 4em !important;
 }

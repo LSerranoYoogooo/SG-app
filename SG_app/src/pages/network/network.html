@@ -4,10 +4,103 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{"title_page_network" | translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="disableAccount()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
+<ion-content>
+<div class="workArea">
+  <ion-grid class="area">
+    <ion-row>
+    <ion-col col-12 class="linea">
+      <p class="title">{{"label_net_email" | translate}}</p>
+      <p class="data"> {{user.Email}} </p>
+    </ion-col>
+    </ion-row>
+    <ion-row>
+    <ion-col col-12 class="linea">
+      <p class="title">{{"label_net_name" | translate}}</p>
+      <p class="data"> {{user.Name}} </p>
+    </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 class="linea">
+        <p class="title">{{"label_net_tel" | translate}}</p>
+        <p class="data"> {{user.Telephone}}  </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 class="linea">
+        <p class="title">{{"label_net_code" | translate}}</p>
+        <p class="data"> {{user.ReferCode}}  </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6 class="linea">
+        <p class="title">{{"label_net_country" | translate}}</p>
+        <p class="data"> {{user.Country}}  </p>
+      </ion-col>
+      <ion-col col-6 class="linea">
+        <p class="title">{{"label_net_product" | translate}}</p>
+        <p class="data"> {{product}}  </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-card>
+    <ion-card-header class="cardTitle">
+      {{"label_net_title" | translate}}
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-5> </ion-col>
+          <ion-col col-2>{{"label_net_line" | translate}}</ion-col>
+          <ion-col col-5>{{"label_net_mount" | translate}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-5>{{"label_net_L1" | translate}}</ion-col>
+          <ion-col col-2>{{network.Line1.length - 1}}</ion-col>
+          <ion-col col-5>${{L1}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-5>{{"label_net_L2" | translate}}</ion-col>
+          <ion-col col-2>{{network.Line2.length - 1}}</ion-col>
+          <ion-col col-5>${{L2}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-5>{{"label_net_L3" | translate}}</ion-col>
+          <ion-col col-2>{{network.Line3.length  - 1}}</ion-col>
+          <ion-col col-5>${{L3}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-5>{{"label_net_L4" | translate}}</ion-col>
+          <ion-col col-2>{{network.Line4.length  - 1}}</ion-col>
+          <ion-col col-5>${{L4}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-5>{{"label_net_L5" | translate}}</ion-col>
+          <ion-col col-2>{{network.Line5.length  - 1}}</ion-col>
+          <ion-col col-5>${{L5}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-5> </ion-col>
+          <ion-col col-2>{{"label_net_total" | translate}}</ion-col>
+          <ion-col col-5>${{TL}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 
-<ion-content padding>
-
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="FY69A77CGBTPQ">
+    <input type="image" src="https://www.paypalobjects.com/es_XC/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+    <img alt="" border="0" src="https://www.paypalobjects.com/es_XC/i/scr/pixel.gif" width="1" height="1">
+  </form>
+</div> 
 </ion-content>

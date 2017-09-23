@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{"title" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="logoR-Recover">
+    <img src="assets/images/fondo_logo.png"/>
+  </div>
+  <form [formGroup]="myForm" class="formStyle-Recover">
+    <ion-item>
+      <ion-label floating>{{"log_email" | translate}}</ion-label>
+      <ion-input formControlName="email" type="email" [(ngModel)]="user.email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>{{"log_pass" | translate}}</ion-label>
+      <ion-input formControlName="password" type="password" [(ngModel)]="user.password"></ion-input>
+    </ion-item>
+    <div padding>
+      <button ion-button full clear [disabled]="!myForm.valid" (click)="recover(user)">
+        <ion-icon name="person"></ion-icon>
+        {{"btn_RecoverAcount" | translate}}
+      </button>
+    </div>
+  </form>
+</ion-content>

@@ -14,13 +14,16 @@ export class SignalDetailsPage {
   firestore = firebase.storage();
   imgsource: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-              public zone: NgZone) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public zone: NgZone
+  ) {
     this.Signal = navParams.data.Signal;
     if (this.Signal.E_Trend == "arrow-dropup-circle"){
-      this.Trend = "label_trend_A";
+      this.Trend = "Buy";
     } else {
-      this.Trend = "label_trend_B";
+      this.Trend = "Sell";
     }
     this.display(this.Signal.Img_E);
   }

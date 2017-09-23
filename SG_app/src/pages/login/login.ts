@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { IonicPage, NavController, NavParams, ToastController, AlertController, Events, LoadingController } from 'ionic-angular';
 import { User } from "../../models/user";
-import { /*FirebaseListObservable,*/ AngularFireDatabase,/* FirebaseObjectObservable*/ } from "angularfire2/database";
-//import { UserInfo } from "../../models/userInfo";
-//mport firebase from 'firebase';
+import { Storage } from '@ionic/storage';
+import { AngularFireAuth } from "angularfire2/auth";
+import { AngularFireDatabase } from "angularfire2/database";
 
 @IonicPage()
 @Component({
@@ -16,21 +15,66 @@ export class LoginPage {
   user = {} as User;
 
   constructor(
-    public navCtrl: NavController, public navParams: NavParams,
-    private auth: AngularFireAuth, private toast: ToastController,
-    public alertCtrl: AlertController, private db: AngularFireDatabase) {
-    }
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private auth: AngularFireAuth,
+    private toast: ToastController,
+    public alertCtrl: AlertController,
+    private db: AngularFireDatabase,
+    private storage: Storage,
+    public events: Events,
+    public loadingCtrl: LoadingController
+  ){ 
+    this.autoLogin();
+  }
 
-  async login(user: User){
+  private  autoLogin(){
+    var Email_login = null;
+    var Verified_state = null;
     try {
-      await this.auth.auth.signInWithEmailAndPassword(user.email, user.password);
-      this.auth.authState.subscribe(data => {
-        if (data.uid){
-          this.reviewSessions(data.email);
-        } 
-      })
+      this.storage.get('Email').then(res=>{
+        Email_login = res
+      });
+      this.storage.get('Verified').then(res=>{
+        Verified_state = res;
+      });
+      if(Verified_state){
+        console.log('2'+Email_login + Verified_state);
+        this.autoLoginReviewSession(Email_login)
+      }
+      console.log('1'+Email_login + Verified_state);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  private async login(user: User){
+    let loading = this.loadingCtrl.create({content : "Processing, please wait..."});
+    loading.present();
+    try {
+      var Email_login;
+      var Verified_state;
+      await this.auth.auth.signInWithEmailAndPassword(user.email, user.password).then(res=>{
+        Email_login = res.email;
+        Verified_state = res.emailVerified;
+      });
+      if(Verified_state){
+        this.loginReviewSession(Email_login, Verified_state);
+        loading.dismissAll();
+      } else {
+        loading.dismissAll();
+        this.auth.auth.signOut();
+        let alert = this.alertCtrl.create({
+          title: 'Confirm email!!!',
+          subTitle: 'you must confirm your email, please check your email',
+          buttons: ['OK']
+        });
+        alert.present();
+      }
     }
     catch (e){
+      console.log('error');
+      loading.dismiss();
       if(e.code == "auth/argument-error"){
         this.toast.create({
           message: "Indicate email and password",
@@ -53,25 +97,30 @@ export class LoginPage {
         }).present();
       } else {
         this.toast.create({
-          message: "Error",
-          duration: 1000
+          message: e.code,
+          duration: 10000
         }).present();
       }
     }
   }
 
-  register() {
+  private register() {
     this.navCtrl.push("RegisterPage");
   }
 
-  resetPass(email: string) {
+  private recover(){
+    this.navCtrl.push("RecoverPage");
+  }
+
+  private resetPass(email: string) {
     let prompt = this.alertCtrl.create({
       title: 'Change Password',
       message: "please enter your email to send instructions.",
       inputs: [
         {
           name: 'email',
-          placeholder: 'Email'
+          placeholder: 'Email',
+          type: 'email'
         },
       ],
       buttons: [
@@ -91,7 +140,29 @@ export class LoginPage {
     prompt.present();
   }
 
-  reviewSessions(email: string){
+  private reviewSessions(email: string){
+    try{
+      this.auth.authState.subscribe(data=>{
+        if(data.emailVerified){
+          if (data.uid){
+            //this.auxReviewSession(email);
+          }
+        } else{
+          let alert = this.alertCtrl.create({
+            title: 'Confirm email!!!',
+            subTitle: 'you must confirm your email, please check your email',
+            buttons: ['OK']
+          });
+          alert.present();
+        }
+      }).unsubscribe();
+    } catch (error){
+      console.log(error);
+    }
+  }
+
+  private loginReviewSession(email: string, verified: boolean){
+    var product: string;
     this.db.list('/users', {
       query: {
         indexOn: 'Email',
@@ -99,13 +170,67 @@ export class LoginPage {
         equalTo: email
       }
     }).subscribe(snapshot => { 
-      for (let user of snapshot){
-        if(user.Intro){
-          this.navCtrl.setRoot("InitialPage");
-        } else {
-          this.navCtrl.setRoot("SignalsPage");
+      var c = snapshot.length;
+      if(c >= 1){
+        for (let user of snapshot){
+          if(user.State == "true"){
+            this.storage.set('Email', user.Email);
+            this.storage.set('ReferCode', user.ReferCode);
+            this.storage.set('Verified', verified)
+            this.events.publish('userLoget', product, user.Product);
+            if(user.Intro){
+              this.navCtrl.setRoot("InitialPage");
+            } else {
+              if(user.Product == 'signal'){
+                this.navCtrl.setRoot("SignalsPage");
+              } else{
+                this.navCtrl.setRoot("IbPage");
+              }
+            }
+          } else{
+            this.auth.auth.signOut();
+            this.toast.create({
+              message: "Unauthorized user",
+              duration: 2000
+            }).present();
+          }
         }
+      } 
+    }).unsubscribe; 
+  }
+
+  private autoLoginReviewSession(email: string){
+    var product: string;
+    this.db.list('/users', {
+      query: {
+        indexOn: 'Email',
+        orderByChild: 'Email',
+        equalTo: email
       }
-    }); 
+    }).subscribe(snapshot => { 
+      var c = snapshot.length;
+      if(c >= 1){
+        for (let user of snapshot){
+          if(user.State == "true"){
+            this.events.publish('userLoget', product, user.Product);
+            if(user.Intro){
+              this.navCtrl.setRoot("InitialPage");
+            } else {
+              if(user.Product == 'signal'){
+                this.navCtrl.setRoot("SignalsPage");
+              } else{
+                this.navCtrl.setRoot("IbPage");
+              }
+            }
+          } else{
+            this.auth.auth.signOut();
+            this.toast.create({
+              message: "Unauthorized user",
+              duration: 2000
+            }).present();
+          }
+        }
+      } 
+    }).unsubscribe; 
   }
 }

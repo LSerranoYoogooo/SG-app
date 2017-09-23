@@ -5,7 +5,7 @@
       </button>
     <ion-title>{{"title_page_signals" | translate}}</ion-title>
   </ion-navbar>
-
+  
   <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="state">
       <ion-segment-button value="signals">
@@ -17,12 +17,14 @@
     </ion-segment>
   </ion-toolbar>
 </ion-header>
-
+  
 <ion-content>
+<div class="workArea">
+  <body background="assets/images/fondo_logo.png" class="aqua"></body>
   <div [ngSwitch]="state">
     <ion-list *ngSwitchCase="'signals'">
       <ion-card *ngFor="let signal of signals | async">
-         <ion-grid>
+        <ion-grid>
           <ion-row (click)="openNavSignalsDetailsPage(signal)">
             <ion-col>
               <ion-icon col-2 class="tamIco" item-left  name={{signal.E_Trend}} [ngStyle]="{'color': signal.E_Color}"></ion-icon>
@@ -30,18 +32,33 @@
             <ion-col col-5 >
               <h4 class="hs">{{signal.Instrument}}</h4>
             </ion-col>
-            <ion-col col-3>
+              <ion-col col-3>
               <a class="a">{{signal.Date_A}}</a>
             </ion-col>
-            <ion-col col-2>
-              <ion-icon class="rigthArrowH tamIco" name="ios-arrow-forward"></ion-icon>
-            </ion-col>
           </ion-row>
-         </ion-grid>
+        </ion-grid>
       </ion-card>
     </ion-list>
     <ion-list *ngSwitchCase="'history'">
-      <ion-card *ngFor="let history of history_signals | async" class="cardHist">
+      <ion-item>
+      <ion-label class="littleLetter">{{"month_view" | translate}}</ion-label>
+      <ion-select [(ngModel)]="history_data_set" (ionChange)="getHistorySignal(history_data_set)">
+        <ion-option value='0'>{{"month1" | translate}}</ion-option>
+        <ion-option value='1'>{{"month2" | translate}}</ion-option>
+        <ion-option value='2'>{{"month3" | translate}}</ion-option>
+        <ion-option value='3'>{{"month4" | translate}}</ion-option>
+        <ion-option value='4'>{{"month5" | translate}}</ion-option>
+        <ion-option value='5'>{{"month6" | translate}}</ion-option>
+        <ion-option value='6'>{{"month7" | translate}}</ion-option>
+        <ion-option value='7'>{{"month8" | translate}}</ion-option>
+        <ion-option value='8'>{{"month9" | translate}}</ion-option>
+        <ion-option value='9'>{{"month10" | translate}}</ion-option>
+        <ion-option value='10'>{{"month11" | translate}}</ion-option>
+        <ion-option value='11'>{{"month12" | translate}}</ion-option>
+        <ion-option value='Default'>{{"month_default" | translate}}</ion-option>
+      </ion-select>
+      </ion-item>
+      <ion-card *ngFor="let history of list_history_signals" class="cardHist">
         <ion-grid>
           <ion-row (click)="openNavHistoryDetailsPage(history)">
             <ion-col>
@@ -56,23 +73,11 @@
             <ion-col col-2>
               <h5 class="h">{{history.Pips}}</h5>
             </ion-col>
-            <ion-col col-2>
-              <ion-icon class="rigthArrowH tamIco" name="ios-arrow-forward" [ngStyle]="{'color': history.R_Color}"></ion-icon>
-            </ion-col>
           </ion-row>
         </ion-grid>
       </ion-card>
     </ion-list>     
   </div>
-
+</div>
 </ion-content>
-
-
-<!-- <ion-card *ngFor="let history of history_signals | async">
-        <button ion-item (click)="openNavHistoryDetailsPage(history)">
-          <ion-icon item-left  name={{history.R_Trend}} [ngStyle]="{'color': history.E_Color}"></ion-icon>
-            {{history.Instrument}} {{history.Pips}}
-          <ion-icon name="ios-arrow-forward" class="rigthArrow" [ngStyle]="{'color': history.R_Color}"></ion-icon>
-        </button>
-      </ion-card>
-      -->
+  

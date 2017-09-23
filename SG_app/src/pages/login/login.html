@@ -1,41 +1,45 @@
 <ion-header>
-  <ion-navbar color="primary">
-    <ion-title>{{"title" | translate}}</ion-title>
-  </ion-navbar>
 </ion-header>
 
 <ion-content>
+<div class="workArea">
   <div class="logo">
-    <img src="assets/images/cover.jpg"/>
+    <img src="assets/images/fondoapp.jpg"/>
   </div>
-  <div padding>
+  <div class="bordes">
     <ion-item>
       <ion-label floating>{{"log_email" | translate}}</ion-label>
-      <ion-input type="text" [(ngModel)]="user.email"></ion-input>
+      <ion-input type="email" [(ngModel)]="user.email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>{{"log_pass" | translate}}</ion-label>
       <ion-input type="password" [(ngModel)]="user.password"></ion-input>
     </ion-item>
   </div>
-  <div padding>
-    <button ion-button color="primary" block (click)="login(user)">
-      {{"btn_Login" | translate}}
-    </button>
-    <ion-grid>
-      <ion-row>
-        <ion-col col-6>
-          <button  class="bloque1" ion-button full clear (click)="register()">
-            <ion-icon name="person"></ion-icon>
-            {{"btn_Register" | translate}}
+  <div class="bordes">
+  <button ion-button color="primary" block (click)="login(user)">
+    {{"btn_Login" | translate}}
+  </button>
+  <ion-grid>
+    <ion-row>
+      <button  class="bloque1" ion-button full clear (click)="register()">
+        <ion-icon name="person"></ion-icon>
+          {{"btn_Register" | translate}}
+      </button>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <button  class="bloque2" ion-button full clear (click)="resetPass(user.email)">
+          {{"btn_Pass" | translate}}
+        </button>
+      </ion-col>
+      <ion-col col-6>
+          <button  class="bloque2" ion-button full clear (click)="recover()">
+            {{"btn_RecoverAcount" | translate}}
           </button>
         </ion-col>
-        <ion-col col-6>
-          <button  class="bloque2" ion-button full clear (click)="resetPass(user.email)">
-            {{"btn_Pass" | translate}}
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    </ion-row>
+  </ion-grid>
   </div>
+</div>
 </ion-content>
