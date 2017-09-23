@@ -40,9 +40,9 @@ export class SignalsPage {
     ) {
       this.signals = db.list('/signals');
       this.getHistorySignal(this.history_data_set);
-      this.getToken();
-      this.suscribeTopic();
-      this.suscribeNotification();
+      //this.getToken();
+      //this.suscribeTopic();
+      //this.suscribeNotification();
     }
 
     openNavSignalsDetailsPage(signal) {

@@ -112,7 +112,6 @@ export class RegisterPage {
         });
         loading.dismissAll();
         this.events.publish('goToLogin');
-        //this.navCtrl.pop();
       });
     } catch (e) {
       loading.dismissAll();

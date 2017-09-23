@@ -39,10 +39,8 @@ export class LoginPage {
         Verified_state = res;
       });
       if(Verified_state){
-        console.log('2'+Email_login + Verified_state);
         this.autoLoginReviewSession(Email_login)
       }
-      console.log('1'+Email_login + Verified_state);
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +71,6 @@ export class LoginPage {
       }
     }
     catch (e){
-      console.log('error');
       loading.dismiss();
       if(e.code == "auth/argument-error"){
         this.toast.create({
@@ -138,27 +135,6 @@ export class LoginPage {
       ]
     });
     prompt.present();
-  }
-
-  private reviewSessions(email: string){
-    try{
-      this.auth.authState.subscribe(data=>{
-        if(data.emailVerified){
-          if (data.uid){
-            //this.auxReviewSession(email);
-          }
-        } else{
-          let alert = this.alertCtrl.create({
-            title: 'Confirm email!!!',
-            subTitle: 'you must confirm your email, please check your email',
-            buttons: ['OK']
-          });
-          alert.present();
-        }
-      }).unsubscribe();
-    } catch (error){
-      console.log(error);
-    }
   }
 
   private loginReviewSession(email: string, verified: boolean){
