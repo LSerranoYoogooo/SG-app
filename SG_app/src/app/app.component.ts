@@ -100,7 +100,10 @@ export class MyApp {
       platform.ready().then(() => {
         this.setUserinfo();
         statusBar.styleDefault();
-        splashScreen.hide();
+        //splashScreen.hide();
+        setTimeout(()=>{
+          splashScreen.hide();
+        }, 100)
       });
   }
 
