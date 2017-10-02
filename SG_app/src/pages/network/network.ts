@@ -30,15 +30,10 @@ export class NetworkPage {
     private alertCtrl: AlertController,
     private fcm: FCM
   ) {
-      console.log('network');
-      
       this.auth.authState.subscribe(data=>{
-        console.log(data);
         if(data != null){
           this.user = this.navParams.get('user');
           this.network = this.navParams.get('network');
-          console.log(this.user);
-          console.log(this.network);
           if(this.user.Product == 'admin'){
             this.product = 'Account Management'
           } else {
@@ -51,27 +46,9 @@ export class NetworkPage {
           this.L5 = (this.network.Line5.length - 1)*(125*0.06);
           this.TL = this.L1 + this.L2 + this.L3 + this.L4 + this.L5;
         } else {
-          console.log('not login');
           navCtrl.setRoot(LoginPage);
         }
       });
-      /*
-      this.user = this.navParams.get('user');
-      this.network = this.navParams.get('network');
-      console.log(this.user);
-      console.log(this.network);
-      if(this.user.Product == 'admin'){
-        this.product = 'Account Management'
-      } else {
-        this.product = 'Signals'
-      }
-      this.L1 = (this.network.Line1.length - 1)*(125*0.02);
-      this.L2 = (this.network.Line2.length - 1)*(125*0.03);
-      this.L3 = (this.network.Line3.length - 1)*(125*0.04);
-      this.L4 = (this.network.Line4.length - 1)*(125*0.05);
-      this.L5 = (this.network.Line5.length - 1)*(125*0.06);
-      this.TL = this.L1 + this.L2 + this.L3 + this.L4 + this.L5;*/
-      
     }
 
     private disableAccount(){
@@ -112,14 +89,6 @@ export class NetworkPage {
         await this.searchUserKey(Email_login).then(res =>{
           Key = res
         });
-        /*this.updateUser(Key);
-        this.db.list('/disconnectUser').push({
-          email: Email_login,
-          pass: password
-        });
-        this.events.publish('goToLogin');*/
-        
-
         await this.auth.auth.signInWithEmailAndPassword(Email_login,password).then(res =>{
           this.auth.auth.currentUser.delete();
           this.updateUser(Key);
@@ -162,6 +131,5 @@ export class NetworkPage {
       var item: FirebaseObjectObservable<any>;
       item = this.db.object('/users/' + key);
       item.update({State: "false"});
-      this.fcm.unsubscribeFromTopic("Signals")
     }
 }

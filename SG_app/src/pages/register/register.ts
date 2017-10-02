@@ -112,9 +112,9 @@ export class RegisterPage {
         });
         loading.dismissAll();
         this.events.publish('goToLogin');
-        //this.navCtrl.pop();
       });
     } catch (e) {
+      console.log(e);
       loading.dismissAll();
       if(e.code == "auth/argument-error"){
         this.toast.create({

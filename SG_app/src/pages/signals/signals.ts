@@ -41,6 +41,7 @@ export class SignalsPage {
       this.signals = db.list('/signals');
       this.getHistorySignal(this.history_data_set);
       this.getToken();
+      this.refreshToken();
       this.suscribeTopic();
       this.suscribeNotification();
     }
@@ -109,7 +110,7 @@ export class SignalsPage {
     }
 
     suscribeTopic(){
-      this.fcm.subscribeToTopic("Signals");
+      this.fcm.subscribeToTopic("Signal");
     }
 
     suscribeNotification(){

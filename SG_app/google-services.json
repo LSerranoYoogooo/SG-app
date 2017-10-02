@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "503332807539",
-    "firebase_url": "https://sequeiraglobal.firebaseio.com",
-    "project_id": "sequeiraglobal",
-    "storage_bucket": "sequeiraglobal.appspot.com"
+    "project_number": "428378058549",
+    "firebase_url": "https://sequeiraglobal-production.firebaseio.com",
+    "project_id": "sequeiraglobal-production",
+    "storage_bucket": "sequeiraglobal-production.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:503332807539:android:d24868b0285ff266",
+        "mobilesdk_app_id": "1:428378058549:android:d24868b0285ff266",
         "android_client_info": {
           "package_name": "com.yoogooodevelop.sequeiraglobal"
         }
       },
       "oauth_client": [
         {
-          "client_id": "503332807539-i3l6kvs5qnord88ji14spfhnvkmi4a9v.apps.googleusercontent.com",
+          "client_id": "428378058549-ja3jdl6cavjvtsffvqgmfntoure96s26.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.yoogooodevelop.sequeiraglobal",
@@ -23,13 +23,13 @@
           }
         },
         {
-          "client_id": "503332807539-agfflvviifqbliplesfrj8v6k4425dd3.apps.googleusercontent.com",
+          "client_id": "428378058549-gmisdnub7c5br6r6sohoql37efqnfof2.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA5Fb1gj25uUcAvbynLnF2e0JqeQ4vkLvM"
+          "current_key": "AIzaSyCv3nVTo9KDi7RTzIV1vEdEvnfvm5kHx_8"
         }
       ],
       "services": {
@@ -40,16 +40,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "503332807539-mdeleoljcmooshc1voeevmc534ioebii.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.yoogooodevelop.sequeiraglobal",
-                "app_store_id": "1261141171"
-              }
+              "client_id": "428378058549-gmisdnub7c5br6r6sohoql37efqnfof2.apps.googleusercontent.com",
+              "client_type": 3
             },
             {
-              "client_id": "503332807539-agfflvviifqbliplesfrj8v6k4425dd3.apps.googleusercontent.com",
-              "client_type": 3
+              "client_id": "428378058549-o4qkrd2vt2uvjdp9hmoan8do6hmaokn9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yoogooodevelop.sequeiraglobal"
+              }
             }
           ]
         },

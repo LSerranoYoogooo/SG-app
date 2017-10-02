@@ -95,21 +95,15 @@ export class MyApp {
 
       this.events.subscribe('goToLogin', val =>{
         this.logOut();
-        /*this.storage.remove('Email');
-        this.storage.remove('ReferCode');
-        this.storage.remove('Verified');
-        this.auth.auth.signOut();
-        //this.nav._removeView(this.nav.getActive());
-        //this.nav._cleanup(this.nav.getActive());
-        //this.storage.clear();
-        this.nav.setRoot('LoginPage');
-        this.nav.goToRoot;*/
       });
       
       platform.ready().then(() => {
         this.setUserinfo();
         statusBar.styleDefault();
-        splashScreen.hide();
+        //splashScreen.hide();
+        setTimeout(()=>{
+          splashScreen.hide();
+        }, 100)
       });
   }
 
@@ -134,10 +128,8 @@ export class MyApp {
   private  auxGoToNetwork(page: any){
     var Email_login;
     this.storage.get('Email').then(res=>{
-      console.log(res);
       this.searchUser(res, page);
     });
-    
   }
 
   private searchUser(email: string, page: any){
@@ -176,7 +168,6 @@ export class MyApp {
     this.storage.remove('Email');
     this.storage.remove('ReferCode');
     this.storage.remove('Verified');
-    //this.nav._cleanup;
     this.nav.setRoot(LoginPage);
   }
 

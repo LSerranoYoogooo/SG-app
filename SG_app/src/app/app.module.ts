@@ -8,6 +8,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { IonicStorageModule } from '@ionic/storage';
+//import { PayPal } from '@ionic-native/paypal'
 import { FCM } from '@ionic-native/fcm';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';

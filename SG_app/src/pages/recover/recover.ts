@@ -84,7 +84,6 @@ export class RecoverPage {
         this.updateUser(res);
         this.auth.auth.signOut();
         this.events.publish('goToLogin');
-        //this.navCtrl.pop();
       });
       this.auth.auth.signOut();
     } catch (error) {
@@ -107,5 +106,4 @@ export class RecoverPage {
       }
     }
   }
-
 }
