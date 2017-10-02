@@ -7,36 +7,34 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>503332807539-mdeleoljcmooshc1voeevmc534ioebii.apps.googleusercontent.com</string>
+	<string>428378058549-o4qkrd2vt2uvjdp9hmoan8do6hmaokn9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.503332807539-mdeleoljcmooshc1voeevmc534ioebii</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>503332807539-i3l6kvs5qnord88ji14spfhnvkmi4a9v.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.428378058549-o4qkrd2vt2uvjdp9hmoan8do6hmaokn9</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDRNAO9PXbWpdPZsMd5DN3jq_jz3fNDflE</string>
+	<string>AIzaSyBiDLkaGMgB1l420204CGbfdvBYeOy82Mw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>503332807539</string>
+	<string>428378058549</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.yoogooodevelop.sequeiraglobal</string>
 	<key>PROJECT_ID</key>
-	<string>sequeiraglobal</string>
+	<string>sequeiraglobal-production</string>
 	<key>STORAGE_BUCKET</key>
-	<string>sequeiraglobal.appspot.com</string>
+	<string>sequeiraglobal-production.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<false></false>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:503332807539:ios:d24868b0285ff266</string>
+	<string>1:428378058549:ios:d24868b0285ff266</string>
 	<key>DATABASE_URL</key>
-	<string>https://sequeiraglobal.firebaseio.com</string>
+	<string>https://sequeiraglobal-production.firebaseio.com</string>
 </dict>
 </plist>

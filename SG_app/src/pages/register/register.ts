@@ -114,6 +114,7 @@ export class RegisterPage {
         this.events.publish('goToLogin');
       });
     } catch (e) {
+      console.log(e);
       loading.dismissAll();
       if(e.code == "auth/argument-error"){
         this.toast.create({

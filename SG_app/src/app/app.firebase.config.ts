@@ -1,8 +1,9 @@
+//production
 export const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyDCnZEuPU72V0UpVrveJU7eB3kjze8pxOw",
-  authDomain: "sequeiraglobal.firebaseapp.com",
-  databaseURL: "https://sequeiraglobal.firebaseio.com",
-  projectId: "sequeiraglobal",
-  storageBucket: "sequeiraglobal.appspot.com",
-  messagingSenderId: "503332807539"
+  apiKey: "AIzaSyBxZDm0H2es9ZGYHqFmiqbsbn6kCP2GZAM",
+  authDomain: "sequeiraglobal-production.firebaseapp.com",
+  databaseURL: "https://sequeiraglobal-production.firebaseio.com",
+  projectId: "sequeiraglobal-production",
+  storageBucket: "sequeiraglobal-production.appspot.com",
+  messagingSenderId: "428378058549"
 }
