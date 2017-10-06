@@ -44,7 +44,7 @@ export class MyApp {
 
       this.availableLang = ['es', 'en'];  //lista de idiomas aceptados
       this.rootPage = LoginPage;
-      
+
       try {
         storage.get('Product').then((val) => {
           if(val == 'signal'){
@@ -100,7 +100,7 @@ export class MyApp {
       platform.ready().then(() => {
         this.setUserinfo();
         statusBar.styleDefault();
-        //splashScreen.hide();
+        splashScreen.hide();
         setTimeout(()=>{
           splashScreen.hide();
         }, 100)

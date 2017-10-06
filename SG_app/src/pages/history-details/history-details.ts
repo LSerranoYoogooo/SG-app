@@ -13,32 +13,28 @@ export class HistoryDetailsPage {
   Trend_E: string;
   Trend_R: string;
   firestore = firebase.storage();
-  imgsource: any;
+  Trend: string;
+  icon: string;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public zone: NgZone) {
       this.History = navParams.data.History;
-      if (this.History.E_Trend == "arrow-dropup-circle"){
+      if (this.History.R_Trend == "arrow-dropup-circle"){
+        this.Trend_R = "label_trend_A";
+        this.Trend = "Buy";
+        this.icon = "md-trending-up"
+      } else {
+        this.Trend_R = "label_trend_B";
+        this.Trend = "Sell";
+        this.icon = "md-trending-down"
+      }
+      if(this.History.E_Trend == "arrow-dropup-circle"){
         this.Trend_E = "label_trend_A";
       } else {
         this.Trend_E = "label_trend_B";
       }
-                
-      if (this.History.R_Trend == "arrow-dropup-circle"){
-        this.Trend_R = "label_trend_A";
-      } else {
-        this.Trend_R = "label_trend_B";
-      }
-      this.displayE(this.History.Img_R);
+      //console.log(this.History);
     }
-
-  displayE(img: string) {
-    this.firestore.ref().child("ImgReal/" + img).getDownloadURL().then((url) => {
-      this.zone.run(() => {
-        this.imgsource = url;
-       })
-    })
-  }
 }

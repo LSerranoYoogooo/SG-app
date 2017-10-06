@@ -2,7 +2,6 @@ page-signal-details {
 
 }
 .S_instrument{
-    margin: 0;
     padding: 10px;
     text-align: center;
 }
@@ -18,15 +17,18 @@ page-signal-details {
     border-radius: 12px;
 }
 .S_signalInfo{
-    padding: 1em;
+    padding: 1rem;
 }
 .general_grid{
-    margin: 2em;
+    margin: 1em;
     width: 86%;
 }
 .tittle{
-    font-size: 1.5rem;
+    font-size: 1.5rem !important;
 }
 .info{
     font-size: 1.7rem;
+}
+.tamIcoDetail{
+    font-size:  10rem !important;
 }

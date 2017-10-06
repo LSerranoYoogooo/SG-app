@@ -34,7 +34,7 @@
         "angular-module-core": "^1.2.19",
         "angularfire2": "^4.0.0-rc0",
         "autoprefixer": "^7.1.4",
-        "cordova-android": "^6.2.3",
+        "cordova-ios": "^4.4.0",
         "cordova-plugin-compat": "^1.2.0",
         "cordova-plugin-console": "^1.1.0",
         "cordova-plugin-device": "^1.1.6",
@@ -97,7 +97,7 @@
             "cordova-plugin-fcm": {}
         },
         "platforms": [
-            "android"
+            "ios"
         ]
     }
 }

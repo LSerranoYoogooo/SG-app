@@ -31,8 +31,10 @@ export class LoginPage {
   private  autoLogin(){
     var Email_login = null;
     var Verified_state = null;
+    
+    
     try {
-      this.storage.get('Email').then(res=>{
+      /*this.storage.get('Email').then(res=>{
         Email_login = res
       });
       this.storage.get('Verified').then(res=>{
@@ -40,7 +42,18 @@ export class LoginPage {
       });
       if(Verified_state){
         this.autoLoginReviewSession(Email_login)
-      }
+      }*/
+      this.auth.authState.subscribe(state=>{
+        if(state.emailVerified == true){
+          Verified_state = state.emailVerified;
+          if(state.email != null){
+            Email_login = state.email;
+          }
+        }
+        console.log(state);
+        this.autoLoginReviewSession(Email_login);
+      });
+      
     } catch (error) {
       console.log(error);
     }

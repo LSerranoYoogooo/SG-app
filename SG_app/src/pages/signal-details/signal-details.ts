@@ -11,6 +11,7 @@ import firebase from 'firebase';
 export class SignalDetailsPage {
   Signal: Signal;
   Trend: string;
+  icon: string;
   firestore = firebase.storage();
   imgsource: any;
 
@@ -22,18 +23,11 @@ export class SignalDetailsPage {
     this.Signal = navParams.data.Signal;
     if (this.Signal.E_Trend == "arrow-dropup-circle"){
       this.Trend = "Buy";
+      this.icon = "md-trending-up"
     } else {
       this.Trend = "Sell";
+      this.icon = "md-trending-down"
     }
-    this.display(this.Signal.Img_E);
+    //console.log(this.Signal);
   }
-
-  display(img: string) {
-    this.firestore.ref().child("ImgEstimated/" + img).getDownloadURL().then((url) => {
-      this.zone.run(() => {
-        this.imgsource = url;
-       })
-    })
-  }
-
 }

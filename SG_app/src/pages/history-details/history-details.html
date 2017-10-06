@@ -9,7 +9,8 @@
   <body background="assets/images/fondo_logo.png" class="aquaDetail"></body>
   <h2 class="H_instrument">{{History.Instrument}}</h2>
   <div class="H_centerImg">
-    <img src="{{imgsource}}" class="H_viewImg"/>
+    <!--<img src="{{imgsource}}" class="H_viewImg" "/>-->
+    <ion-icon class="tamIcoDetail" [ngStyle]="{'color': History.R_Color}" name={{icon}}></ion-icon>
   </div>
   <ion-grid class="general_grid">
       <ion-row>

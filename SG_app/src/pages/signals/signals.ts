@@ -15,11 +15,12 @@ import { FCM } from '@ionic-native/fcm';
 })
 export class SignalsPage {
   state: string = "signals";
-  user: any;
-  users: any;
+  //user: any;
+  //users: any;
   signals: FirebaseListObservable<any>;
   history_signals: FirebaseListObservable<any>;
-  list_history_signals= [];
+  list_history_signals = [];
+  list_signals = [];
   nativepath: any;
   firestore = firebase.storage();
   imgsource: any;
@@ -38,12 +39,20 @@ export class SignalsPage {
     private storage: Storage,
     private fcm: FCM,
     ) {
-      this.signals = db.list('/signals');
+      //this.signals = db.list('/signals');
+      db.list('/signals').subscribe(data=>{
+        this.list_signals = [];
+        for (let signal of data){
+          this.list_signals.unshift(signal);
+        }
+      })
+      
+
       this.getHistorySignal(this.history_data_set);
-      this.getToken();
-      this.refreshToken();
-      this.suscribeTopic();
-      this.suscribeNotification();
+      //this.getToken();
+      //this.refreshToken();
+      //this.suscribeTopic();
+      //this.suscribeNotification();
     }
 
     openNavSignalsDetailsPage(signal) {
@@ -55,22 +64,22 @@ export class SignalsPage {
     }
 
     getHistorySignal(val: string){
-      this.list_history_signals = [];
       this.auxGetDefault();
       if(val == 'Default'){
         this.db.list('/history').subscribe(snapshot=>{
+          this.list_history_signals = [];
           for (let HSignal of snapshot){
             if(HSignal.Month_Actual_Number == this.date1){
-              this.list_history_signals.push(HSignal);
+              this.list_history_signals.unshift(HSignal);
             }
             if(HSignal.Month_Actual_Number == this.date2){
-              this.list_history_signals.push(HSignal);
+              this.list_history_signals.unshift(HSignal);
             }
             if(HSignal.Month_Actual_Number == this.date3){
-              this.list_history_signals.push(HSignal);
+              this.list_history_signals.unshift(HSignal);
             }
           }
-        })
+        });
       } else {
         this.db.list('/history', {
           query: {
@@ -79,8 +88,9 @@ export class SignalsPage {
             equalTo: val
           }
         }).subscribe(snapshot => {
-            for (let HSignal of snapshot){
-              this.list_history_signals.push(HSignal);
+          this.list_history_signals = [];
+          for (let HSignal of snapshot){
+            this.list_history_signals.unshift(HSignal);
           }
         });
       }
@@ -111,12 +121,18 @@ export class SignalsPage {
 
     suscribeTopic(){
       this.fcm.subscribeToTopic("Signal");
+      let alert = this.alertCtrl.create({
+        title: 'Sequeira Global',
+        subTitle: 'Suscription',
+        buttons: ['OK']
+      });
+      alert.present();
     }
 
     suscribeNotification(){
       this.fcm.onNotification().subscribe(data=>{
         if(data.wasTapped){
-          //console.log("Received in background"); 
+          //console.log("Received in background");
         } else {
             let alert = this.alertCtrl.create({
               title: 'Sequeira Global',
@@ -124,7 +140,8 @@ export class SignalsPage {
               buttons: ['OK']
             });
             alert.present();
+            data.wasTapped;
         };
-      })
+      });
     }
 }

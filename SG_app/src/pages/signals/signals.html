@@ -23,7 +23,7 @@
   <body background="assets/images/fondo_logo.png" class="aqua"></body>
   <div [ngSwitch]="state">
     <ion-list *ngSwitchCase="'signals'">
-      <ion-card *ngFor="let signal of signals | async">
+      <ion-card *ngFor="let signal of list_signals">
         <ion-grid>
           <ion-row (click)="openNavSignalsDetailsPage(signal)">
             <ion-col>
@@ -62,7 +62,7 @@
         <ion-grid>
           <ion-row (click)="openNavHistoryDetailsPage(history)">
             <ion-col>
-              <ion-icon col-2 class="tamIco" item-left  name={{history.R_Trend}} [ngStyle]="{'color': history.E_Color}"></ion-icon>
+              <ion-icon col-2 class="tamIco" item-left  name={{history.R_Trend}} [ngStyle]="{'color': history.R_Color}"></ion-icon>
             </ion-col>
             <ion-col col-4 >
               <h4 class="h">{{history.Instrument}}</h4>
