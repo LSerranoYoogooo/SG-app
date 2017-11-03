@@ -108,7 +108,7 @@ export class RegisterPage {
         this.auth.auth.currentUser.sendEmailVerification();
         this.addUser(user);
         this.addToNetwork(user, this.reference).then(res =>{
-          this.auxLine1(this.reference, user.email, user.referCode, user.name);
+          this.auxLine1(this.reference, user.email, user.referCode, user.name, user.product, "trial");
         });
         loading.dismissAll();
         this.events.publish('goToLogin');
@@ -194,11 +194,11 @@ export class RegisterPage {
       var newUsr = {
         Reference: user.referCode,
         FatherReference: reference,
-        Line1: [{ReferCode: "init", email: "init", state: "1"}],
-        Line2: [{ReferCode: "init", email: "init", state: "1"}],
-        Line3: [{ReferCode: "init", email: "init", state: "1"}],
-        Line4: [{ReferCode: "init", email: "init", state: "1"}],
-        Line5: [{ReferCode: "init", email: "init", state: "1"}],
+        Line1: [{Reference: "init", Email: "init", State: "#"}],
+        Line2: [{Reference: "init", Email: "init", State: "#"}],
+        Line3: [{Reference: "init", Email: "init", State: "#"}],
+        Line4: [{Reference: "init", Email: "init", State: "#"}],
+        Line5: [{Reference: "init", Email: "init", State: "#"}],
       }
       this.db.list('/network').push(newUsr);
       resolve(true);
@@ -241,7 +241,7 @@ export class RegisterPage {
     });
   }
 
-  auxLine1(codeReference: string, email: string, codeGenerate: string, name: string){
+  auxLine1(codeReference: string, email: string, codeGenerate: string, name: string, product: string, payment: string){
     var network1: any;
     var line = {} as Linea;
     var key1: any;
@@ -249,6 +249,8 @@ export class RegisterPage {
     line.Reference = codeGenerate;
     line.State = "0";
     line.Name = name;
+    line.Product = product;
+    line.Payment = payment;
     this.auxGetKey(codeReference).then(res =>{
       key1 = res;
       this.auxGetNetwork(codeReference).then( res => {

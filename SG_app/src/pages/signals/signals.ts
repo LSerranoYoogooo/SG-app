@@ -49,10 +49,10 @@ export class SignalsPage {
       
 
       this.getHistorySignal(this.history_data_set);
-      //this.getToken();
-      //this.refreshToken();
-      //this.suscribeTopic();
-      //this.suscribeNotification();
+      this.getToken();
+      this.refreshToken();
+      this.suscribeTopic();
+      this.suscribeNotification();
     }
 
     openNavSignalsDetailsPage(signal) {

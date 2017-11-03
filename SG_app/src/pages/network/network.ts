@@ -15,10 +15,14 @@ import { LoginPage } from '../login/login';
   templateUrl: 'network.html',
 })
 export class NetworkPage {
-  network: any;
+  networkA: any;
+  networkS: any;
   user: any;
   product: any;
-  L1: any; L2: any; L3: any; L4: any; L5: any; TL: any;
+  //networkS: any;
+  //networkA: Network;
+  LS1= 0; LS2= 0; LS3= 0; LS4= 0; LS5= 0; TSL= 0;
+  LA1= 0; LA2= 0; LA3= 0; LA4= 0; LA5= 0; TAL= 0;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -33,19 +37,21 @@ export class NetworkPage {
       this.auth.authState.subscribe(data=>{
         if(data != null){
           this.user = this.navParams.get('user');
-          this.network = this.navParams.get('network');
           if(this.user.Product == 'admin'){
             this.product = 'Account Management'
           } else {
             this.product = 'Signals'
           }
-          this.L1 = (this.network.Line1.length - 1)*(125*0.02);
-          this.L2 = (this.network.Line2.length - 1)*(125*0.03);
-          this.L3 = (this.network.Line3.length - 1)*(125*0.04);
-          this.L4 = (this.network.Line4.length - 1)*(125*0.05);
-          this.L5 = (this.network.Line5.length - 1)*(125*0.06);
-          this.TL = this.L1 + this.L2 + this.L3 + this.L4 + this.L5;
-        } else {
+          if(this.user.Payment == "trial"){
+            
+          } else{
+            this.networkA = this.navParams.get('networkA');
+            this.networkS = this.navParams.get('networkS');
+            console.log(this.networkA);
+            console.log(this.networkS);
+
+          }
+        }else {
           navCtrl.setRoot(LoginPage);
         }
       });
@@ -132,4 +138,5 @@ export class NetworkPage {
       item = this.db.object('/users/' + key);
       item.update({State: "false"});
     }
+
 }

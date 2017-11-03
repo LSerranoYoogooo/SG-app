@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "428378058549",
+    "firebase_url": "https://sequeiraglobal-production.firebaseio.com",
+    "project_id": "sequeiraglobal-production",
+    "storage_bucket": "sequeiraglobal-production.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428378058549:android:d24868b0285ff266",
+        "android_client_info": {
+          "package_name": "com.yoogooodevelop.sequeiraglobal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "428378058549-ja3jdl6cavjvtsffvqgmfntoure96s26.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yoogooodevelop.sequeiraglobal",
+            "certificate_hash": "17046620532a2040330c3ecd4625e0e1288c26bc"
+          }
+        },
+        {
+          "client_id": "428378058549-gmisdnub7c5br6r6sohoql37efqnfof2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv3nVTo9KDi7RTzIV1vEdEvnfvm5kHx_8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "428378058549-o4qkrd2vt2uvjdp9hmoan8do6hmaokn9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yoogooodevelop.sequeiraglobal",
+                "app_store_id": "1261141171"
+              }
+            },
+            {
+              "client_id": "428378058549-gmisdnub7c5br6r6sohoql37efqnfof2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

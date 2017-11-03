@@ -50,7 +50,7 @@ export class LoginPage {
             Email_login = state.email;
           }
         }
-        console.log(state);
+        //console.log(state);
         this.autoLoginReviewSession(Email_login);
       });
       
